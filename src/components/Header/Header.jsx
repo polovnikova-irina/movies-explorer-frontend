@@ -7,7 +7,7 @@ export function Header({ loggedIn }) {
   return (
     <header className="header">
       <div className="header__container">
-      <img className="header__logo" src={logo} alt="Логотип" />
+      <img className="header__logo" src={logo} alt="Лого" />
       <div className="header__actions">
       <Link to="/sign-up" className="header__link">
         Регистрация
