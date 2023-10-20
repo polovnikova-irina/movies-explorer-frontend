@@ -1,0 +1,13 @@
+body {
+  min-width: 320px;
+  max-width: 1280px;
+  width: 100%;
+  background-color: #202020;
+  height: 100vh;
+  color: #ffffff;
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
