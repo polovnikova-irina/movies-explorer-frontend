@@ -2,9 +2,9 @@ import './TitleSeparator.css';
 
 export function TitleSeparator( { title }) {
   return (
-    <div className="header-separator">
-    <h1 className="header-separator__title">{title}</h1>
-    <hr className="header-separator__hr"/>
+    <div className="title-separator">
+    <h1 className="title-separator__text">{title}</h1>
+    <hr className="title-separator__hr"/>
   </div>
   );
 }

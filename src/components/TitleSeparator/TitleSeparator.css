@@ -1,20 +1,41 @@
-.header-separator {
+.title-separator {
   margin: 0 auto;
-  width: calc(100% - 36px);
-  background-color: #073042;
-  padding: 70px 18px 60px;
+  padding: 70px 0 60px;
 }
 
-.header-separator__hr {
-    border-bottom: 1px solid #DADADA;; 
-    margin: 28px;
+.title-separator__hr {
+  border-bottom: 1px solid #dadada;
+  margin-top: 28px;
 }
 
-.header-separator__title {
+.title-separator__text {
+  margin: 0;
+  padding: 0;
   width: 284px;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.72px;
+}
+
+@media screen and (min-width: 768px) {
+  .title-separator {
+    padding: 90px 0 70px;
+  }
+
+  .title-separator__text {
+    width: 600px;
+    font-size: 22px;
+  }
+  
+  .title-separator__hr {
+    margin-top: 23px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .title-separator {
+    padding: 110px 0 70px;
+  }
 }
