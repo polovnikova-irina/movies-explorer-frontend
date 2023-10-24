@@ -1,180 +1,108 @@
-.teach {
+.techs {
   margin: 0 auto;
   width: calc(100% - 36px);
-  padding: 0 18px 69px;
-  background-color: #202020;
+  padding: 0 18px 70px;
+  background-color: #272727;
 }
 
-.teach__info {
+.techs__container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  row-gap: 56px;
-  margin-bottom: 60px;
 }
 
-.teach__info-title {
-  margin: 0 0 16px;
+.techs__title {
   padding: 0;
-  width: 284px;
-  font-size: 18px;
+  margin: 0 0 24px;
+  width: 292px;
+  text-align: center;
+  font-size: 30px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  letter-spacing: -0.72px;
+  letter-spacing: -1.2px;
 }
 
-.teach__info-subtitle {
-  margin: 0;
+.techs__subtitle {
   padding: 0;
-  width: 284px;
+  margin: 0 0 50px;
+  width: 292px;
+  text-align: center;
   font-size: 11px;
   font-style: normal;
   font-weight: 400;
   line-height: 16px;
+  letter-spacing: -0.44px;
 }
 
-.teach__stripe {
+.techs__list {
+  list-style: none;
+  padding: 0;
+  width: 178px;
+  margin: 0 auto;
   display: flex;
-  height: 35px;
-  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
 }
 
-.teach__stripe-color {
+.techs__item {
   display: flex;
+  width: 84px;
+  height: 57px;
+  border-radius: 10px;
+  background-color: #303030;
   align-items: center;
   justify-content: center;
-  height: 35px;
-}
-
-.teach__stripe-color_green {
-  width: 35.21%;
-  background-color: #3ddc84;
-}
-
-.teach__stripe-color_black {
-  width: 64.79%;
-  background-color: #303030;
-}
-
-.teach__stripe-text {
-  margin: 0;
-  padding: 0;
-  width: 80px;
   text-align: center;
-  font-size: 11px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-}
-
-.teach__stripe-text-black {
-  color: #000;
-}
-
-.teach__stripe-text-white {
-  color: #fff;
-}
-
-.teach__technology-stack {
-  display: flex;
-  margin-top: 10px;
-  width: 100%;
-}
-
-.teach__technology-stack-text {
-  width: 80px;
-  margin: 0 52px 0 10px;
-  color: #a0a0a0;
-  text-align: center;
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  letter-spacing: -0.48px;
 }
 
 @media screen and (min-width: 768px) {
-  .teach {
+  .techs {
     width: calc(100% - 100px);
     padding: 0 50px 90px;
   }
 
-  .teach__info {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    margin-bottom: 60px;
-    row-gap: 22px;
+  .techs__title {
+    width: 600px;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -2px;
   }
 
-  .teach__info-title {
-    width: 319px;
-    font-size: 20px;
-    letter-spacing: -0.8px;
-  }
-
-  .teach__info-subtitle {
-    width: 319px;
+  .techs__subtitle {
+    width: 460px;
     font-size: 12px;
     line-height: 18px;
+    letter-spacing: -0.48px;
   }
 
-  .teach__stripe-color {
-    height: 36px;
-  }
-
-  .teach__stripe-color_green {
-    width: 20.958%;
-  }
-  
-  .teach__stripe-color_black {
-    width: 79.04%;
-  }
-  
-  .teach__stripe-text {
-    width: 120px;
-    font-size: 14px;
-  }
-
-  .teach__technology-stack {
-    margin-top: 14px;
-  }
-  
-  .teach__technology-stack-text {
-    width: 120px;
-    font-size: 14px;
-    margin-left: 10px;
-    margin-right: 204px;
+  .techs__list {
+    width: auto;
   }
 }
 
 @media screen and (min-width: 1280px) {
-  .teach {
+  .techs {
     width: calc(100% - 140px);
-    padding: 0 70px 110px;
-    margin-bottom: 110px;
+    padding: 0 70px 100px;
   }
 
-  .teach__info-title {
-    width: 550px;
-  }
-
-  .teach__info-subtitle {
-    width: 550px;
+  .techs__subtitle {
     font-size: 14px;
     line-height: 20px;
+    letter-spacing: -0.56px;
   }
 
-  .teach__info {
-    row-gap: 26px;
-    margin-bottom: 110px;
-  }
-
-  .teach__technology-stack-text {
-    width: 200px;
-    margin-left: 14px;
-    margin-right: 356px;
+  .techs__item {
+    font-size: 14px;
+    letter-spacing: -0.56px;
+    width: 90px;
   }
 }
