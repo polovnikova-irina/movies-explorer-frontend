@@ -80,13 +80,12 @@
 .teach__technology-stack {
   display: flex;
   margin-top: 10px;
-  padding: 0 17.605% 0 3.521%;
+  width: 100%;
 }
 
 .teach__technology-stack-text {
-  margin: 0;
-  padding: 0;
   width: 80px;
+  margin: 0 52px 0 10px;
   color: #a0a0a0;
   text-align: center;
   font-size: 11px;
@@ -140,13 +139,14 @@
   }
 
   .teach__technology-stack {
-    column-gap: 214px;
     margin-top: 14px;
   }
   
   .teach__technology-stack-text {
-    width: 17.964%;
+    width: 120px;
     font-size: 14px;
+    margin-left: 10px;
+    margin-right: 204px;
   }
 }
 
@@ -154,6 +154,7 @@
   .teach {
     width: calc(100% - 140px);
     padding: 0 70px 110px;
+    margin-bottom: 110px;
   }
 
   .teach__info-title {
@@ -171,14 +172,9 @@
     margin-bottom: 110px;
   }
 
-  .teach__technology-stack {
-    column-gap: 370px;
-    margin-bottom: 110px;
-  }
-  
   .teach__technology-stack-text {
-    width: 17.544%;
-    font-size: 14px;
+    width: 200px;
     margin-left: 14px;
+    margin-right: 356px;
   }
 }
