@@ -37,9 +37,9 @@ export function AboutProject() {
           </p>
         </div>
         </div>
-        <div className="project__technology-stack">
-          <p className="project__technology-stack-text">Back-end</p>
-          <p className="project__technology-stack-text">Front-end</p>
+        <div className="project__stack">
+          <p className="project__stack-item">Back-end</p>
+          <p className="project__stack-item">Front-end</p>
         </div>
     </section>
   );

@@ -1,11 +1,11 @@
 .title-separator {
   margin: 0 auto;
-  padding: 70px 0 60px;
+  padding: 70px 0 0;
 }
 
 .title-separator__hr {
-  border-bottom: 1px solid #dadada;
-  margin-top: 28px;
+  border: 1px solid #dadada;
+  margin: 28px 0 0;
 }
 
 .title-separator__text {
@@ -21,7 +21,7 @@
 
 @media screen and (min-width: 768px) {
   .title-separator {
-    padding: 90px 0 70px;
+    padding: 90px 0 0;
   }
 
   .title-separator__text {
@@ -36,6 +36,6 @@
 
 @media screen and (min-width: 1280px) {
   .title-separator {
-    padding: 110px 0 70px;
+    padding: 110px 0 0;
   }
 }

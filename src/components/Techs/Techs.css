@@ -10,6 +10,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 60px;
 }
 
 .techs__title {
@@ -83,6 +84,10 @@
     letter-spacing: -0.48px;
   }
 
+  .techs__container {
+    margin-top: 80px;
+  }
+
   .techs__list {
     width: auto;
   }
@@ -98,6 +103,10 @@
     font-size: 14px;
     line-height: 20px;
     letter-spacing: -0.56px;
+  }
+
+  .techs__container {
+    margin-top: 90px;
   }
 
   .techs__item {

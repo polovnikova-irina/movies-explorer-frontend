@@ -1,0 +1,173 @@
+.about-me {
+  margin: 0 auto;
+  width: calc(100% - 36px);
+  padding: 0 18px 70px;
+  background-color: #202020;
+}
+
+.about-me__container {
+  margin-top: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 40px;
+}
+
+.about-me__photo {
+  width: 284px;
+  height: 352px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.about-me__details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.about-me__author {
+  margin: 0;
+  padding: 0;
+  min-width: 284px;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -1.2px;
+}
+
+.about-me__job {
+  margin: 0;
+  padding: 0;
+  min-width: 284px;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.about-me__description {
+  margin: 0;
+  padding: 0;
+  width: 284px;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.about-me__link {
+  all: unset;
+  display: block;
+  margin-top: 20px;
+  min-width: 284px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  transition: opacity 0.3s linear;
+  cursor: pointer;
+}
+
+.about-me__link:hover {
+  opacity: 0.8;
+}
+
+@media screen and (min-width: 768px) {
+  .about-me {
+    width: calc(100% - 100px);
+    padding: 0px 50px 90px;
+  }
+
+  .about-me__container {
+    margin-top: 66px;
+    flex-wrap: nowrap;
+    column-gap: 49px;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+  }
+  
+  .about-me__photo {
+    width: 255px;
+    height: 307px;
+  }
+  
+  .about-me__details {
+    justify-content: flex-start;
+  }
+  
+  .about-me__author {
+    width: 364px;
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -1.6px;
+  }
+  
+  .about-me__job {
+    margin-top: 16px;
+    width: 364px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+  }
+  
+  .about-me__description {
+    margin-top: 20px;
+    width: 364px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  
+  .about-me__link {
+    width: 364px;
+    margin-top: 87px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .about-me {
+    width: calc(100% - 140px);
+    padding: 0 70px 110px;
+  }
+
+  .about-me__container {
+    column-gap: 270px;
+  }
+
+  .about-me__details {
+    row-gap: 0;
+  }
+
+  .about-me__author {
+    width: 600px;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -2px;
+  }
+  
+  .about-me__job {
+    margin-top: 18px;
+    width: 600px;
+    font-size: 18px;
+    line-height: 20px;
+  }
+  
+  .about-me__description {
+    margin-top: 26px;
+    width: 600px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+  
+  .about-me__link {
+    width: 600px;
+    margin-top: 101px;
+  }
+}
