@@ -12,7 +12,7 @@ function PortfolioItem({ title, link, isLastItem }) {
           <img src={arrowIcon} alt="стрелка" />
         </a>
       </div>
-      {!isLastItem && <hr className="portfolio__hr" />}
+      {!isLastItem && <hr className="portfolio__divider" />}
     </>
   );
 }

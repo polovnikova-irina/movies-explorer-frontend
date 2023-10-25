@@ -1,8 +1,8 @@
 .portfolio {
   margin: 0 auto;
-  width: calc(100% - 20px);
+  width: calc(100% - 36px);
+  padding: 0 18px 70px;
   background-color: #202020;
-  padding: 0 10px 70px;
 }
 
 .portfolio__title {
@@ -49,15 +49,15 @@
     opacity: 0.8;
   }
 
-.portfolio__hr {
+.portfolio__divider {
   border: 1px solid #e6e6e6;
   margin-top: 19px;
 }
 
 @media screen and (min-width: 768px) {
   .portfolio {
-    width: calc(100% - 88px);
-    padding: 0 44px 90px;
+    width: calc(100% - 100px);
+    padding: 0 50px 90px;
   }
 
   .portfolio__title {
@@ -100,7 +100,7 @@
     width: 30px;
   }
 
-  .portfolio__hr {
+  .portfolio__divider {
     border: 1px solid #e6e6e6;
     margin-top: 20px;
   }
