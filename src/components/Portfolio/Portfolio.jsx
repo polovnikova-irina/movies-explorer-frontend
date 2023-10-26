@@ -8,8 +8,8 @@ function PortfolioItem({ title, link, isLastItem }) {
         <a className="portfolio__link" href={link} target="_blank">
           {title}
         </a>
-        <a className="portfolio__arrow-icon" href={link} target="_blank">
-          <img src={arrowIcon} alt="стрелка" />
+        <a className="portfolio__link" href={link} target="_blank">
+          <img className="portfolio__arrow-icon" src={arrowIcon} alt="стрелка" />
         </a>
       </div>
       {!isLastItem && <hr className="portfolio__divider" />}
