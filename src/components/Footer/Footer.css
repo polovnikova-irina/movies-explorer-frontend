@@ -2,17 +2,13 @@
   margin: 0 auto;
   width: calc(100% - 20px);
   background-color: #202020;
-  padding: 0 10px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 79px 10px 20px;
 }
 
 .footer__copyright {
   margin: 0;
   padding: 0;
-  width: 300px;
+  width: auto;
   color: #8b8b8b;
   text-align: center;
   font-feature-settings: 'clig' off, 'liga' off;
@@ -63,7 +59,6 @@
 .footer__copyright-year {
   margin: 0;
   padding: 0;
-  color: #8b8b8b;
   font-feature-settings: 'clig' off, 'liga' off;
   font-size: 12px;
   font-style: normal;
@@ -75,6 +70,7 @@
   .footer {
     width: calc(100% - 60px);
     padding: 0 30px 20px;
+    align-items: normal;
   }
 
   .footer__divider {
@@ -83,7 +79,7 @@
 
   .footer__container {
     flex-direction: row-reverse;
-    gap: 0 478px;
+    justify-content: space-between; 
   }
 
   .footer__info {
@@ -91,6 +87,19 @@
     flex-direction: row;
     margin-bottom: 0;
     gap: 0 20px;
+  }
+
+  .footer__copyright {
+    width: auto; 
+    font-size: 13px;
+  }
+
+  .footer__copyright-year {
+    font-size: 13px;
+  }
+
+  .footer__link {
+    font-size: 13px;
   }
 }
 

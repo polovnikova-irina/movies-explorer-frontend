@@ -1,0 +1,25 @@
+.switch {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.switch__checkbox {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch__image {
+    width: 36px;
+    height: 20px;
+    transition: transform 0.2s; 
+  }
+  
+  .switch__image-on {
+    transform: translateX(1px); 
+  }
+  
+
+  .switch__image-off {
+    transform: translateX(0); 
+  }
