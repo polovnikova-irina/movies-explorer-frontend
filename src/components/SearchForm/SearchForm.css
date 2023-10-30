@@ -1,25 +1,118 @@
-.switch {
-  display: inline-block;
+.search__container {
+  display: flex;
+  align-items: center;
+  height: 72px;
+  border-radius: 9px;
+  background-color: #2f2f2f;
+  margin-bottom: 45px;
+}
+
+.search__form {
+  width: 100%;
+  padding: 0 19px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search__form-input::placeholder {
+  color: #8b8b8b;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.search__form-input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #fff;
+}
+
+.search__form-button {
+  margin-left: 21.35px;
+  width: 58.65px;
+  height: 34px;
+  border-radius: 48px;
+  border: 1px solid #4285f4;
+  background-color: #4285f4;
+  color: #fff;
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.search__form-icon {
+  display: none;
+}
+
+.search__form-divider {
+  display: none;
+}
+
+.search__toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 13px;
+}
+
+.search__toggle {
+  display: flex;
+  align-items: center;
   cursor: pointer;
 }
 
-.switch__checkbox {
+.search__toggle-checkbox {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.switch__image {
-    width: 36px;
-    height: 20px;
-    transition: transform 0.2s; 
-  }
-  
-  .switch__image-on {
-    transform: translateX(1px); 
-  }
-  
+.search__toggle-icon {
+  width: 36px;
+  height: 20px;
+  transition: transform 0.2s;
+}
 
-  .switch__image-off {
-    transform: translateX(0); 
+.search__toggle-icon_on {
+  transform: translateX(1px);
+}
+
+.search__toggle-icon_off {
+  transform: translateX(0);
+}
+
+.search__toggle-shortfilms {
+  padding: 0;
+  margin: 0 0 5px;
+  width: 99px;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+@media screen and (min-width: 768px) {
+  .search__form-icon {
+    display: block;
+    width: 15px;
+height: 15px;
   }
+  
+  .search__form-divider {
+    display: block;
+    border: 1px solid grey;
+    width: 42px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .search__container {
+  }
+}

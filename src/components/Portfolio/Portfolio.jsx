@@ -4,15 +4,11 @@ import arrowIcon from '../../images/portfolio__arrow-icon.svg';
 function PortfolioItem({ title, link, isLastItem }) {
   return (
     <>
-      <div className="portfolio__item">
-        <a className="portfolio__link" href={link} target="_blank">
-          {title}
+        <a className="project__link" href={link} target="_blank">
+        <span className="project__title">{title}</span>
+          <img className="project__arrow-icon" src={arrowIcon} alt="стрелка" />
         </a>
-        <a className="portfolio__link" href={link} target="_blank">
-          <img className="portfolio__arrow-icon" src={arrowIcon} alt="стрелка" />
-        </a>
-      </div>
-      {!isLastItem && <hr className="portfolio__divider" />}
+      {!isLastItem && <hr className="project__divider" />}
     </>
   );
 }
