@@ -24,15 +24,17 @@
   
   .toggle__icon_on {
     background-image: url('../../images/searchForm__switch-on.svg');
+    background-repeat: no-repeat;
   }
   
   .toggle__icon_off {
     background-image: url('../../images/searchForm__switch-off.svg');
+    background-repeat: no-repeat;
   }
 
   .toggle__short-films {
     padding: 0;
-    margin: 0 0 4px;
+    margin: 0;
     width: 99px;
     font-size: 11px;
     font-style: normal;

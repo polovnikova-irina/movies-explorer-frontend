@@ -5,8 +5,8 @@ export function AboutProject() {
   return (
     <section className="project">
       <TitleSeparator title="О проекте" />
-      <div className="project__info">
-        <div className="project__info-section">
+      <ul className="project__info">
+        <li className="project__info-section">
           <h3 className="project__info-title">
             Дипломный проект включал 5 этапов
           </h3>
@@ -14,8 +14,8 @@ export function AboutProject() {
             Составление плана, работа над бэкендом, вёрстку, добавление
             функциональности и финальные доработки.
           </p>
-        </div>
-        <div className="project__info-section">
+        </li>
+        <li className="project__info-section">
           <h3 className="project__info-title">
             На выполнение диплома ушло 5 недель
           </h3>
@@ -23,24 +23,22 @@ export function AboutProject() {
             У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было
             соблюдать, чтобы успешно защититься.
           </p>
-        </div>
-      </div>
-      <div className="project__stripe">
-        <div className="project__stripe-color project__stripe-color_green">
-          <p className="project__stripe-text project__stripe-text-black">
+        </li>
+      </ul>
+      <ul className="project__stripe">
+        <li className="project__stripe-area project__stripe-area_color_one">
+          <div className="project__stripe-time project__stripe-time_color_one">
             1 неделя
-          </p>
-        </div>
-        <div className="project__stripe-color project__stripe-color_black">
-          <p className="project__stripe-text project__stripe-text-white">
+          </div>
+          <p className="project__stripe-stack">Back-end</p>
+        </li>
+        <li className="project__stripe-area project__stripe-area_color_two">
+          <div className="project__stripe-time project__stripe-time_color_two">
             4 недели
-          </p>
-        </div>
-        </div>
-        <div className="project__stack">
-          <p className="project__stack-item">Back-end</p>
-          <p className="project__stack-item">Front-end</p>
-        </div>
+          </div>
+          <p className="project__stripe-stack">Front-end</p>
+        </li>
+      </ul>
     </section>
   );
 }

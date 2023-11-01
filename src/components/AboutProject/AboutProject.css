@@ -6,13 +6,14 @@
 }
 
 .project__info {
+  list-style: none;
+  padding: 0;
+  margin: 60px auto 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  row-gap: 56px;
-  margin-bottom: 60px;
-  margin-top: 60px;
+  row-gap: 56px;;
 }
 
 .project__info-title {
@@ -37,65 +38,51 @@
 }
 
 .project__stripe {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   height: 35px;
+}
+
+.project__stripe-area {
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 9px;
   width: 100%;
 }
 
-.project__stripe-color {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-  height: 35px;
-}
-
-.project__stripe-color_green {
+.project__stripe-area_color_one {
   width: 35.21%;
   background-color: #3ddc84;
 }
 
-.project__stripe-color_black {
-  width: 64.79%;
+.project__stripe-area_color_two {
   background-color: #303030;
 }
 
-.project__stripe-text {
-  margin: 0;
-  padding: 0;
-  width: 80px;
-  text-align: center;
+
+.project__stripe-time {
   font-size: 11px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 }
 
-.project__stripe-text-black {
+.project__stripe-time_color_one {
   color: #000;
 }
 
-.project__stripe-text-white {
-  color: #fff;
-}
-
-.project__stack {
-  display: flex;
-  margin-top: 10px;
-}
-
-.project__stack-item {
-  flex-grow: 1;
-  margin: 0 42px 0 0;
-  padding: 0;
+.project__stripe-stack {
+  margin: 21px 0 0;
   color: #a0a0a0;
   text-align: center;
   font-size: 11px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  min-width: 80px; 
 }
+
 
 @media screen and (min-width: 768px) {
   .project {
@@ -125,32 +112,17 @@
     line-height: 18px;
   }
 
-  .project__stripe-color {
-    height: 36px;
-  }
-
-  .project__stripe-color_green {
+  .project__stripe-area_color_one {
     width: 20.958%;
   }
 
-  .project__stripe-color_black {
-    width: 79.04%;
-  }
-
-  .project__stripe-text {
-    width: 120px;
+  .project__stripe-time {
     font-size: 14px;
   }
 
-  .project__stack {
-    margin-top: 14px;
-  }
-
-  .project__stack-item {
-    width: 120px;
+  .project__stripe-stack {
+    margin-top: 23px;
     font-size: 14px;
-    margin-left: 10px;
-    margin-right: 204px;
   }
 }
 
@@ -173,11 +145,5 @@
   .project__info {
     row-gap: 26px;
     margin-bottom: 110px;
-  }
-
-  .project__stack-item {
-    width: 200px;
-    margin-left: 18px;
-    margin-right: 352px;
   }
 }

@@ -1,0 +1,85 @@
+.card {
+  max-width: 300px;
+  width: 100%;
+}
+
+.card__wrapper {
+  margin-top: 15px;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__image-link {
+  all: unset;
+  transition: opacity 0.1s linear;
+}
+
+.card__image-link:hover {
+  opacity: 0.9;
+}
+
+.card__image {
+  height: 168px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.card__title {
+  margin: 0;
+  padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.card__button {
+  background-color: transparent;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.card__divider {
+  width: 100%;
+  border: 1px solid #424242;
+  margin: 29px 0 6px;
+}
+
+.card__duration {
+  margin: 0;
+  padding: 0;
+  color: #8b8b8b;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    max-width: 300px;
+  }
+
+  .card__title {
+    font-size: 13px;
+  }
+
+  .card__duration {
+    font-size: 11px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .card {
+    max-width: 270px;
+  }
+}

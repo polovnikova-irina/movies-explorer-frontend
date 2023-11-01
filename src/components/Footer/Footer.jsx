@@ -6,10 +6,10 @@ export function Footer() {
   <p className="footer__copyright">Учебный проект Яндекс.Практикум x BeatFilm.</p>
   <hr className="footer__divider" />
   <div className="footer__container">
-  <div className="footer__info">
-    <a className="footer__link" href="https://practicum.yandex.ru/" target="_blank">Яндекс.Практикум</a>
-      <a className="footer__link" href="https://github.com/" target="_blank">Github</a>
-      </div>
+  <ul className="footer__info">
+    <li><a className="footer__link" href="https://practicum.yandex.ru/" target="_blank"  rel="noreferrer">Яндекс.Практикум</a></li>
+    <li><a className="footer__link" href="https://github.com/" target="_blank"  rel="noreferrer">Github</a></li>
+      </ul>
       <p className="footer__copyright-year">©2023</p>
   </div>
 </section>

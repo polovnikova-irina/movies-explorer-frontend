@@ -24,8 +24,10 @@ export function SearchForm() {
     <section className="search">
       <div className="search__container">
         <form className="search__form">
+        <div className="search__form-wrapper">
           <img className="search__form-icon" src={searchFormIcon} alt="Иконка поиска" />
           <input className="search__form-input" type="text" name="search" placeholder="Фильм" />
+          </div>
           <div className="search__form-wrapper">
           <button className="search__form-button" type="submit">Найти</button>
           <hr className="search__form-divider" />
@@ -38,6 +40,7 @@ export function SearchForm() {
         {windowWidth >= 320 && windowWidth <= 767 && (
             <Toggle />
         )}
+        <hr className="search__divider" />
     </section>
   );
 }
