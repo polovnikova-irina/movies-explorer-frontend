@@ -1,11 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 // import { useState } from 'react';
 import './Header.css';
 
 export function Header({ loggedIn }) {
+
+  const location = useLocation();
+  const mainPage = location.pathname === '/';
+
   return (
-    <header className="header">
+       <header className={`header ${mainPage ? 'header_theme_blue' : ""}`}>
       <div className="header__container">
       <img className="header__logo" src={logo} alt="Лого" />
       <div className="header__actions">
@@ -31,5 +35,4 @@ export function Header({ loggedIn }) {
   //     <Link to="/profile" className="header__link">
   //       Аккаунт
   //     </Link>
-  //     <img className="header__icon" src={logo} alt="Иконка входа" />
   // </div>

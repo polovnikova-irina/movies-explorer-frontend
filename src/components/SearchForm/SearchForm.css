@@ -5,6 +5,7 @@
   border-radius: 9px;
   background-color: #2f2f2f;
   margin-bottom: 45px;
+  margin-top: 80px;
 }
 
 .search__form {
@@ -103,6 +104,10 @@
 }
 
 @media screen and (min-width: 1280px) {
+  .search__container {
+    margin-top: 70px;
+  }
+
   .search__divider {
     margin-bottom: 69px;
   }

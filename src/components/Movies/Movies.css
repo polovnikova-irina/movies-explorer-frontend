@@ -1,23 +1,21 @@
 .movies {
-    margin: 0 auto;
-    width: calc(100% - 20px);
-    background-color: #202020;
-    padding: 79px 10px 20px;
+  margin: 0 auto;
+  width: calc(100% - 20px);
+  background-color: #202020;
+  padding: 0 10px 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .movies {
+    width: calc(100% - 60px);
+    padding: 0 30px 20px;
+    align-items: normal;
   }
-  
-  
-  @media screen and (min-width: 768px) {
-    .movies {
-      width: calc(100% - 60px);
-      padding: 80px 30px 20px;
-      align-items: normal;
-    }
+}
+
+@media screen and (min-width: 1280px) {
+  .movies {
+    width: calc(100% - 140px);
+    padding: 0 70px 125px;
   }
-  
-  @media screen and (min-width: 1280px) {
-    .movies {
-      width: calc(100% - 140px);
-      padding: 70px 70px 125px;
-    }
-  }
-  
+}

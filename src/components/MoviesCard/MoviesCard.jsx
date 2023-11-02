@@ -1,25 +1,28 @@
 import './MoviesCard.css';
+import poster from '../../images/moviesCard__image.jpg'
 import { useLocation } from 'react-router-dom';
-import image from '../../images/moviesCard__image.jpg';
 import deleteIcon from '../../images/moviesCard__image-delete.svg';
 import saveIcon from '../../images/moviesCard__image-save.svg';
 
-export function MoviesCard() {
+export function MoviesCard({ movie }) {
   const location = useLocation();
+  const savedMovies = location.pathname === '/saved-movies';
+  const movies = location.pathname === '/movies';
+
   return (
     <div className="card">
       <a
-        href="https://www.youtube.com/watch?v=5ovzC93EneA"
+        href={movie.link}
         target="_blank"
         className="card__image-link"
         rel="noreferrer"
       >
-        <img className="card__image" src={image} alt="постер" />
+        <img className="card__image" src={poster} alt={movie.title} />
       </a>
       <div className="card__container">
         <div className="card__wrapper">
-          <h2 className="card__title">33 слова о дизайне</h2>
-          {location.pathname === '/movies' && (
+          <h2 className="card__title">{movie.title}</h2>
+          {movies && (
             <button
               className="card__button card__button_type_save"
               type="button"
@@ -32,7 +35,7 @@ export function MoviesCard() {
               />
             </button>
           )}
-          {location.pathname === '/saved-movies' && (
+          {savedMovies && (
             <button
               className="card__button card__button_type_delete"
               type="button"
@@ -47,7 +50,7 @@ export function MoviesCard() {
           )}
         </div>
         <hr className="card__divider" />
-        <p className="card__duration">1ч 42м</p>
+        <p className="card__duration">{movie.duration}</p>
       </div>
     </div>
   );

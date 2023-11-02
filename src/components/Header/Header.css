@@ -1,9 +1,15 @@
 .header {
   margin: 0 auto;
+  padding-top: 18px;
   width: calc(100% - 28px);
-  background-color: #073042;
+  background-color: #202020;
   padding: 18px 14px;
 }
+
+.header_theme_blue {
+  background-color: #073042
+}
+
 
 .header__logo {
   margin: 0; 
@@ -82,7 +88,8 @@
 @media screen and (min-width: 1280px) {
     .header {
       width: calc(100% - 140px);
-      padding: 18px 70px;
+      padding: 18px 70px; 
+      padding-top: 18px;
     }
 
   }

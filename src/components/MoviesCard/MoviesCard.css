@@ -1,11 +1,10 @@
 .card {
-  max-width: 300px;
-  width: 100%;
+  min-height: 256px;
+  width: 300px;
 }
 
 .card__wrapper {
   margin-top: 15px;
-  width: 300px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,12 +15,18 @@
   transition: opacity 0.1s linear;
 }
 
+.card__icon {
+  width: 24px;
+  height: 24px;
+}
+
 .card__image-link:hover {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .card__image {
-  height: 168px;
+  width: 100%;
+  min-height: 168px;
   object-fit: cover;
   cursor: pointer;
 }
@@ -66,7 +71,7 @@
 
 @media screen and (min-width: 768px) {
   .card {
-    max-width: 300px;
+    width: 339px;
   }
 
   .card__title {
@@ -76,10 +81,17 @@
   .card__duration {
     font-size: 11px;
   }
+
 }
 
 @media screen and (min-width: 1280px) {
   .card {
-    max-width: 270px;
+   width: 270px;
+  }
+
+  .card__image {
+    min-height: 168px;
+    object-fit: cover;
+    cursor: pointer;
   }
 }

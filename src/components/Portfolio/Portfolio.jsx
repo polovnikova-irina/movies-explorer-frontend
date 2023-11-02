@@ -4,7 +4,7 @@ import arrowIcon from '../../images/portfolio__arrow-icon.svg';
 function PortfolioItem({ title, link, isLastItem }) {
   return (
     <>
-        <a className="project__link" href={link} target="_blank">
+        <a className="project__link" href={link} target="_blank" rel='noreferrer' >
         <span className="project__title">{title}</span>
           <img className="project__arrow-icon" src={arrowIcon} alt="стрелка" />
         </a>

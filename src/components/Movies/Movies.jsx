@@ -1,17 +1,18 @@
 import './Movies.css';
-import { SearchForm } from "../SearchForm/SearchForm";
-// import { Preloader } from "../Preloader/Preloader";
-// import { MoviesCardList } from "../MoviesCardList/MoviesCardList;
-import { MoviesCard } from "../MoviesCard/MoviesCard";
+import { Header } from '../Header/Header';
+import { Footer } from '../Footer/Footer';
+import { SearchForm } from '../SearchForm/SearchForm';
+import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 
 export function Movies() {
-    return (
-    <section className="movies">
+  return (
+    <>
+      <Header />
+      <section className="movies">
         <SearchForm />
-        < MoviesCard />
-        {/* <Preloader />
         <MoviesCardList />
-        <MoviesCard /> */}
-      </ section>
-    );
-  }
+      </section>
+      <Footer />
+    </>
+  );
+}

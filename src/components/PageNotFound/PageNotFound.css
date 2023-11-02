@@ -1,0 +1,63 @@
+.not-found {
+    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.not-found__title {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.not-found__title span {
+  display: block;
+  margin: 10px 0 0;
+  padding: 0;
+  font-size: 80px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.not-found__button {
+  all: unset;
+  color: #4285f4;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  transition: opacity 0.3s linear;
+  cursor: pointer;
+  align-self: center;
+  margin-top: 284px;
+}
+
+.not-found__button:hover {
+  opacity: 0.6;
+}
+
+@media screen and (min-width: 768px) {
+    .not-found__title {
+        font-size: 16px;
+    }
+
+    .not-found__title span {
+        font-size: 140px;
+        margin-top: 5px;
+      }
+
+      .not-found__button {
+        font-size: 14px;
+        margin-top: 184px;
+      } 
+  
+  }
+
