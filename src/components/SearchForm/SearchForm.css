@@ -48,6 +48,12 @@
   font-style: normal;
   font-weight: 500;
   line-height: 18px;
+  cursor: pointer;
+  transition: opacity .3s liner;
+}
+
+.search__form-button:hover {
+  opacity: .8;
 }
 
 .search__form-icon {

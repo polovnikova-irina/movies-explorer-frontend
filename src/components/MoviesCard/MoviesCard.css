@@ -12,7 +12,7 @@
 
 .card__image-link {
   all: unset;
-  transition: opacity 0.1s linear;
+  transition: opacity .3s linear;
 }
 
 .card__icon {
@@ -21,7 +21,7 @@
 }
 
 .card__image-link:hover {
-  opacity: 0.8;
+  opacity: .8;
 }
 
 .card__image {

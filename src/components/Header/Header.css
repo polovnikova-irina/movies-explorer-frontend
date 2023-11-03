@@ -35,12 +35,8 @@
     font-style: normal;
     font-weight: 500;
     line-height: 16px;
-    transition: opacity 0.3s linear;
+    transition: opacity .3s linear;
     cursor: pointer;
-  }
-  
-  .header__link:hover {
-    opacity: 0.8;
   }
 
 .header__login-button {
@@ -55,13 +51,14 @@
     font-style: normal;
     font-weight: 500;
     line-height: 16px;
-    transition: opacity 0.3s linear;
+    transition: opacity .3s linear;
     cursor: pointer;
 }
 
-.header__login-button:hover {
-    opacity: 0.8;
-  }
+.header__link:hover, 
+.header__login-button:hover  {
+  opacity: .8;
+}
 
 @media screen and (min-width: 768px) {
   .header {

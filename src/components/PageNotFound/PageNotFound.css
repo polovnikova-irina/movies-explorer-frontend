@@ -34,14 +34,14 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  transition: opacity 0.3s linear;
+  transition: opacity .3s linear;
   cursor: pointer;
   align-self: center;
   margin-top: 284px;
 }
 
 .not-found__button:hover {
-  opacity: 0.6;
+  opacity: .8;
 }
 
 @media screen and (min-width: 768px) {
