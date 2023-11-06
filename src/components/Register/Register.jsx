@@ -12,12 +12,13 @@ export function Register() {
       title="Добро пожаловать!"
       nameInputLabel="Имя"
       emailInputLabel="E-mail"
-      extraInputLabel="Пароль"
+      passwordInputLabel="Пароль"
       buttonLabel="Войти"
       text="Уже зарегистрированы?"
       to="/signin"
       textLink="Войти"
       onSubmit={handleRegistration}
+      isRegistration={true}
     />
   );
 }

@@ -20,6 +20,11 @@ export function Header({ loggedIn }) {
         Войти
       </button>
       </div>
+      <div className="header__burger">
+      <button type='button' className="header__burger-button" aria-label='бургер-кнопка'></button>
+        <span/>
+
+      </div>
     </div>
     </header>
   );
