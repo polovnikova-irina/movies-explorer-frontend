@@ -1,12 +1,22 @@
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../images/logo.svg';
-// import { useState } from 'react';
+import { useState } from 'react';
 import './Header.css';
+import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 
 export function Header({ loggedIn }) {
-
   const location = useLocation();
   const mainPage = location.pathname === '/';
+
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+
+  const handleMenuClick = () => {
+    setMenuIsOpen(!menuIsOpen);
+  }
+
+  const closeMenu = () => {
+    setMenuIsOpen(false); 
+  };
 
   return (
        <header className={`header ${mainPage ? 'header_theme_blue' : ""}`}>
@@ -21,10 +31,10 @@ export function Header({ loggedIn }) {
       </button>
       </div>
       <div className="header__burger">
-      <button type='button' className="header__burger-button" aria-label='бургер-кнопка'></button>
+      <button type='button' className="header__burger-button" aria-label='открыть бургер-меню' onClick={handleMenuClick}></button>
         <span/>
-
       </div>
+      <BurgerMenu isOpen={menuIsOpen} closeMenu={closeMenu}/>
     </div>
     </header>
   );

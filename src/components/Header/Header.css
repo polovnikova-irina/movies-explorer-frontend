@@ -56,7 +56,6 @@
 }
 
 
-
 .header__burger-button {
   all: unset;
   width: 44px;
@@ -66,13 +65,11 @@ background-image: url(../../images/header__burger-button.svg);
 background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat;
-  transition: opacity .3s linear;
   cursor: pointer;
 }
 
 .header__link:hover, 
-.header__login-button:hover,
-.header__burger-button  {
+.header__login-button:hover  {
   opacity: .8;
 }
 
@@ -107,6 +104,10 @@ background-size: cover;
       width: calc(100% - 140px);
       padding: 18px 70px; 
       padding-top: 18px;
+    }
+
+    .header__burger{
+      display: none;
     }
 
   }
