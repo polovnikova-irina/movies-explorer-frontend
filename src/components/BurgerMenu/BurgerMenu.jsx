@@ -7,7 +7,6 @@ export function BurgerMenu({ isOpen, closeMenu }) {
 
   return (
     <div className={`menu ${isOpen ? 'menu_active' : ''}`}>
-       <div className='menu__blur'/>
       <button className="menu__close-button" type='button' onClick={closeMenu}>
             <img src={buttonClose} alt="закрыть" />
       </button>
