@@ -11,6 +11,9 @@ export function Movies() {
       <section className="movies">
         <SearchForm />
         <MoviesCardList />
+        <button className="movies__button" aria-label='еще'>
+           Ещё
+         </button>
       </section>
       <Footer />
     </>

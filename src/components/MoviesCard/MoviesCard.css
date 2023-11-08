@@ -18,6 +18,11 @@
 .card__icon {
   width: 24px;
   height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.card__icon:hover {
+  transform: scale(1.2);
 }
 
 .card__image-link:hover {

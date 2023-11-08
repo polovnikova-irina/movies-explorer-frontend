@@ -6,7 +6,7 @@ flex-direction: column;
 }
 
 .card-list__container {
-    margin: 0;
+    margin: 0 0 0;
     padding: 0;
     list-style: none;
     display: grid;
@@ -20,38 +20,11 @@ flex-direction: column;
     padding: 0;
 }
 
-.card-list__button {
-    all: unset;
-    margin-top: 60px;
-    width: 240px;
-    width: 100%;
-    min-height: 36px;
-    border-radius: 6px;
-    text-align: center;
-    background: #2f2f2f;
-    text-align: center;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    cursor: pointer;
-    align-self: center; 
-    transition: opacity .3s linear;
-}
-
-.card-list__button:hover {
-    opacity: .8;
-}
-
 @media screen and (min-width: 768px) {
     .card-list__container {
         grid-template-columns: repeat(auto-fit, minmax(339px, 1fr));
         max-width: 708px; 
         gap: 30px;
-    }
-
-    .card-list__button {
-       width: 320px;
     }
   }
 

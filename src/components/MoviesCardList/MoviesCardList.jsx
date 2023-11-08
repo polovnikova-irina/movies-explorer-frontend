@@ -13,11 +13,7 @@ export function MoviesCardList() {
           </li>
         ))}
       </ul>
-      </>
-       
-      <button className="card-list__button">
-        Ещё
-      </button>
-    </section>
+      </>    
+      </section>
   );
 }

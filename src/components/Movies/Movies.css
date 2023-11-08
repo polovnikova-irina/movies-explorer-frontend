@@ -3,6 +3,29 @@
   width: calc(100% - 20px);
   background-color: #202020;
   padding: 0 10px 20px;
+  text-align: center;
+}
+
+.movies__button {
+  all: unset;
+  margin: 60px auto 0;
+  width: 240px;
+  min-height: 36px;
+  border-radius: 6px;
+  text-align: center;
+  background: #2f2f2f;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+  align-self: center;
+  transition: opacity 0.3s linear;
+}
+
+.movies__button:hover {
+  opacity: 0.8;
 }
 
 @media screen and (min-width: 768px) {
@@ -10,6 +33,10 @@
     width: calc(100% - 60px);
     padding: 0 30px 20px;
     align-items: normal;
+  }
+
+  .movies__button {
+    width: 320px;
   }
 }
 

@@ -4,7 +4,7 @@ import {AuthForm} from '../AuthForm/AuthForm';
 export function Login() {
   const handleRegistration = (e) => {
     e.preventDefault();
-    // Обработка логики регистрации
+    
   };
 
   return (
