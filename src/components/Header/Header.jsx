@@ -22,7 +22,7 @@ export function Header({ loggedIn }) {
     <header className={`header ${mainPage ? 'header_theme_blue' : ''}`}>
       <div className='header__container'>
         <Link to='/'>
-          <img className='header__logo ' src={logo} alt='Лого' />
+          <img className='header__logo' src={logo} alt='Лого' />
         </Link>
         {loggedIn ? (
           <>
@@ -60,12 +60,14 @@ export function Header({ loggedIn }) {
           </>
         ) : (
           <div className='header__actions'>
-            <Link to='/sign-up' className='header__link'>
+            <Link to='/signup' className='header__link'>
               Регистрация
-            </Link>
+            </Link >
+            <Link to='/signin' className='header__link'>
             <button onClick={loggedIn} className='header__login-button'>
               Войти
             </button>
+            </Link>
           </div>
         )}
       </div>

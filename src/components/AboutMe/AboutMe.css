@@ -101,6 +101,7 @@
   
   .about-me__details {
     justify-content: flex-start;
+    row-gap: 0px;
   }
   
   .about-me__author {
@@ -134,15 +135,11 @@
 @media screen and (min-width: 1280px) {
   .about-me {
     width: calc(100% - 140px);
-    padding: 0 70px 110px;
+    padding: 0 70px 100px;
   }
 
   .about-me__container {
     column-gap: 270px;
-  }
-
-  .about-me__details {
-    row-gap: 0;
   }
 
   .about-me__author {
@@ -168,6 +165,11 @@
   
   .about-me__link {
     width: 600px;
-    margin-top: 101px;
+    margin-top: 98px;
+  }
+
+  .about-me__photo {
+    width: 270px;
+    height: 327px;
   }
 }

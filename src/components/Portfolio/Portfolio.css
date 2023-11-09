@@ -1,7 +1,7 @@
 .portfolio {
   margin: 0 auto;
   width: calc(100% - 36px);
-  padding: 0 18px 70px;
+  padding: 0 18px 55px;
   background-color: #202020;
 }
 
@@ -28,6 +28,7 @@
 
 .project__title {
   margin: 0;
+  margin-bottom: 15px;
   padding: 0;
   color: #FFF;
   font-size: 18px;
@@ -48,13 +49,14 @@
 
 .project__divider {
   border: 1px solid #e6e6e6;
-  margin-top: 19px;
+  margin: 0;
+  margin-bottom: 22px;
 }
 
 @media screen and (min-width: 768px) {
   .portfolio {
     width: calc(100% - 100px);
-    padding: 0 50px 90px;
+    padding: 0 50px 155px;
   }
 
   .portfolio__title {
@@ -78,7 +80,7 @@
 @media screen and (min-width: 1280px) {
   .portfolio {
     width: calc(100% - 140px);
-    padding: 0 70px 125px;
+    padding: 0 70px 190px;
   }
 
   .portfolio__title {
@@ -92,12 +94,8 @@
     letter-spacing: -1.2px;
   }
 
-  .project__divider {
-    border: 1px solid #e6e6e6;
-    margin-top: 20px;
-  }
-
   .project__arrow-icon {
-    width: 21px;
+    margin-right: 6px;
+    width: 19px;
   }
 }

@@ -25,14 +25,16 @@ export function AuthForm({
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  // };
 
   return (
     <div className='auth-form'>
       <div className='auth-form__header'>
-        <img className='auth-form__logo' src={logo} alt='Логотип' />
+      <Link to='/'>
+          <img className='auth-form__logo header__logo' src={logo} alt='Лого' />
+        </Link>
         <h2 className='auth-form__title'>{title}</h2>
       </div>
       <form className='auth-form__form' onSubmit={onSubmit}>

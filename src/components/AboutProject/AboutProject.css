@@ -1,7 +1,7 @@
 .project {
   margin: 0 auto;
   width: calc(100% - 36px);
-  padding: 0 18px 69px;
+  padding: 0 18px 95px;
   background-color: #202020;
 }
 
@@ -13,7 +13,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  row-gap: 56px;;
+  row-gap: 58px;
 }
 
 .project__info-title {
@@ -53,7 +53,7 @@
 }
 
 .project__stripe-area_color_one {
-  width: 35.21%;
+  width: 55%;
   background-color: #3ddc84;
 }
 
@@ -87,7 +87,7 @@ line-height: normal;
 @media screen and (min-width: 768px) {
   .project {
     width: calc(100% - 100px);
-    padding: 0 50px 90px;
+    padding: 0 50px 122px;
   }
 
   .project__info {
@@ -95,12 +95,13 @@ line-height: normal;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    margin-bottom: 60px;
+    margin-bottom: 94px;
     margin-top: 70px;
-    row-gap: 22px;
+    column-gap: 30px;
   }
 
   .project__info-title {
+    margin-bottom: 20px;
     width: 319px;
     font-size: 20px;
     letter-spacing: -0.8px;
@@ -113,7 +114,7 @@ line-height: normal;
   }
 
   .project__stripe-area_color_one {
-    width: 20.958%;
+    width: 26.5%;
   }
 
   .project__stripe-time {
@@ -129,7 +130,7 @@ line-height: normal;
 @media screen and (min-width: 1280px) {
   .project {
     width: calc(100% - 140px);
-    padding: 0 70px 110px;
+    padding: 0 70px 130px;
   }
 
   .project__info-title {
@@ -140,10 +141,15 @@ line-height: normal;
     width: 550px;
     font-size: 14px;
     line-height: 20px;
+    margin-top: 26px;
   }
 
   .project__info {
-    row-gap: 26px;
     margin-bottom: 110px;
+    column-gap: 40px;
+  }
+
+  .project__stripe-area_color_one {
+    width: 25%;
   }
 }

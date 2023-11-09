@@ -1,5 +1,5 @@
 import '../../vendor/fonts/fonts.css';
-// import React, { useEffect, useState } from "react";
+import React, { useState} from "react";
 import { Route, Routes } from 'react-router-dom';
 import { Main } from '../Main/Main';
 import { Movies } from '../Movies/Movies';
@@ -10,16 +10,17 @@ import { Profile } from '../Profile/Profile.jsx';
 import { PageNotFound } from '../PageNotFound/PageNotFound.jsx';
 
 function App() {
+  // const [currentUser, setСurrentUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
   return (
-    // const [loggedIn, setLoggedIn] = useState(false);
     <div className="page">
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/saved-movies" element={<SavedMovies />} />
+        <Route path="/" element={<Main />} loggedIn={loggedIn} />
+        <Route path="/movies" element={<Movies />} loggedIn={loggedIn} />
+        <Route path="/saved-movies" element={<SavedMovies />} loggedIn={loggedIn}/>
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile />} loggedIn={loggedIn}/>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>

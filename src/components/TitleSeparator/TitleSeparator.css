@@ -24,6 +24,11 @@
     padding: 90px 0 0;
   }
 
+  .title-separator__divider {
+    border: 1px solid #dadada;
+    margin: 24px 0 0;
+  }
+
   .title-separator__text {
     width: 600px;
     font-size: 22px;

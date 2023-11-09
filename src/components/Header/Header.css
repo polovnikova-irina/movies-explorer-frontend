@@ -24,6 +24,7 @@
 }
 
 .header__actions {
+  margin-bottom: 4px;
   display: flex;
   column-gap: 14px;
   align-items: center;
@@ -90,7 +91,7 @@
   }
 
   .header__link {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .header__login-button {

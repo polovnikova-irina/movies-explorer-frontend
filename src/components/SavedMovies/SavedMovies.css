@@ -1,5 +1,5 @@
 .saved-movies {
-    margin: 0 auto 229px;
+    margin: 0 auto 138px;
     width: calc(100% - 20px);
     background-color: #202020;
     padding: 0 10px;
@@ -8,7 +8,8 @@
   @media screen and (min-width: 768px) {
     .saved-movies {
       width: calc(100% - 60px);
-      padding: 0 30px 20px;
+      padding: 0 30px;
+      margin-bottom: 230px;
       align-items: normal;
     }
   }
@@ -17,6 +18,6 @@
     .saved-movies {
       width: calc(100% - 140px);
       padding: 0 70px;
-      margin-bottom: 319px;
+      margin-bottom: 295px;
     }
   }

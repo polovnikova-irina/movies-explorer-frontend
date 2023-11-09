@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import './MoviesCard.css';
 import poster from '../../images/moviesCard__image.jpg'
 import { useLocation } from 'react-router-dom';
@@ -8,9 +9,19 @@ export function MoviesCard({ movie }) {
   const location = useLocation();
   const savedMovies = location.pathname === '/saved-movies';
   const movies = location.pathname === '/movies';
+  const [hovered, setHovered] = useState(false);
+
+  const handleHover = () => {
+    setHovered(true);
+  };
+
+  const handleLeave = () => {
+    setHovered(false);
+  };
 
   return (
-    <div className="card">
+    <div className="card" onMouseEnter={handleHover}
+    onMouseLeave={handleLeave}>
       <a
         href={movie.link}
         target="_blank"
@@ -30,20 +41,22 @@ export function MoviesCard({ movie }) {
             >
               <img
                 className="card__icon card__icon_type_save"
-                alt="удалить"
+                alt="сохранить"
                 src={saveIcon}
               />
             </button>
           )}
           {savedMovies && (
             <button
-              className="card__button card__button_type_delete"
+            className={`card__button card__button_type_delete ${
+              hovered ? '' : 'card__button_visible'
+            }`}
               type="button"
               aria-label="Удалить фильм"
             >
               <img
                 className="card__icon card__icon_type_delete"
-                alt="сохранить"
+                alt="удалить"
                 src={deleteIcon}
               />
             </button>
