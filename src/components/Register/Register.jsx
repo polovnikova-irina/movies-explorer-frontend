@@ -13,7 +13,7 @@ export function Register() {
       nameInputLabel="Имя"
       emailInputLabel="E-mail"
       passwordInputLabel="Пароль"
-      buttonLabel="Войти"
+      buttonLabel="Зарегистрироваться"
       text="Уже зарегистрированы?"
       to="/signin"
       textLink="Войти"

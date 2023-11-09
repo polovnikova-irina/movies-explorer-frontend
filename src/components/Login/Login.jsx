@@ -12,7 +12,7 @@ export function Login() {
       title="Рады видеть!"
       emailInputLabel="E-mail"
       passwordInputLabel="Пароль"
-      buttonLabel="Зарегистрироваться"
+      buttonLabel="Войти"
       text="Ещё не зарегистрированы?"
       to="/signup"
       textLink="Регистрация"

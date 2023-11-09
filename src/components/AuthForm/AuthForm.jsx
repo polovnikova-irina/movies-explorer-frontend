@@ -71,10 +71,10 @@ export function AuthForm({
             onChange={handleInputChange} 
           />
         </label>
-        <button className='auth-form__button' type='submit' disabled={isButtonDisabled}>
+      </form>
+      <button className='auth-form__button' type='submit' disabled={isButtonDisabled}>
           {buttonLabel}
         </button>
-      </form>
       <div className='auth-form__navigation'>
         <p className='auth-form__navigation-text'>{text}</p>
         <Link to={to} className='auth-form__navigation-link'>

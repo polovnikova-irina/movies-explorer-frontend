@@ -58,8 +58,8 @@
 
 .header__burger-button {
   all: unset;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 37px;
   background-color: transparent;
   background-image: url(../../images/header__burger-button.svg);
   background-size: cover;
@@ -126,7 +126,7 @@
 
   .header__navigate-movies {
     margin-right: 746px;
-    margin-left: 45px;
+    margin-left: 30px;
     display: flex;
     gap: 16px;
   }
@@ -137,6 +137,10 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+  }
+
+  .header__navigate-movies__link {
+    font-size: 13px;
   }
 
   .header__link-account-text {

@@ -16,7 +16,7 @@
 }
 
 .auth-form__title {
-  margin: 50px 0 80px;
+  margin: 45px 0 82px;
   padding: 0;
   font-size: 24px;
   font-style: normal;
@@ -32,6 +32,7 @@
 
 .auth-form__form {
   width: 260px;
+  height: 200px;
   display: flex;
   flex-direction: column;
 }
@@ -64,8 +65,8 @@
 }
 
 .auth-form__button {
-  width: 260px;
   all: unset;
+  width: 260px;
   margin-top: 222px;
   margin-bottom: 14px;
   height: 45px;
@@ -129,7 +130,7 @@
 
   .auth-form__title {
     text-align: left;
-    margin: 50px 0 80px;
+    margin: 35px 0 42px;
     padding: 0;
     font-size: 24px;
     font-style: normal;
@@ -140,7 +141,10 @@
   .auth-form__button {
     width: 396px;
     font-size: 14px;
+    margin-top: 134px;
+  margin-bottom: 16px;
   }
+
   .auth-form__navigation {
     font-size: 14px;
   }
@@ -148,7 +152,7 @@
 
 @media screen and (min-width: 1280px) {
   .auth-form {
-    margin: 70px auto 70px;
+    margin: 70px auto 0;
     width: calc(100% - 884px);
     padding: 0 442px;
   }
