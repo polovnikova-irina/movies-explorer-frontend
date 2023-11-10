@@ -8,11 +8,13 @@ export function SavedMovies() {
   return (
     <>
       <Header />
+      <main className="content">
       <section className="saved-movies">
         <SearchForm />
         <MoviesCardList />
       </section>
       <Footer />
+      </main>
     </>
   );
 }

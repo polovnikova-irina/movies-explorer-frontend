@@ -8,17 +8,17 @@ export function Toggle() {
   };
 
   return (
-    <div className="toggle__container">
-      <label className="toggle__label">
+    <div className="search__toggle-container">
+      <label className="search__toggl-label">
         <input
-          className="toggle__checkbox"
+          className="search__toggle-checkbox"
           type="checkbox"
           checked={isToggled}
           onChange={toggleSwitch}
         />
-        <div className={`toggle__icon ${isToggled ? 'toggle__icon_on' : 'toggle__icon_off'}`} />
+        <div className={`search__toggle-icon ${isToggled ? 'search__toggle-icon_on' : 'search__toggle-icon_off'}`} />
       </label>
-      <p className="toggle__short-films">Короткометражки</p>
+      <p className="search__toggle-shortfilms">Короткометражки</p>
     </div>
   );
 }

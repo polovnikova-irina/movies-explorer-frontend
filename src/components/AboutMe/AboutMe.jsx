@@ -7,9 +7,9 @@ export function AboutMe() {
     <section className="about-me">
       <TitleSeparator title="Студент" />
       <div className="about-me__container">
-        <img className="about-me__photo" src={profilePhoto} alt="Фото" />
+        <img className="about-me__photo" src={profilePhoto} alt="Фотография профиля пользователя" />
         <div className="about-me__details">
-      <h2 className="about-me__author">Виталий</h2>
+      <h3 className="about-me__author">Виталий</h3>
       <p className="about-me__job">Фронтенд-разработчик, 30 лет</p>
       <p className="about-me__description">
         Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня

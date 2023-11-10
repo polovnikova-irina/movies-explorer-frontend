@@ -1,4 +1,3 @@
-import './Main.css'
 import { Header } from "../Header/Header";
 import { Footer } from "../Footer/Footer";
 import { Promo } from "../Promo/Promo";
@@ -11,7 +10,7 @@ export function Main() {
     return (
       <>
       <Header />
-      <main className="main">
+      <main className="content">
         <Promo />
         <AboutProject />
         <Techs />

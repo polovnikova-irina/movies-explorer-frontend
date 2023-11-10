@@ -2,7 +2,7 @@ import './Footer.css';
 
 export function Footer() {
   return (
-    <section className="footer">
+    <footer className="footer">
   <p className="footer__copyright">Учебный проект Яндекс.Практикум x BeatFilm.</p>
   <hr className="footer__divider" />
   <div className="footer__container">
@@ -12,6 +12,6 @@ export function Footer() {
       </ul>
       <p className="footer__copyright-year">©2023</p>
   </div>
-</section>
+</footer>
   );
 }

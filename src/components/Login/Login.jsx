@@ -8,6 +8,7 @@ export function Login() {
   };
 
   return (
+  <main className="content">
     <AuthForm
       title="Рады видеть!"
       emailInputLabel="E-mail"
@@ -19,5 +20,6 @@ export function Login() {
       onSubmit={handleRegistration}
       isRegistration={false}
     />
+  </main>
   );
 }

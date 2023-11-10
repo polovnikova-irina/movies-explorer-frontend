@@ -20,57 +20,55 @@ export function Header({ loggedIn }) {
 
   return (
     <header className={`header ${mainPage ? 'header_theme_blue' : ''}`}>
-      <div className='header__container'>
-        <Link to='/'>
-          <img className='header__logo' src={logo} alt='Лого' />
+      <nav className="header__container">
+        <Link to="/">
+          <img className="header__logo" src={logo} alt="Лого" />
         </Link>
         {loggedIn ? (
           <>
-            <div className='header__navigate-movies'>
+            <nav className="header__navigate-movies">
               <Link
-                to='/movies'
-                className='header__link header__navigate-movies__link'
+                to="/movies"
+                className="header__link header__navigate-movies-link"
               >
                 Фильмы
               </Link>
               <Link
-                to='/saved-movies'
-                className='header__link header__navigate-movies__link'
+                to="/saved-movies"
+                className="header__link header__navigate-movies-link"
               >
                 Сохраненные фильмы
               </Link>
-            </div>
-            <Link to='/profile' className='header__link header__link-account'>
-              <span className='header__link-account-text'>Аккаунт</span>
+            </nav>
+            <Link to="/profile" className="header__link header__link-account">
+              <span className="header__link-account-text">Аккаунт</span>
               <div
                 className={`header__link-account-image ${
                   mainPage ? 'header__link-account-image_theme_blue' : ''
                 }`}
               ></div>
             </Link>
-            <div className='header__burger'>
+            <nav className="header__burger">
               <button
-                type='button'
-                className='header__burger-button'
-                aria-label='открыть бургер-меню'
+                type="button"
+                className="header__burger-button"
+                aria-label="открыть бургер-меню"
                 onClick={handleMenuClick}
               ></button>
               <BurgerMenu isOpen={menuIsOpen} closeMenu={closeMenu} />
-            </div>
+            </nav>
           </>
         ) : (
-          <div className='header__actions'>
-            <Link to='/signup' className='header__link'>
+          <nav className="header__actions">
+            <Link to="/signup" className="header__link">
               Регистрация
-            </Link >
-            <Link to='/signin' className='header__link'>
-            <button onClick={loggedIn} className='header__login-button'>
-              Войти
-            </button>
             </Link>
-          </div>
+            <Link to="/signin" className="header__link header__link-button" >
+              Войти
+            </Link>
+          </nav>
         )}
-      </div>
+      </nav>
     </header>
   );
 }

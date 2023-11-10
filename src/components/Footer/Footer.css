@@ -109,7 +109,7 @@
 @media screen and (min-width: 1280px) {
   .footer {
     width: calc(100% - 140px);
-    padding: 0 70px 0;
+    padding: 0 70px 20px;
   }
 
   .footer__divider {

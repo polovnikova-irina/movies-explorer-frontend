@@ -8,6 +8,7 @@ export function Register() {
   };
 
   return (
+    <main className="content">
     <AuthForm
       title="Добро пожаловать!"
       nameInputLabel="Имя"
@@ -20,5 +21,6 @@ export function Register() {
       onSubmit={handleRegistration}
       isRegistration={true}
     />
+    </main>
   );
 }

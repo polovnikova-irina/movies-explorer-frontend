@@ -27,15 +27,15 @@ export function AboutProject() {
       </ul>
       <ul className="project__stripe">
         <li className="project__stripe-area project__stripe-area_color_one">
-          <div className="project__stripe-time project__stripe-time_color_one">
+          <p className="project__stripe-time project__stripe-time_color_one">
             1 неделя
-          </div>
+          </p>
           <p className="project__stripe-stack">Back-end</p>
         </li>
         <li className="project__stripe-area project__stripe-area_color_two">
-          <div className="project__stripe-time project__stripe-time_color_two">
+          <p className="project__stripe-time project__stripe-time_color_two">
             4 недели
-          </div>
+          </p>
           <p className="project__stripe-stack">Front-end</p>
         </li>
       </ul>

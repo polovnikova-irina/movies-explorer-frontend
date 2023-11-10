@@ -8,6 +8,7 @@ export function Movies() {
   return (
     <>
       <Header />
+      <main className="content">
       <section className="movies">
         <SearchForm />
         <MoviesCardList />
@@ -16,6 +17,7 @@ export function Movies() {
          </button>
       </section>
       <Footer />
+      </main>
     </>
   );
 }

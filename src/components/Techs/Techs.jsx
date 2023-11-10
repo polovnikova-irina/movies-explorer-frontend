@@ -6,7 +6,7 @@ export function Techs() {
     <section className="techs">
       <TitleSeparator title="Технологии" />
       <div className="techs__container">
-      <h2 className="techs__title">7 технологий</h2>
+      <h3 className="techs__title">7 технологий</h3>
       <p className="techs__subtitle">
         На курсе веб-разработки мы освоили технологии, которые применили в&nbsp;
         дипломном проекте.
