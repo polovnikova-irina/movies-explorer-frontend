@@ -27,7 +27,6 @@ export function Portfolio() {
               <span className="portfolio__name">{project.title}</span>
               <img className="portfolio__arrow-icon" src={arrowIcon} alt="стрелка" />
             </a>
-            {index !== projects.length - 1 && <hr className="portfolio__divider" />}
           </li>
         ))}
       </ul>

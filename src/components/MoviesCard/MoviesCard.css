@@ -39,6 +39,8 @@
 .card__title {
   margin: 0;
   padding: 0;
+  display: flex;
+  align-items: center; 
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -58,12 +60,6 @@
   padding: 0;
 }
 
-.card__divider {
-  width: 100%;
-  border: 1px solid #424242;
-  margin: 23px 0 6px;
-}
-
 .card__duration {
   margin: 0;
   padding: 0;
@@ -77,6 +73,14 @@
 
 .card__button_visible {
   display: block; 
+}
+
+.card__duration::before {
+  content: "";
+  display: block;
+  width: 100%;
+  border: 1px solid #424242;
+  margin: 23px 0 6px;
 }
 
 @media screen and (min-width: 768px) {

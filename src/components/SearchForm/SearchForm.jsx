@@ -30,7 +30,6 @@ export function SearchForm() {
           </div>
           <div className="search__form-wrapper">
           <button className="search__form-button" type="submit">Найти</button>
-          <hr className="search__form-divider" />
           </div>
           {windowWidth >= 768 && (
               <Toggle />
@@ -40,7 +39,7 @@ export function SearchForm() {
         {windowWidth >= 320 && windowWidth <= 767 && (
             <Toggle />
         )}
-        <hr className="search__divider" />
+
     </section>
   );
 }

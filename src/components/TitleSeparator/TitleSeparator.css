@@ -3,11 +3,6 @@
   padding: 70px 0 0;
 }
 
-.title-separator__divider {
-  border: 1px solid #dadada;
-  margin: 28px 0 0;
-}
-
 .title-separator__text {
   margin: 0;
   padding: 0;
@@ -19,23 +14,26 @@
   letter-spacing: -0.72px;
 }
 
+.title-separator::after {
+  content: '';
+  border: 1px solid #dadada;
+  display: block;
+  width: 100%;
+  margin: 28px 0 0;
+}
+
 @media screen and (min-width: 768px) {
   .title-separator {
     padding: 90px 0 0;
   }
 
-  .title-separator__divider {
-    border: 1px solid #dadada;
+  .title-separator::after {
     margin: 24px 0 0;
   }
 
   .title-separator__text {
     width: 600px;
     font-size: 22px;
-  }
-  
-  .title-separator__hr {
-    margin-top: 23px;
   }
 }
 

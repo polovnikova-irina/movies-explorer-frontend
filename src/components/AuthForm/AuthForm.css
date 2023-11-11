@@ -74,8 +74,6 @@
 .auth-form__button {
   all: unset;
   width: 260px;
-  margin-top: 222px;
-  margin-bottom: 14px;
   height: 45px;
   flex-shrink: 0;
   border-radius: 3px;
@@ -89,12 +87,19 @@
   cursor: pointer;
 }
 
+.auth-form__button_type_registration-form {
+  margin-top: 222px;
+}
+
+.auth-form__button_type_login-form {
+  margin-top: 309px;
+}
+
 .auth-form__navigation {
   display: flex;
   align-items: center;
   justify-content: center;
   column-gap: 7px;
-
   text-align: center;
   font-size: 12px;
   font-style: normal;
@@ -149,8 +154,14 @@
   .auth-form__button {
     width: 396px;
     font-size: 14px;
+  }
+
+  .auth-form__button_type_registration-form {
     margin-top: 134px;
-  margin-bottom: 16px;
+  }
+  
+  .auth-form__button_type_login-form {
+    margin-top: 221px;
   }
 
   .auth-form__navigation {

@@ -62,7 +62,6 @@ export function MoviesCard({ movie }) {
             </button>
           )}
         </div>
-        <hr className="card__divider" />
         <p className="card__duration">{movie.duration}</p>
       </div>
     </div>

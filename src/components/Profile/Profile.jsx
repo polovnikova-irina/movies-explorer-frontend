@@ -20,7 +20,6 @@ export function Profile(loggedIn) {
     // localStorage.clear();
     // loggedIn(false);
     navigate('/');
-    window.location.reload();
   };
 
   return (
@@ -31,21 +30,24 @@ export function Profile(loggedIn) {
           <h1 className="profile__title">Привет, Виталий!</h1>
           <form className="profile__form">
             <label className="profile__label">
-              <p className="profile__input-text">Имя</p>
+              Имя
               <input
                 className="profile__input"
                 type="name"
                 name="name"
                 // value={name}
                 required
+                placeholder="Имя"
+                minLength="2"
+                maxLength="30"
                 disabled={!isEditing}
               />
             </label>
-            <hr className="profile__divider" />
             <label className="profile__label">
-              <p className="profile__input-text">E-mail</p>
+            E-mail
               <input
                 className="profile__input"
+                placeholder="E-mail"
                 type="email"
                 name="email"
                 // value={email}
@@ -53,33 +55,34 @@ export function Profile(loggedIn) {
                 disabled={!isEditing}
               />
             </label>
-          </form>
-          <div className="profile__nav">
-            {isEditing ? (
+            {isEditing && (
               <button
-                className="profile__nav-edit"
+                className="profile__save-button auth-form__button"
                 type="button"
                 onClick={handleSaveClick}
               >
                 Сохранить
               </button>
-            ) : (
+            )}
+          </form>
+            {!isEditing && (
+              <div className='profile__edit-container'>
               <button
-                className="profile__nav-edit"
-                type="button"
+                className="profile__button-edit"
+                type="submit"
                 onClick={handleEditClick}
               >
                 Редактировать
               </button>
-            )}
             <button
-              className="profile__nav-signout"
+              className="profile__signout"
               type="button"
               onClick={signOut}
             >
               Выйти из аккаунта
             </button>
-          </div>
+            </div>
+            )}
         </section>
       </main>
     </>
