@@ -32,7 +32,7 @@
   background-repeat: no-repeat;
 }
 
-.search__toggle-shortfilms {
+.search__toggle-text{
   padding: 0;
   margin: 0;
   font-size: 11px;
@@ -42,7 +42,8 @@
 }
 
 @media screen and (min-width: 768px) {
-  .search__toggle-shortfilms {
+
+  .search__toggle-text {
     font-size: 13px;
   }
 }

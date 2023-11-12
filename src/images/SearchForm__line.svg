@@ -1,0 +1,16 @@
+<svg width="1" height="40" viewBox="0 0 1 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1" height="40" fill="#E5E5E5"/>
+<g id="RESULT_MAIN" clip-path="url(#clip0_1_6015)">
+<rect width="1280" height="1748" transform="translate(-983 -160)" fill="#202020"/>
+<g id="search__ID:4">
+<rect id="back__COLOR:primary" x="-983" y="-86" width="1280" height="222" fill="#202020"/>
+<rect id="search-input__COLOR:special-2" x="-913" y="-16" width="1140" height="72" rx="9" fill="#2F2F2F"/>
+<path id="input__COLOR:stroke-2" fill-rule="evenodd" clip-rule="evenodd" d="M-1.74845e-06 40L0 -4.37112e-08L1 0L0.999998 40L-1.74845e-06 40Z" fill="#424242"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_1_6015">
+<rect width="1280" height="1748" fill="white" transform="translate(-983 -160)"/>
+</clipPath>
+</defs>
+</svg>

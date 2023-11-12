@@ -28,9 +28,8 @@ export function SearchForm() {
           <img className="search__form-icon" src={searchFormIcon} alt="Иконка поиска" />
           <input className="search__form-input" type="text" name="search" placeholder="Фильм" />
           </div>
-          <div className="search__form-wrapper">
           <button className="search__form-button" type="submit">Найти</button>
-          </div>
+          <div className='search__line'></div>
           {windowWidth >= 768 && (
               <Toggle />
           )}

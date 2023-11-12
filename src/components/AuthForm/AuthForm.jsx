@@ -39,7 +39,7 @@ export function AuthForm({
     </div>
     <div>
     <form className='auth-form__form' onSubmit={onSubmit}>
-      {/* {isRegistration && (
+      {isRegistration && (
         <label className='auth-form__label'>
           {nameInputLabel}
           <input
@@ -50,6 +50,7 @@ export function AuthForm({
             maxLength="30"
             required
             onChange={handleInputChange} 
+            placeholder='Имя'
           />
         </label>
       )}
@@ -61,7 +62,8 @@ export function AuthForm({
           type='email'
           name='email'
           required
-          onChange={handleInputChange} 
+          onChange={handleInputChange}
+          placeholder='E-mail' 
         />
       </label>
       <label className='auth-form__label'>
@@ -74,14 +76,15 @@ export function AuthForm({
           maxLength="30"
           required
           onChange={handleInputChange} 
+          placeholder='Пароль'
         />
-      </label> */}
+      </label>
       <button className={`auth-form__button ${isRegistration ? 'auth-form__button_type_registration-form' : 'auth-form__button_type_login-form'}`} type='submit' disabled={isButtonDisabled}>
         {buttonLabel}
       </button>
     </form>
     </div>
-    <div className='auth-form__navigation'>
+    <div className={`auth-form__navigation ${isRegistration ? 'auth-form__navigation_type_registration-form' : 'auth-form__navigation_type_login-form'}`}>
       <p className='auth-form__navigation-text'>{text}</p>
       <Link to={to} className='auth-form__navigation-link'>
         {textLink}

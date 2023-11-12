@@ -1,7 +1,7 @@
 .auth-form {
-  margin: 56px auto 30px;
+  margin: 56px auto;
   width: calc(100% - 60px);
-  padding: 0 30px;
+  padding: 0 30px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,6 +9,8 @@
 }
 
 .auth-form__header {
+  margin: 0;
+  padding: 0;
   width: 260px;
   display: flex;
   align-items: center;
@@ -32,11 +34,6 @@
   text-align: center;
 }
 
-.auth-form__logo {
-  width: 38px;
-  height: 38px;
-}
-
 .auth-form__form {
   width: 260px;
   height: 200px;
@@ -54,7 +51,7 @@
 
 .auth-form__input {
   width: 100%;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
   background: transparent;
   border: none;
   border-bottom: 1px solid #424242;
@@ -88,11 +85,11 @@
 }
 
 .auth-form__button_type_registration-form {
-  margin-top: 222px;
+  margin-top: 215px;
 }
 
 .auth-form__button_type_login-form {
-  margin-top: 309px;
+  margin-top: 288px;
 }
 
 .auth-form__navigation {
@@ -105,6 +102,14 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.auth-form__navigation_type_registration-form {
+  margin-top: 280px;
+}
+
+.auth-form__navigation_type_login-form {
+  margin-top: 280px;
 }
 
 .auth-form__navigation-text {
@@ -157,11 +162,19 @@
   }
 
   .auth-form__button_type_registration-form {
-    margin-top: 134px;
+    margin-top: 128px;
   }
   
   .auth-form__button_type_login-form {
-    margin-top: 221px;
+    margin-top: 200px;
+  }
+
+  .auth-form__navigation_type_registration-form {
+    margin-top: 195px;
+  }
+  
+  .auth-form__navigation_type_login-form {
+    margin-top: 195px;
   }
 
   .auth-form__navigation {
@@ -171,7 +184,7 @@
 
 @media screen and (min-width: 1280px) {
   .auth-form {
-    margin: 70px auto 0;
+    margin: 70px auto;
     width: calc(100% - 884px);
     padding: 0 442px;
   }

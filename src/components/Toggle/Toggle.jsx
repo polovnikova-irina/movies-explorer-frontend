@@ -18,7 +18,7 @@ export function Toggle() {
         />
         <div className={`search__toggle-icon ${isToggled ? 'search__toggle-icon_on' : 'search__toggle-icon_off'}`} />
       </label>
-      <p className="search__toggle-shortfilms">Короткометражки</p>
+      <span className="search__toggle-text">Короткометражки</span>
     </div>
   );
 }

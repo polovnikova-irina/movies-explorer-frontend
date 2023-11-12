@@ -4,7 +4,7 @@
 }
 
 .card__wrapper {
-  margin-top: 5px;
+  margin-top: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -80,7 +80,7 @@
   display: block;
   width: 100%;
   border: 1px solid #424242;
-  margin: 23px 0 6px;
+  margin: 25px 0 6px;
 }
 
 @media screen and (min-width: 768px) {
@@ -115,5 +115,13 @@
 
   .card__button_visible {
     display: none; 
+  }
+
+  .card__wrapper {
+    margin-top: 0;
+  }
+
+  .card__duration::before {
+    margin: 12px 0 6px;
   }
 }

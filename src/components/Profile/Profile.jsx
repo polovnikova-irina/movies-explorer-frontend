@@ -6,7 +6,18 @@ import { Header } from '../Header/Header';
 export function Profile(loggedIn) {
   const navigate = useNavigate();
 
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [isEditing, setIsEditing] = useState(false);
+
+  
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -17,7 +28,7 @@ export function Profile(loggedIn) {
   };
 
   const signOut = () => {
-    // localStorage.clear();
+    localStorage.clear();
     // loggedIn(false);
     navigate('/');
   };
@@ -35,7 +46,8 @@ export function Profile(loggedIn) {
                 className="profile__input"
                 type="name"
                 name="name"
-                // value={name}
+                  value={name}
+                  onChange={handleNameChange}
                 required
                 placeholder="Имя"
                 minLength="2"
@@ -50,16 +62,19 @@ export function Profile(loggedIn) {
                 placeholder="E-mail"
                 type="email"
                 name="email"
-                // value={email}
+                value={email}
+                onChange={handleEmailChange}
                 required
                 disabled={!isEditing}
               />
             </label>
             {isEditing && (
               <button
-                className="profile__save-button auth-form__button"
-                type="button"
+              // className={`profile__save-button auth-form__button ${isEditing ? 'profile__save-button_disabled' : ''}`}
+              className="profile__save-button auth-form__button"
+                type="submit"
                 onClick={handleSaveClick}
+                // disabled={isEditing}
               >
                 Сохранить
               </button>
@@ -69,7 +84,7 @@ export function Profile(loggedIn) {
               <div className='profile__edit-container'>
               <button
                 className="profile__button-edit"
-                type="submit"
+                type="button"
                 onClick={handleEditClick}
               >
                 Редактировать
