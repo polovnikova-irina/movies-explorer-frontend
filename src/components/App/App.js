@@ -1,5 +1,6 @@
 import '../../vendor/fonts/fonts.css';
-import React, { useState} from "react";
+import './App.css';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Main } from '../Main/Main';
 import { Movies } from '../Movies/Movies';
@@ -11,16 +12,26 @@ import { PageNotFound } from '../PageNotFound/PageNotFound.jsx';
 
 function App() {
   // const [currentUser, setСurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState();
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+  };
   return (
     <div className="page">
       <Routes>
-        <Route path="/" element={<Main />} loggedIn={loggedIn} />
-        <Route path="/movies" element={<Movies />} loggedIn={loggedIn} />
-        <Route path="/saved-movies" element={<SavedMovies />} loggedIn={loggedIn}/>
+        <Route path="/" element={<Main loggedIn={handleLogin} />} />
+        <Route path="/movies" element={<Movies loggedIn={handleLogin} />} />
+        <Route
+          path="/saved-movies"
+          element={<SavedMovies loggedIn={handleLogin} />}
+        />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
-        <Route path="/profile" element={<Profile />} loggedIn={loggedIn}/>
+        <Route
+          path="/profile"
+          element={<Profile loggedIn={handleLogin} />}
+        />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>

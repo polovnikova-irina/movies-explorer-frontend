@@ -35,7 +35,7 @@ export function AuthForm({
       <Link to='/'>
         <img className='auth-form__logo' src={logo} alt='Лого' />
       </Link>
-      <h1 className='auth-form__title'>{title}</h1>
+      <h2 className='auth-form__title'>{title}</h2>
     </div>
     <div>
     <form className='auth-form__form' onSubmit={onSubmit}>

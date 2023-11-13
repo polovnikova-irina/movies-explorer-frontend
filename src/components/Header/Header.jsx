@@ -4,7 +4,7 @@ import { useState } from 'react';
 import './Header.css';
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 
-export function Header({ loggedIn }) {
+export function Header({loggedIn}) {
   const location = useLocation();
   const mainPage = location.pathname === '/';
 
@@ -67,7 +67,7 @@ export function Header({ loggedIn }) {
               Войти
             </Link>
           </nav>
-        )}
+        )} 
       </nav>
     </header>
   );

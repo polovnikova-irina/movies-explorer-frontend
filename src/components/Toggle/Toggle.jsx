@@ -16,7 +16,7 @@ export function Toggle() {
           checked={isToggled}
           onChange={toggleSwitch}
         />
-        <div className={`search__toggle-icon ${isToggled ? 'search__toggle-icon_on' : 'search__toggle-icon_off'}`} />
+        <span className={`search__toggle-icon ${isToggled ? 'search__toggle-icon_on' : 'search__toggle-icon_off'}`} />
       </label>
       <span className="search__toggle-text">Короткометражки</span>
     </div>

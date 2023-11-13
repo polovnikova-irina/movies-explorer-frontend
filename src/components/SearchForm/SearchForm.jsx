@@ -26,7 +26,7 @@ export function SearchForm() {
         <form className="search__form">
         <div className="search__form-wrapper">
           <img className="search__form-icon" src={searchFormIcon} alt="Иконка поиска" />
-          <input className="search__form-input" type="text" name="search" placeholder="Фильм" />
+          <input className="search__form-input" type="text" name="search" placeholder="Фильм" required/>
           </div>
           <button className="search__form-button" type="submit">Найти</button>
           <div className='search__line'></div>

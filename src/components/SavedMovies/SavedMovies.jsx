@@ -4,17 +4,17 @@ import { Footer } from '../Footer/Footer';
 import { SearchForm } from '../SearchForm/SearchForm';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 
-export function SavedMovies() {
+export function SavedMovies(loggedIn) {
   return (
     <>
-      <Header />
+      <Header loggedIn={loggedIn} />
       <main className="content">
       <section className="saved-movies">
         <SearchForm />
         <MoviesCardList />
       </section>
-      <Footer />
       </main>
+      <Footer />
     </>
   );
 }

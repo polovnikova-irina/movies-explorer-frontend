@@ -3,12 +3,17 @@
   align-items: center;
   justify-content: center;
   column-gap: 20px;
+  transition: opacity .3s linear;
 }
 
 .search__toggl-label {
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+
+.search__toggl-label:hover {
+opacity: .8;
 }
 
 .search__toggle-checkbox {

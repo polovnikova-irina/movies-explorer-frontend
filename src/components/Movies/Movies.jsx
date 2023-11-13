@@ -4,20 +4,20 @@ import { Footer } from '../Footer/Footer';
 import { SearchForm } from '../SearchForm/SearchForm';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 
-export function Movies() {
+export function Movies(loggedIn) {
   return (
     <>
-      <Header />
+      <Header loggedIn={loggedIn}/>
       <main className="content">
       <section className="movies">
         <SearchForm />
         <MoviesCardList />
-        <button className="movies__button" aria-label='еще'>
+        <button className="movies__button" type='button' aria-label='еще'>
            Ещё
          </button>
       </section>
-      <Footer />
       </main>
+      <Footer />
     </>
   );
 }

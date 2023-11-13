@@ -35,16 +35,16 @@ export function Profile(loggedIn) {
 
   return (
     <>
-      <Header />
+      <Header loggedIn={loggedIn} />
       <main className="content">
         <section className="profile">
-          <h1 className="profile__title">Привет, Виталий!</h1>
+          <h2 className="profile__title">Привет, Виталий!</h2>
           <form className="profile__form">
             <label className="profile__label">
               Имя
               <input
                 className="profile__input"
-                type="name"
+                type="text"
                 name="name"
                   value={name}
                   onChange={handleNameChange}
