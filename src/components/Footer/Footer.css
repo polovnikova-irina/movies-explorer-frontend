@@ -1,0 +1,120 @@
+.footer {
+  margin: 0 auto;
+  width: calc(100% - 20px);
+  background-color: #202020;
+  padding: 79px 10px 20px;
+}
+
+.footer__copyright {
+  margin: 0;
+  padding: 0;
+  width: auto;
+  color: #8b8b8b;
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.footer__copyright::after {
+  content: "";
+  display: block;
+  border: 1px solid #424242;
+  margin: 21px auto 25px;
+}
+
+.footer__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer__link {
+  all: unset;
+  color: #fff;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  transition: opacity .3s linear;
+  cursor: pointer;
+}
+
+.footer__link:hover {
+  opacity: 0.8;
+}
+
+.footer__info {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 8px;
+  margin-bottom: 30px;
+}
+
+.footer__copyright-year {
+  margin: 0;
+  padding: 0;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@media screen and (min-width: 768px) {
+  .footer {
+    width: calc(100% - 60px);
+    padding: 0 30px 20px;
+    align-items: normal;
+  }
+
+
+  .footer__copyright::after {
+    margin-bottom: 17px;
+  }
+
+  .footer__container {
+    flex-direction: row-reverse;
+    justify-content: space-between; 
+  }
+
+  .footer__info {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0;
+    gap: 0 20px;
+  }
+
+  .footer__copyright {
+    width: auto; 
+    font-size: 13px;
+  }
+
+  .footer__copyright-year {
+    font-size: 13px;
+  }
+
+  .footer__link {
+    font-size: 13px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .footer {
+    width: calc(100% - 140px);
+    padding: 0 70px 20px;
+  }
+
+  .footer__copyright::after {
+    margin-bottom: 17px;
+  }
+}
