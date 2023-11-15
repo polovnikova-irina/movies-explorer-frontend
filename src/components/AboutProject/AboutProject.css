@@ -1,0 +1,155 @@
+.project {
+  margin: 0 auto;
+  width: calc(100% - 36px);
+  padding: 0 18px 95px;
+  background-color: #202020;
+}
+
+.project__info {
+  list-style: none;
+  padding: 0;
+  margin: 60px auto 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 58px;
+}
+
+.project__info-title {
+  margin: 0 0 16px;
+  padding: 0;
+  width: 284px;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.72px;
+}
+
+.project__info-subtitle {
+  margin: 0;
+  padding: 0;
+  width: 284px;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.project__stripe {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  height: 35px;
+}
+
+.project__stripe-area {
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 9px;
+  width: 100%;
+}
+
+.project__stripe-area_color_one {
+  width: 55%;
+  background-color: #3ddc84;
+}
+
+.project__stripe-area_color_two {
+  background-color: #303030;
+}
+
+.project__stripe-time {
+  margin: 0;
+  padding: 0;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.project__stripe-time_color_one {
+  color: #000;
+}
+
+.project__stripe-stack {
+  margin: 21px 0 0;
+  color: #a0a0a0;
+  text-align: center;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@media screen and (min-width: 768px) {
+  .project {
+    width: calc(100% - 100px);
+    padding: 0 50px 122px;
+  }
+
+  .project__info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 94px;
+    margin-top: 70px;
+    column-gap: 30px;
+  }
+
+  .project__info-title {
+    margin-bottom: 20px;
+    width: 319px;
+    font-size: 20px;
+    letter-spacing: -0.8px;
+  }
+
+  .project__info-subtitle {
+    width: 319px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .project__stripe-area_color_one {
+    width: 26.5%;
+  }
+
+  .project__stripe-time {
+    font-size: 14px;
+  }
+
+  .project__stripe-stack {
+    margin-top: 23px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .project {
+    width: calc(100% - 140px);
+    padding: 0 70px 130px;
+  }
+
+  .project__info-title {
+    width: 550px;
+  }
+
+  .project__info-subtitle {
+    width: 550px;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 26px;
+  }
+
+  .project__info {
+    margin-bottom: 110px;
+    column-gap: 40px;
+  }
+
+  .project__stripe-area_color_one {
+    width: 25%;
+  }
+}

@@ -1,0 +1,125 @@
+.techs {
+  margin: 0 auto;
+  width: calc(100% - 36px);
+  padding: 0 18px 72px;
+  background-color: #272727;
+}
+
+.techs__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.techs__title {
+  padding: 0;
+  margin: 0 0 22px;
+  width: 292px;
+  text-align: center;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -1.2px;
+}
+
+.techs__subtitle {
+  padding: 0;
+  margin: 0 0 50px;
+  width: 292px;
+  text-align: center;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.44px;
+}
+
+.techs__list {
+  list-style: none;
+  padding: 0;
+  width: 178px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.techs__item {
+  display: flex;
+  width: 84px;
+  height: 57px;
+  border-radius: 10px;
+  background-color: #303030;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.48px;
+}
+
+@media screen and (min-width: 768px) {
+  .techs {
+    width: calc(100% - 100px);
+    padding: 0 50px 90px;
+  }
+
+  .techs__title {
+    margin: 0 0 21px;
+    width: 600px;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -2px;
+  }
+
+  .techs__subtitle {
+    margin: 0 0 82px;
+    width: 460px;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.48px;
+  }
+
+  .techs__container {
+    margin-top: 80px;
+  }
+
+  .techs__list {
+    width: auto;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .techs {
+    width: calc(100% - 140px);
+    padding: 0 70px 102px;
+  }
+
+  .techs__title {
+    margin: 0 0 25px;
+  }
+
+
+  .techs__subtitle {
+    margin: 0 0 101px;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.56px;
+  }
+
+  .techs__container {
+    margin-top: 90px;
+  }
+
+  .techs__item {
+    font-size: 14px;
+    letter-spacing: -0.56px;
+    width: 90px;
+  }
+}
