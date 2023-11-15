@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 // import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { ProtectedRouteElement } from '../ProtectedRoute/ProtectedRoute.jsx';
-import * as auth from '../../utils/auth.jsx';
+import * as auth from '../../utils/auth.js';
 import { Main } from '../Main/Main';
 import { Movies } from '../Movies/Movies';
 import { SavedMovies } from '../SavedMovies/SavedMovies.jsx';
@@ -22,38 +22,39 @@ function App() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
 
-  // useEffect(() => {
-  //   const jwt = localStorage.getItem("jwt");
-  //   if (jwt) {
-  //     auth
-  //       .checkToken(jwt)
-  //       .then((res) => {
-  //         setEmail(res.email);
-  //         setName(res.name);
-  //         setLoggedIn(true);
-  //         navigate("/profile", { replace: true });
-  //       })
-  //       .catch((err) => {
-  //         if (err.status === 400) {
-  //           console.log("400 - Токен не передан или передан не в том формате");
-  //         } else if (err.status === 401) {
-  //           console.log("401 - Переданный токен некорректен");
-  //         }
-  //         console.log(err);
-  //       });
-  //   }
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      auth
+        .checkToken(jwt)
+        .then((res) => {
+          setEmail(res.email);
+          setName(res.name);
+          setLoggedIn(true);
+          navigate("/profile", { replace: true });
+        })
+        .catch((err) => {
+          if (err.status === 400) {
+            console.log("400 - Токен не передан или передан не в том формате");
+          } else if (err.status === 401) {
+            console.log("401 - Переданный токен некорректен");
+          }
+          console.log(err);
+        });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleRegisterSubmit(name, email, password) {
     auth
       .register(name, email, password)
       .then((res) => {
-        handleLoginSubmit(res.email, res.password);
+        console.log('Регистрация успешна:', res);
+        handleLoginSubmit(email, password);
         // // setIsSuccess(true);
-        // navigate("/signin", { replace: true });
       })
       .catch((err) => {
+        console.error('Ошибка при регистрации:', err);
         if (err.status === 400) {
           console.log('400 - некорректно заполнено одно из полей');
         }
@@ -69,7 +70,7 @@ function App() {
         localStorage.setItem('jwt', data.token);
         setLoggedIn(true);
         setEmail(email);
-        navigate('/movie', { replace: true });
+        navigate('/movies', { replace: true });
       })
       .catch((err) => {
         // setIsSuccess(false);
@@ -108,7 +109,7 @@ function App() {
         <Route
           path="/profile"
           element={
-            <ProtectedRouteElement element={Profile} loggedIn={loggedIn} />
+            <ProtectedRouteElement element={Profile} loggedIn={loggedIn} userEmail={email} userName={name} />
           }
         />
         <Route path="*" element={<PageNotFound />} />

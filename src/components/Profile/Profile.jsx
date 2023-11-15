@@ -3,21 +3,21 @@ import { useNavigate } from 'react-router-dom';
 import './Profile.css';
 import { Header } from '../Header/Header';
 
-export function Profile(loggedIn) {
+export function Profile( { loggedIn, userEmail, userName }) {
   const navigate = useNavigate();
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  // const [name, setName] = useState('');
+  // const [email, setEmail] = useState('');
   const [isEditing, setIsEditing] = useState(false);
 
   
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
+  // const handleNameChange = (e) => {
+  //   setName(e.target.value);
+  // };
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
+  // const handleEmailChange = (e) => {
+  //   setEmail(e.target.value);
+  // };
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -38,7 +38,7 @@ export function Profile(loggedIn) {
       <Header loggedIn={loggedIn} />
       <main className="content">
         <section className="profile">
-          <h2 className="profile__title">Привет, Виталий!</h2>
+          <h2 className="profile__title">Привет, {userName}!</h2>
           <form className="profile__form">
             <label className="profile__label">
               Имя
@@ -46,8 +46,8 @@ export function Profile(loggedIn) {
                 className="profile__input"
                 type="text"
                 name="name"
-                  value={name}
-                  onChange={handleNameChange}
+                  value={userName}
+                  // onChange={handleNameChange}
                 required
                 placeholder="Имя"
                 minLength="2"
@@ -62,8 +62,8 @@ export function Profile(loggedIn) {
                 placeholder="E-mail"
                 type="email"
                 name="email"
-                value={email}
-                onChange={handleEmailChange}
+                value={userEmail}
+                // onChange={handleEmailChange}
                 required
                 disabled={!isEditing}
               />

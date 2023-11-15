@@ -1,7 +1,15 @@
 export const BASE_URL = "https://api.movies.park.nomoredomainsrocks.ru";
 
-const checkResponce = (res) => {
-  return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+// const checkResponse = (res) => {
+//   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+// };
+
+const checkResponse = (res) => {
+  if (!res.ok) {
+    console.error(`Ошибка: ${res.status}`);
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
+  return res.json();
 };
 
 export const register = (name, email, password) => {
@@ -11,7 +19,7 @@ export const register = (name, email, password) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ name, email, password }),
-  }).then(checkResponce);
+  }).then(checkResponse);
 };
 
 export const authorize = (email, password) => {
@@ -22,7 +30,7 @@ export const authorize = (email, password) => {
     },
     body: JSON.stringify({ email, password }),
   })
-    .then(checkResponce)
+    .then(checkResponse)
     .then((data) => {
       if (data.token) {
         localStorage.setItem("jwt", data.token);
@@ -40,5 +48,5 @@ export const checkToken = (token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then(checkResponce);
+  }).then(checkResponse);
 };
