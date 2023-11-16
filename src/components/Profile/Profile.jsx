@@ -1,23 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Profile.css';
 import { Header } from '../Header/Header';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-export function Profile( { loggedIn, userEmail, userName }) {
+export function Profile({ loggedIn, onUpdateUser }) {
   const navigate = useNavigate();
 
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
+  const currentUser = useContext(CurrentUserContext);
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+// После загрузки текущего пользователя из API его данные 
+//будут использованы в управляемых компонентах.
+  useEffect(() => {
+    setName(currentUser.name || '');
+    setEmail(currentUser.email || '');
+  }, [currentUser]);
+
+  // Обработчики изменения полей ввода
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+        // Передаём значения управляемых компонентов во внешний обработчик
+    onUpdateUser({
+      name,
+      email,
+    });
+  };
+
   const [isEditing, setIsEditing] = useState(false);
-
-  
-  // const handleNameChange = (e) => {
-  //   setName(e.target.value);
-  // };
-
-  // const handleEmailChange = (e) => {
-  //   setEmail(e.target.value);
-  // };
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -29,7 +49,7 @@ export function Profile( { loggedIn, userEmail, userName }) {
 
   const signOut = () => {
     localStorage.clear();
-    // loggedIn(false);
+    loggedIn(false);
     navigate('/');
   };
 
@@ -38,16 +58,16 @@ export function Profile( { loggedIn, userEmail, userName }) {
       <Header loggedIn={loggedIn} />
       <main className="content">
         <section className="profile">
-          <h2 className="profile__title">Привет, {userName}!</h2>
-          <form className="profile__form">
+          <h2 className="profile__title">Привет, {name}!</h2>
+          <form className="profile__form"  onSubmit={handleSubmit}>
             <label className="profile__label">
               Имя
               <input
                 className="profile__input"
                 type="text"
                 name="name"
-                  value={userName}
-                  // onChange={handleNameChange}
+                value={name}
+                onChange={handleNameChange}
                 required
                 placeholder="Имя"
                 minLength="2"
@@ -56,22 +76,22 @@ export function Profile( { loggedIn, userEmail, userName }) {
               />
             </label>
             <label className="profile__label">
-            E-mail
+              E-mail
               <input
                 className="profile__input"
                 placeholder="E-mail"
                 type="email"
                 name="email"
-                value={userEmail}
-                // onChange={handleEmailChange}
+                value={email}
+                onChange={handleEmailChange}
                 required
                 disabled={!isEditing}
               />
             </label>
             {isEditing && (
               <button
-              // className={`profile__save-button auth-form__button ${isEditing ? 'profile__save-button_disabled' : ''}`}
-              className="profile__save-button auth-form__button"
+                // className={`profile__save-button auth-form__button ${isEditing ? 'profile__save-button_disabled' : ''}`}
+                className="profile__save-button auth-form__button"
                 type="submit"
                 onClick={handleSaveClick}
                 // disabled={isEditing}
@@ -80,8 +100,8 @@ export function Profile( { loggedIn, userEmail, userName }) {
               </button>
             )}
           </form>
-            {!isEditing && (
-              <div className='profile__edit-container'>
+          {!isEditing && (
+            <div className="profile__edit-container">
               <button
                 className="profile__button-edit"
                 type="button"
@@ -89,15 +109,15 @@ export function Profile( { loggedIn, userEmail, userName }) {
               >
                 Редактировать
               </button>
-            <button
-              className="profile__signout"
-              type="button"
-              onClick={signOut}
-            >
-              Выйти из аккаунта
-            </button>
+              <button
+                className="profile__signout"
+                type="button"
+                onClick={signOut}
+              >
+                Выйти из аккаунта
+              </button>
             </div>
-            )}
+          )}
         </section>
       </main>
     </>

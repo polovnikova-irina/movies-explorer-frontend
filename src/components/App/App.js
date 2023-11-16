@@ -2,9 +2,9 @@ import '../../vendor/fonts/fonts.css';
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-// import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import { ProtectedRouteElement } from '../ProtectedRoute/ProtectedRoute.jsx';
-import * as auth from '../../utils/auth.js';
+import { mainApi } from '../../utils/MainApi.js';
 import { Main } from '../Main/Main';
 import { Movies } from '../Movies/Movies';
 import { SavedMovies } from '../SavedMovies/SavedMovies.jsx';
@@ -15,38 +15,39 @@ import { PageNotFound } from '../PageNotFound/PageNotFound.jsx';
 
 function App() {
   const navigate = useNavigate();
-  // const [currentUser, setСurrentUser] = useState({});
+  const [currentUser, setСurrentUser] = useState("");
 
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+  // useEffect(() => {
+  //   if(loggedIn) {
+  //   Promise.all([api.getInfo(localStorage.jwt), api.getCards(localStorage.jwt)])
+  //     .then(([dataUser, dataCards]) => {
+  //       setСurrentUser(dataUser);
+  //       setCards(dataCards);
+  //     })
+  //     .catch((err) =>
+  //       console.log("Ошибка при загрузке данных о пользователе:", err)
+  //     );
+  //   }
+  // }, [loggedIn]);
 
-  useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth
-        .checkToken(jwt)
-        .then((res) => {
-          setEmail(res.email);
-          setName(res.name);
-          setLoggedIn(true);
-          navigate("/profile", { replace: true });
-        })
-        .catch((err) => {
-          if (err.status === 400) {
-            console.log("400 - Токен не передан или передан не в том формате");
-          } else if (err.status === 401) {
-            console.log("401 - Переданный токен некорректен");
-          }
-          console.log(err);
-        });
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+  const handleUpdateUser = (name, email) => {
+    // setIsLoading(true);
+    mainApi
+      .setUsersData(name, email, localStorage.jwt)
+      .then((data) => {
+        setСurrentUser(data);
+      })
+      .catch((err) =>
+        console.log("Ошибка при изменении данных о пользователе:", err)
+      )
+      // .finally(() => setIsLoading(false));
+  };
 
   function handleRegisterSubmit(name, email, password) {
-    auth
+    mainApi 
       .register(name, email, password)
       .then((res) => {
         console.log('Регистрация успешна:', res);
@@ -64,12 +65,12 @@ function App() {
   }
 
   function handleLoginSubmit(email, password) {
-    auth
+    mainApi 
       .authorize(email, password)
       .then((data) => {
         localStorage.setItem('jwt', data.token);
         setLoggedIn(true);
-        setEmail(email);
+        setСurrentUser({email});
         navigate('/movies', { replace: true });
       })
       .catch((err) => {
@@ -85,7 +86,7 @@ function App() {
   }
 
   return (
-    // <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
       <Routes>
         <Route path="/" element={<Main loggedIn={loggedIn} />} />
@@ -109,13 +110,17 @@ function App() {
         <Route
           path="/profile"
           element={
-            <ProtectedRouteElement element={Profile} loggedIn={loggedIn} userEmail={email} userName={name} />
+            <ProtectedRouteElement
+              element={Profile}
+              loggedIn={loggedIn}
+              onUpdateUser={handleUpdateUser}
+            />
           }
         />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
-    // </CurrentUserContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 
