@@ -15,7 +15,7 @@ import { PageNotFound } from '../PageNotFound/PageNotFound.jsx';
 
 function App() {
   const navigate = useNavigate();
-  const [currentUser, setСurrentUser] = useState("");
+  const [currentUser, setСurrentUser] = useState({});
 
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -31,6 +31,18 @@ function App() {
   //     );
   //   }
   // }, [loggedIn]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      mainApi.getUserInfo(localStorage.jwt)
+        .then((dataUser) => {
+          setСurrentUser(dataUser);
+        })
+        .catch((err) =>
+          console.log("Ошибка при загрузке данных о пользователе:", err)
+        );
+    }
+  }, [loggedIn]);
 
 
   const handleUpdateUser = (name, email) => {
@@ -70,7 +82,6 @@ function App() {
       .then((data) => {
         localStorage.setItem('jwt', data.token);
         setLoggedIn(true);
-        setСurrentUser({email});
         navigate('/movies', { replace: true });
       })
       .catch((err) => {

@@ -3,51 +3,48 @@ import { useNavigate } from 'react-router-dom';
 import './Profile.css';
 import { Header } from '../Header/Header';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-
+import { useFormWithValidation } from '../../hooks/validation';
 export function Profile({ loggedIn, onUpdateUser }) {
   const navigate = useNavigate();
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEditClick = () => {
+    setIsEditing(true); 
+  };
+  
+  const handleSaveClick = () => {
+    setIsEditing(false); 
+  };
+  
+  const {
+    values,
+    handleChange,
+    errors,
+    isValid,
+    resetForm
+  } = useFormWithValidation();
 
   const currentUser = useContext(CurrentUserContext);
-
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-
-// После загрузки текущего пользователя из API его данные 
-//будут использованы в управляемых компонентах.
-  useEffect(() => {
-    setName(currentUser.name || '');
-    setEmail(currentUser.email || '');
-  }, [currentUser]);
-
-  // Обработчики изменения полей ввода
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
         // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
-      name,
-      email,
+      name: currentUser.name,
+      email: currentUser.email,
     });
   };
 
-  const [isEditing, setIsEditing] = useState(false);
+  useEffect(() => {
+    // Устанавливаем начальные значения из currentUser
+    resetForm({
+      name: currentUser.name || '',
+      email: currentUser.email || '',
+    });
+  }, [currentUser, resetForm]);
 
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
 
-  const handleSaveClick = () => {
-    setIsEditing(false);
-  };
-
-  const signOut = () => {
+  function signOut() {
     localStorage.clear();
     loggedIn(false);
     navigate('/');
@@ -58,7 +55,7 @@ export function Profile({ loggedIn, onUpdateUser }) {
       <Header loggedIn={loggedIn} />
       <main className="content">
         <section className="profile">
-          <h2 className="profile__title">Привет, {name}!</h2>
+          <h2 className="profile__title">{`Привет, ${values.name}!`}</h2>
           <form className="profile__form"  onSubmit={handleSubmit}>
             <label className="profile__label">
               Имя
@@ -66,8 +63,8 @@ export function Profile({ loggedIn, onUpdateUser }) {
                 className="profile__input"
                 type="text"
                 name="name"
-                value={name}
-                onChange={handleNameChange}
+                value={values.name || ''}
+                onChange={handleChange}
                 required
                 placeholder="Имя"
                 minLength="2"
@@ -75,6 +72,7 @@ export function Profile({ loggedIn, onUpdateUser }) {
                 disabled={!isEditing}
               />
             </label>
+            <span className='profile__input-error input-error'>{errors.name}</span> 
             <label className="profile__label">
               E-mail
               <input
@@ -82,22 +80,25 @@ export function Profile({ loggedIn, onUpdateUser }) {
                 placeholder="E-mail"
                 type="email"
                 name="email"
-                value={email}
-                onChange={handleEmailChange}
+                value={values.email || ''}
+                onChange={handleChange}
                 required
                 disabled={!isEditing}
               />
             </label>
+            <span className='profile__input-error input-error'>{errors.email}</span> 
             {isEditing && (
+              <>
+              {/* <span>{errors.name}</span> */}
               <button
-                // className={`profile__save-button auth-form__button ${isEditing ? 'profile__save-button_disabled' : ''}`}
-                className="profile__save-button auth-form__button"
+                className={`profile__save-button auth-form__button ${!isValid ? 'profile__save-button_disabled' : ''}`}
                 type="submit"
                 onClick={handleSaveClick}
-                // disabled={isEditing}
+                disabled={!isValid} 
               >
                 Сохранить
               </button>
+              </>
             )}
           </form>
           {!isEditing && (
