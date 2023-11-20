@@ -42,6 +42,7 @@
 }
 
 .auth-form__label {
+  position: relative;
   color: #8b8b8b;
   font-size: 10px;
   font-style: normal;
@@ -51,7 +52,6 @@
 
 .auth-form__input {
   width: 100%;
-  margin-bottom: 26px;
   background: transparent;
   border: none;
   border-bottom: 1px solid #424242;
@@ -62,6 +62,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  margin-bottom: 26px;
 }
 
 .auth-form__input:focus {
@@ -129,6 +130,23 @@
 .auth-form__navigation-link:hover,
 .auth-form__logo:hover {
   opacity: 0.8;
+}
+
+.input-error {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  color: #ee3465;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  transform: translateY(55%);
+}
+
+.auth-form__button_disabled {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
 }
 
 @media screen and (min-width: 768px) {

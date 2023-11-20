@@ -5,6 +5,6 @@ export const ProtectedRouteElement = ({ element: Component, ...props }) => {
   return props.loggedIn ? (
     <Component {...props} />
   ) : (
-    <Navigate to="/sign-up" replace />
+    <Navigate to="/" replace />
   );
 };

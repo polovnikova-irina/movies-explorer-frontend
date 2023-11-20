@@ -18,6 +18,8 @@ export function AuthForm({
   to,
   textLink,
   isRegistration,
+  errors,
+  isValid,
 }) {
   return (
     <div className="auth-form">
@@ -30,6 +32,7 @@ export function AuthForm({
       <div>
         <form className="auth-form__form" onSubmit={onSubmit}>
           {isRegistration && (
+            <>
             <label className="auth-form__label">
               {nameInput}
               <input
@@ -38,12 +41,15 @@ export function AuthForm({
                 name="name"
                 minLength="2"
                 maxLength="30"
+                pattern="^[A-Za-zА-Яа-яЁё\s]+$"  
                 required
                 onChange={onChange}
                 value={valueName}
                 placeholder="Имя"
               />
+              <span className='auth-form__input-error input-error'>{errors.name}</span>
             </label>
+             </>
           )}
 
           <label className="auth-form__label">
@@ -52,11 +58,13 @@ export function AuthForm({
               className="auth-form__input"
               type="email"
               name="email"
+              pattern="^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,6}$"
               required
               onChange={onChange}
               value={valueEmail}
               placeholder="E-mail"
             />
+             <span className='auth-form__input-error input-error'>{errors.email}</span>
           </label>
           <label className="auth-form__label">
             {passwordInput}
@@ -71,14 +79,16 @@ export function AuthForm({
               onChange={onChange}
               placeholder="Пароль"
             />
+            <span className='auth-form__input-error input-error'>{errors.password}</span>
           </label>
           <button
             className={`auth-form__button ${
               isRegistration
                 ? 'auth-form__button_type_registration-form'
                 : 'auth-form__button_type_login-form'
-            }`}
+            } ${!isValid ? 'auth-form__button_disabled' : ''}`}
             type="submit"
+            disabled={!isValid} 
           >
             {submitButton}
           </button>

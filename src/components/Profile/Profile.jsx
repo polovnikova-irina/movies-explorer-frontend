@@ -4,31 +4,30 @@ import './Profile.css';
 import { Header } from '../Header/Header';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../hooks/validation';
+
 export function Profile({ loggedIn, onUpdateUser }) {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
+  const [prevValues, setPrevValues] = useState({});
+  const [notification, setNotification] = useState("");
 
-  const handleEditClick = () => {
-    setIsEditing(true); 
+  const { values, handleChange, errors, isValid, setIsValid, resetForm } =
+    useFormWithValidation();
+
+   const currentUser = useContext(CurrentUserContext);
+
+   const handleEditClick = () => {
+    setPrevValues(values);
+    setIsEditing(true);
   };
-  
+
   const handleSaveClick = () => {
-    setIsEditing(false); 
+    setIsEditing(false);
   };
-  
-  const {
-    values,
-    handleChange,
-    errors,
-    isValid,
-    resetForm
-  } = useFormWithValidation();
 
-  const currentUser = useContext(CurrentUserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-        // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
       name: currentUser.name,
       email: currentUser.email,
@@ -36,83 +35,117 @@ export function Profile({ loggedIn, onUpdateUser }) {
   };
 
   useEffect(() => {
-    // Устанавливаем начальные значения из currentUser
     resetForm({
       name: currentUser.name || '',
       email: currentUser.email || '',
     });
   }, [currentUser, resetForm]);
 
+  useEffect(() => {
+    if (isEditing) {
+      handleDisableBtn();
+    }
+  }, [isEditing, values, currentUser]);
+
+  function handleDisableBtn() {
+    if (
+      values.name === currentUser.name &&
+      values.email === currentUser.email
+    ) {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+    }
+  }
+
+  const handleCancelClick = () => {
+    resetForm(prevValues);
+    setIsEditing(false);
+  };
+
 
   function signOut() {
     localStorage.clear();
     loggedIn(false);
     navigate('/');
-  };
+  }
 
   return (
     <>
       <Header loggedIn={loggedIn} />
-      <main className="content">
-        <section className="profile">
-          <h2 className="profile__title">{`Привет, ${values.name}!`}</h2>
-          <form className="profile__form"  onSubmit={handleSubmit}>
-            <label className="profile__label">
+      <main className='content'>
+        <section className='profile'>
+          <h2 className='profile__title'>{`Привет, ${values.name}!`}</h2>
+          <form className='profile__form' onSubmit={handleSubmit}>
+            <label className='profile__label'>
               Имя
               <input
-                className="profile__input"
-                type="text"
-                name="name"
+                className='profile__input'
+                type='text'
+                name='name'
                 value={values.name || ''}
                 onChange={handleChange}
                 required
-                placeholder="Имя"
-                minLength="2"
-                maxLength="30"
+                placeholder='Имя'
+                minLength='2'
+                maxLength='30'
                 disabled={!isEditing}
               />
             </label>
-            <span className='profile__input-error input-error'>{errors.name}</span> 
-            <label className="profile__label">
+            <span className='profile__input-error input-error'>
+            {errors.name}
+            </span>
+            <label className='profile__label'>
               E-mail
               <input
-                className="profile__input"
-                placeholder="E-mail"
-                type="email"
-                name="email"
-                value={values.email || ''}
+                className='profile__input'
+                placeholder='E-mail'
+                type='email'
+                name='email'
+                value={values.email}
                 onChange={handleChange}
                 required
                 disabled={!isEditing}
               />
             </label>
-            <span className='profile__input-error input-error'>{errors.email}</span> 
+            <span className='profile__input-error input-error'>
+            {errors.email || 'Некорректный email'}
+            </span>
             {isEditing && (
               <>
-              {/* <span>{errors.name}</span> */}
-              <button
-                className={`profile__save-button auth-form__button ${!isValid ? 'profile__save-button_disabled' : ''}`}
-                type="submit"
-                onClick={handleSaveClick}
-                disabled={!isValid} 
-              >
-                Сохранить
-              </button>
+                <button
+                  className={`profile__save-button auth-form__button ${
+                    !isValid ? 'profile__save-button_disabled' : ''
+                  }`}
+                  type='submit'
+                  onClick={handleSaveClick}
+                  disabled={!isValid}
+                >
+                  Сохранить
+                </button>
+                <button
+                  className='profile__button-cancel'
+                  type='button'
+                  onClick={handleCancelClick}
+                >
+                  Отменить
+                </button>
               </>
             )}
           </form>
           {!isEditing && (
-            <div className="profile__edit-container">
+                       
+            <div className='profile__edit-container'>
               <button
-                className="profile__button-edit"
-                type="button"
+                className='profile__button-edit'
+                type='button'
                 onClick={handleEditClick}
               >
                 Редактировать
               </button>
               <button
-                className="profile__signout"
-                type="button"
+                className='profile__signout'
+                type='button'
                 onClick={signOut}
               >
                 Выйти из аккаунта

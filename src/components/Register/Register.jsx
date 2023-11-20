@@ -1,38 +1,28 @@
 import React, {useState} from 'react';
 import {AuthForm} from '../AuthForm/AuthForm';
+import { useFormWithValidation } from '../../hooks/validation';
 
 export function Register({ onRegister }) {
-
-  const [formValue, setFormValue] = useState({
-    name: '',
-    email: '',
-    password: '',
-  })
-
-  const handleChange = (e) => {
-    const {name, value} = e.target;
-
-    setFormValue({
-      ...formValue,
-      [name]: value
-    });
-  }
+  
+  const { values, handleChange, errors, isValid } =
+    useFormWithValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegister(formValue.name, formValue.email, formValue.password);
+    onRegister(values.valueName, values.valueEmail, values.valuePassword);
   };
+
 
   return (
     <main className="content">
     <AuthForm
       title="Добро пожаловать!"
       nameInput="Имя"
-      valueName = {formValue.name}
+      valueName = {values.name || ''}
       emailInput="E-mail"
-      valueEmail = {formValue.email}
+      valueEmail = {values.email || ''}
       passwordInput="Пароль"
-      valuePassword = {formValue.password}
+      valuePassword = {values.password || ''}
       submitButton="Зарегистрироваться"
       text="Уже зарегистрированы?"
       to="/signin"
@@ -40,6 +30,8 @@ export function Register({ onRegister }) {
       isRegistration={true}
       onSubmit={handleSubmit}
       onChange={handleChange}
+      errors={errors}
+      isValid={isValid} 
     />
     </main>
   );
