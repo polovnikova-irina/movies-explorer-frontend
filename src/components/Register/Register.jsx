@@ -9,7 +9,7 @@ export function Register({ onRegister }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegister(values.valueName, values.valueEmail, values.valuePassword);
+    onRegister(values.name, values.email, values.password);
   };
 
 

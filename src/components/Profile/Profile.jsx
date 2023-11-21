@@ -92,9 +92,9 @@ export function Profile({ loggedIn, onUpdateUser }) {
                 disabled={!isEditing}
               />
             </label>
-            <span className='profile__input-error input-error'>
+            {/* <span className='profile__input-error input-error'>
             {errors.name}
-            </span>
+            </span> */}
             <label className='profile__label'>
               E-mail
               <input
@@ -108,9 +108,9 @@ export function Profile({ loggedIn, onUpdateUser }) {
                 disabled={!isEditing}
               />
             </label>
-            <span className='profile__input-error input-error'>
+            {/* <span className='profile__input-error input-error'>
             {errors.email || 'Некорректный email'}
-            </span>
+            </span> */}
             {isEditing && (
               <>
                 <button

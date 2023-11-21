@@ -8,7 +8,7 @@ export function Login({ onLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Submitting form:', values);
-    onLogin(values.valueEmail, values.valuePassword);
+    onLogin(values.email, values.password);
   };
 
   return (

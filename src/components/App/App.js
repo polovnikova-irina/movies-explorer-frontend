@@ -94,6 +94,19 @@ function App() {
       });
   }
 
+  const getAllMovies = () => {
+    // setIsLoading(true);
+    moviesApi
+      .getMovies()
+      .then((data) => {
+        setСurrentUser(data);
+      })
+      .catch((err) =>
+        console.log('Ошибка при изменении данных о пользователе:', err)
+      );
+    // .finally(() => setIsLoading(false));
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>

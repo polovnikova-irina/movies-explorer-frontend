@@ -21,6 +21,8 @@ export function AuthForm({
   errors,
   isValid,
 }) {
+
+
   return (
     <div className="auth-form">
       <div className="auth-form__header">
@@ -41,11 +43,10 @@ export function AuthForm({
                 name="name"
                 minLength="2"
                 maxLength="30"
-                pattern="^[A-Za-zА-Яа-яЁё\s]+$"  
                 required
                 onChange={onChange}
                 value={valueName}
-                placeholder="Имя"
+                placeholder="Введите имя"
               />
               <span className='auth-form__input-error input-error'>{errors.name}</span>
             </label>
@@ -58,11 +59,11 @@ export function AuthForm({
               className="auth-form__input"
               type="email"
               name="email"
-              pattern="^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,6}$"
+              pattern="^\S+@\S+\.\S+$"
               required
               onChange={onChange}
               value={valueEmail}
-              placeholder="E-mail"
+              placeholder="Введите e-mail"
             />
              <span className='auth-form__input-error input-error'>{errors.email}</span>
           </label>
@@ -72,12 +73,12 @@ export function AuthForm({
               className="auth-form__input"
               type="password"
               name="password"
-              minLength="2"
+              minLength="5"
               maxLength="30"
               required
               value={valuePassword}
               onChange={onChange}
-              placeholder="Пароль"
+              placeholder="Введите пароль"
             />
             <span className='auth-form__input-error input-error'>{errors.password}</span>
           </label>

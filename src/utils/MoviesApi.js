@@ -12,7 +12,7 @@ class Api {
       return fetch(url, options).then(this._checkResponse);
     }
 
-    getMovies= (token) => {
+    getMovies=() => {
         return this._request('/beatfilm-movies', {
           method: "GET",
           headers: {
@@ -20,8 +20,6 @@ class Api {
           },
         });
       };
-      
-
 }
 
 export const mainApi = new Api({
