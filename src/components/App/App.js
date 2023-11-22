@@ -5,7 +5,6 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import { ProtectedRouteElement } from '../ProtectedRoute/ProtectedRoute.jsx';
 import { mainApi } from '../../utils/MainApi.js';
-import { moviesApi } from '../../utils/MoviesApi.js';
 import { Main } from '../Main/Main';
 import { Movies } from '../Movies/Movies';
 import { SavedMovies } from '../SavedMovies/SavedMovies.jsx';
@@ -20,6 +19,7 @@ function App() {
   const [currentUser, setСurrentUser] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isTokenValid, setTokenValidity] = useState(true);
 
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -33,11 +33,11 @@ function App() {
           setСurrentUser(dataUser);
           setSavedMovies(dataMovies);
           setLoggedIn(true);
-          setIsLoading(false);
+          setTokenValidity(false);
         })
         .catch((err) => {
           console.log('Ошибка при загрузке данных о пользователе:', err);
-          setIsLoading(false);
+          setTokenValidity(false);
           localStorage.clear();
         })
     }
@@ -94,23 +94,10 @@ function App() {
       });
   }
 
-  const getAllMovies = () => {
-    // setIsLoading(true);
-    moviesApi
-      .getMovies()
-      .then((data) => {
-        setСurrentUser(data);
-      })
-      .catch((err) =>
-        console.log('Ошибка при изменении данных о пользователе:', err)
-      );
-    // .finally(() => setIsLoading(false));
-  };
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
-        {/* {isLoading ? (
+        {/* {isTokenValid ? (
           <Preloader />
         ) : ( */}
           <Routes>

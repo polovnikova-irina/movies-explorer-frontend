@@ -1,3 +1,5 @@
+import {MAIN_API_URL, MOVIES_API_URL} from "../utils/constants"
+
 class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
@@ -69,14 +71,26 @@ class Api {
     });
   }
 
-  addMovie(movieData, token) {
+  addMovie(movie, token) {
     return this._request('/movies', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         "Authorization": `Bearer ${token}`,
       },
-      body: JSON.stringify({movieData}),
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        description: movie.description,
+        year: movie.year,
+        image: `${MOVIES_API_URL}${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        thumbnail: `${MOVIES_API_URL}${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+      }),
     });
   }
 
@@ -92,5 +106,5 @@ class Api {
 }
 
 export const mainApi = new Api({
-  baseUrl: 'https://api.movies.park.nomoredomainsrocks.ru',
+  baseUrl: MAIN_API_URL,
 });
