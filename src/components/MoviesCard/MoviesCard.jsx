@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './MoviesCard.css';
-import poster from '../../images/moviesCard__image.jpg'
 import { useLocation } from 'react-router-dom';
+import { MOVIES_API_URL } from "../../utils/constants"
 import deleteIcon from '../../images/moviesCard__image-delete.svg';
 import saveIcon from '../../images/moviesCard__image-save.svg';
 
@@ -19,20 +19,31 @@ export function MoviesCard({ movie }) {
     setHovered(false);
   };
 
+  const convertDuration = (totalMinutes) => {
+    const minutes = totalMinutes % 60;
+    const hours = Math.floor(totalMinutes / 60);
+    if (hours < 1) {
+      return `${minutes}м`;
+    } else {
+      return `${hours}ч ${minutes}м`;
+    }
+  }
+
+
   return (
     <div className="card" onMouseEnter={handleHover}
     onMouseLeave={handleLeave}>
       <a
-        href={movie.link}
+        href={movie.trailerLink}
         target="_blank"
         className="card__image-link"
         rel="noreferrer"
       >
-        <img className="card__image" src={poster} alt={movie.title} />
+        <img className="card__image" src={`${MOVIES_API_URL}${movie.image.url}`} alt={movie.nameRU} />
       </a>
       <div className="card__container">
         <div className="card__wrapper">
-          <h2 className="card__title">{movie.title}</h2>
+          <h2 className="card__title">{movie.nameRU}</h2>
           {movies && (
             <button
               className="card__button card__button_type_save"
@@ -62,7 +73,7 @@ export function MoviesCard({ movie }) {
             </button>
           )}
         </div>
-        <p className="card__duration">{movie.duration}</p>
+        <p className="card__duration">{convertDuration(movie.duration)}</p>
       </div>
     </div>
   );

@@ -24,6 +24,6 @@ class Api {
       };
 }
 
-export const mainApi = new Api({
+export const moviesApi = new Api({
     baseUrl: MOVIES_API_URL,
   });

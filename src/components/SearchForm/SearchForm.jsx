@@ -5,7 +5,7 @@ import { Toggle } from "../Toggle/Toggle";
 import searchFormIcon from '../../images/searchForm__form-icon.svg';
 
 
-export function SearchForm() {
+export function SearchForm( { onSearch }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -19,6 +19,16 @@ export function SearchForm() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   if (searchInputValue.length !== 0) {
+  //     onSearch(searchInputValue);
+  //     setSearchError("");
+  //   } else {
+  //     setSearchError(SEARCH_QUERY_ERROR);
+  //   }
+  // }
 
   return (
     <section className="search">

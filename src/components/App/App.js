@@ -16,10 +16,11 @@ import { PageNotFound } from '../PageNotFound/PageNotFound.jsx';
 
 function App() {
   const navigate = useNavigate();
-  const [currentUser, setСurrentUser] = useState({});
-  const [savedMovies, setSavedMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isTokenValid, setTokenValidity] = useState(true);
+  const [currentUser, setСurrentUser] = useState({}); 
+  const [savedMovies, setSavedMovies] = useState([]);  
+  const [isLoading, setIsLoading] = useState(true); //загрузка баттонпрелоадер
+  const [isTokenValid, setTokenValidity] = useState(true); //при обновлении оставалась нужная страница
+  const [isSuccess, setIsSuccess] = useState(true); //уведомление об ошибках или успехе
 
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -44,71 +45,76 @@ function App() {
   }, [loggedIn]);
 
   const handleUpdateUser = (name, email) => {
-    // setIsLoading(true);
+    setIsLoading(true);
     mainApi
       .setUsersData(name, email, localStorage.jwt)
       .then((data) => {
         setСurrentUser(data);
+        setIsSuccess(true);
       })
-      .catch((err) =>
+      .catch((err) => {
         console.log('Ошибка при изменении данных о пользователе:', err)
-      );
-    // .finally(() => setIsLoading(false));
+        setIsSuccess(false);
+  })
+    .finally(() => setIsLoading(false));
   };
 
   function handleRegisterSubmit(name, email, password) {
+    setIsLoading(true);
     mainApi
       .register(name, email, password)
       .then((res) => {
         console.log('Регистрация успешна:', res);
         handleLoginSubmit(email, password);
-        // // setIsSuccess(true);
+        setIsSuccess(false);
       })
       .catch((err) => {
         console.error('Ошибка при регистрации:', err);
         if (err.status === 400) {
           console.log('400 - некорректно заполнено одно из полей');
         }
-        // setIsSuccess(false);
-      });
-    // .finally(() => setIsInfoTooltipPopupOpen(true));
+        setIsSuccess(true);
+      })
+    .finally(() => setIsLoading(false));
   }
 
   function handleLoginSubmit(email, password) {
+    setIsLoading(true);
     mainApi
       .authorize(email, password)
       .then((data) => {
         localStorage.setItem('jwt', data.token);
         setLoggedIn(true);
         navigate('/movies', { replace: true });
+        setIsSuccess(false);
       })
       .catch((err) => {
-        // setIsSuccess(false);
-        // setIsInfoTooltipPopupOpen(true);
         if (err.status === 400) {
           console.log('400 - не передано одно из полей');
         } else if (err.status === 401) {
           console.log('401 - пользователь с email не найден');
         }
         console.log(err);
-      });
+        setIsSuccess(true);
+      })
+      .finally(() => setIsLoading(false));
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
-        {/* {isTokenValid ? (
+        {isTokenValid ? (
           <Preloader />
-        ) : ( */}
+        ) : (
           <Routes>
             <Route path='/' element={<Main loggedIn={loggedIn} />} />
             <Route
               path='/signup'
-              element={<Register onRegister={handleRegisterSubmit} />}
+              element={<Register onRegister={handleRegisterSubmit} isSuccess={isSuccess} isLoading={isLoading}/>}
             />
             <Route
               path='/signin'
-              element={<Login onLogin={handleLoginSubmit} />}
+              element={<Login onLogin={handleLoginSubmit} isSuccess={isSuccess} isLoading={isLoading}/>}
             />
             <Route
               path='/movies'
@@ -132,12 +138,14 @@ function App() {
                   element={Profile}
                   loggedIn={setLoggedIn}
                   onUpdateUser={handleUpdateUser}
+                  isSuccess={isSuccess} 
+                  isLoading={isLoading}
                 />
               }
             />
             <Route path='*' element={<PageNotFound />} />
           </Routes>
-      {/* )} */}
+      )} 
       </div>
     </CurrentUserContext.Provider>
   );

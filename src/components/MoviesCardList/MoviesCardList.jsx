@@ -1,14 +1,13 @@
-import { moviesData } from '../../utils/constants';
 import './MoviesCardList.css';
 import { MoviesCard } from '../MoviesCard/MoviesCard';
 
-export function MoviesCardList() {
+export function MoviesCardList({ movies }) {
   return (
     <section className="card-list">
         <>
       <ul className="card-list__container">
-        {moviesData.map((movie) => (
-          <li key={movie._id}>
+        {movies.map((movie) => (
+          <li key={movie.id}>
             <MoviesCard movie={movie} />
           </li>
         ))}

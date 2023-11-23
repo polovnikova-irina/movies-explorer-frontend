@@ -4,7 +4,7 @@ export const MOVIES_API_URL = "https://api.nomoreparties.co";
 export const EMAIL_REGEX = '^\\S+@\\S+\\.\\S+$';
 export const NAME_REGEX = '^[A-Za-zА-Яа-яЁё\\-\\s]+$';
 
-export const MAX_DURATION_SHORT_MOVIES = 40;
+export const SHORT_FILM_DURATION = 40;
 
 export const SCREEN_SIZES = {
     L: 1280,
