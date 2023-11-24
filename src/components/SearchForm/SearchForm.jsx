@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
-
 import './SearchForm.css';
-import { Toggle } from "../Toggle/Toggle";
+import { MOVIES_MESSAGES } from '../../utils/constants';
+import { Toggle } from '../Toggle/Toggle';
 import searchFormIcon from '../../images/searchForm__form-icon.svg';
 
-
-export function SearchForm( { onSearch }) {
+export function SearchForm({
+  onSearch,
+  inputValue,
+  isFilterActive,
+  onFilterChange,
+  isLoading,
+  serverError,
+}) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [currentValue, setCurrentValue] = useState('');
+  const [searchError, setSearchError] = useState('');
 
   useEffect(() => {
     const handleResize = () => {
@@ -20,35 +28,86 @@ export function SearchForm( { onSearch }) {
     };
   }, []);
 
+  useEffect(() => {
+    setCurrentValue(inputValue);
+    setSearchError('');
+    console.log('Current Value Updated:', inputValue);
+  }, [inputValue]);
+
   // function handleSubmit(e) {
   //   e.preventDefault();
-  //   if (searchInputValue.length !== 0) {
-  //     onSearch(searchInputValue);
-  //     setSearchError("");
+  //   console.log('Submitting with Current Value:', currentValue);
+  //   if (currentValue.length !== 0) {
+  //     onSearch(currentValue);
+  //     setSearchError('');
   //   } else {
-  //     setSearchError(SEARCH_QUERY_ERROR);
+  //     setSearchError(MOVIES_MESSAGES.SEARCH_QUERY_ERROR);
   //   }
   // }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (currentValue.length !== 0) {
+        const valueToSearch = currentValue; // сохраняем значение, чтобы гарантировать его актуальность
+        setCurrentValue(valueToSearch); // обновляем состояние, если это необходимо
+        onSearch(valueToSearch);
+        setSearchError('');
+    } else {
+        setSearchError(MOVIES_MESSAGES.SEARCH_QUERY_ERROR);
+    }
+}
+  const handleInputChange = (e) => {
+    setCurrentValue(e.target.value);
+    console.log('Input Value Changed:', e.target.value);;
+  };
 
   return (
     <section className="search">
       <div className="search__container">
-        <form className="search__form">
-        <div className="search__form-wrapper">
-          <img className="search__form-icon" src={searchFormIcon} alt="Иконка поиска" />
-          <input className="search__form-input" type="text" name="search" placeholder="Фильм" required/>
+        <form
+          className="search__form"
+          name="search-form"
+          onSubmit={handleSubmit}
+          noValidate
+        >
+          <div className="search__form-wrapper">
+            <img
+              className="search__form-icon"
+              src={searchFormIcon}
+              alt="Иконка поиска"
+            />
+            <input
+              className="search__form-input"
+              type="text"
+              name="search"
+              placeholder="Фильм"
+              required
+              value={currentValue || ''}
+              onChange={handleInputChange}
+              disabled={isLoading ? true : false}
+            />
           </div>
-          <button className="search__form-button" type="submit">Найти</button>
-          <div className='search__line'></div>
-          {windowWidth >= 768 && (
-              <Toggle />
-          )}
+          <button
+            className={`search__form-button ${isLoading ? "search__form-button_disable" : ""}`}
+            type="submit"
+            disabled={isLoading ? true : false}
+          >
+            Найти
+          </button>
+          <div className="search__line"></div>
+          {windowWidth >= 768 && <Toggle />}
         </form>
-        </div>
-        {windowWidth >= 320 && windowWidth <= 767 && (
-            <Toggle />
-        )}
-
+      </div>
+      {serverError ? (
+       <span className="search__error search__error_active">
+       {MOVIES_MESSAGES.SERVER_REQUEST_ERROR}
+     </span>
+      ) : (
+        <span className="search__error search__error_active">
+          {searchError}
+        </span>
+      )}
+      {windowWidth >= 320 && windowWidth <= 767 && <Toggle />}
     </section>
   );
 }

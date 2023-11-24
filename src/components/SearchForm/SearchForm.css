@@ -65,6 +65,12 @@
   opacity: 0.8;
 }
 
+.search__form-button_disable {
+  background-color: #f8f8f8;
+  order: 1px solid #f8f8f8;
+  color: #c2c2c2;
+}
+
 .search__form-icon {
   display: none;
 }

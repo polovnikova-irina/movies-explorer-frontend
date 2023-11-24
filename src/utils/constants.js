@@ -26,7 +26,7 @@ export const SCREEN_SIZES = {
 
 export const MOVIES_MESSAGES = {
     SERVER_REQUEST_ERROR: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
-    SEARCH_QUERY_MISSING_ERROR: 'Нужно ввести ключевое слово',
+    SEARCH_QUERY_ERROR: 'Нужно ввести ключевое слово',
     NOT_FOUND_ERROR: 'Ничего не найдено',
   };
 
