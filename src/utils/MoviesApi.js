@@ -1,6 +1,6 @@
 import {MOVIES_API_URL} from "../utils/constants"
 
-class Api {
+class MoviesApi {
     constructor(options) {
       this._baseUrl = options.baseUrl;
     }
@@ -15,6 +15,7 @@ class Api {
     }
 
     getMovies=() => {
+      console.log('Запрос к бд:', this._baseUrl + '/beatfilm-movies');
         return this._request('/beatfilm-movies', {
           method: "GET",
           headers: {
@@ -24,6 +25,6 @@ class Api {
       };
 }
 
-export const moviesApi = new Api({
+export const moviesApi = new MoviesApi({
     baseUrl: MOVIES_API_URL,
   });

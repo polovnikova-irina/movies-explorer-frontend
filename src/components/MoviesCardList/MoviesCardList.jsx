@@ -2,6 +2,7 @@ import './MoviesCardList.css';
 import { MoviesCard } from '../MoviesCard/MoviesCard';
 
 export function MoviesCardList({ movies }) {
+  console.log('Movies in MoviesCardList:', movies);
   return (
     <section className="card-list">
       <ul className="card-list__container">

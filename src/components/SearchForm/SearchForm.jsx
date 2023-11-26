@@ -31,31 +31,20 @@ export function SearchForm({
   useEffect(() => {
     setCurrentValue(inputValue);
     setSearchError('');
-    console.log('Current Value Updated:', inputValue);
+    console.log('Занчение инпута обновилось:', inputValue);
   }, [inputValue]);
-
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   console.log('Submitting with Current Value:', currentValue);
-  //   if (currentValue.length !== 0) {
-  //     onSearch(currentValue);
-  //     setSearchError('');
-  //   } else {
-  //     setSearchError(MOVIES_MESSAGES.SEARCH_QUERY_ERROR);
-  //   }
-  // }
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log('Submitting со значением инпута:', currentValue);
     if (currentValue.length !== 0) {
-        const valueToSearch = currentValue; // сохраняем значение, чтобы гарантировать его актуальность
-        setCurrentValue(valueToSearch); // обновляем состояние, если это необходимо
-        onSearch(valueToSearch);
-        setSearchError('');
+      onSearch(currentValue);
+      setSearchError('');
     } else {
-        setSearchError(MOVIES_MESSAGES.SEARCH_QUERY_ERROR);
+      setSearchError(MOVIES_MESSAGES.SEARCH_QUERY_ERROR);
     }
-}
+  }
+
   const handleInputChange = (e) => {
     setCurrentValue(e.target.value);
     console.log('Input Value Changed:', e.target.value);;
