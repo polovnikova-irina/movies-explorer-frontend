@@ -100,6 +100,28 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
+  function handleDMovieLike(savedMovieId) {
+
+  }
+  
+
+  function handleMovieDelete(savedMovieId) {
+    mainApi
+    .deleteMovie(savedMovieId, localStorage.jwt)
+    .then(() => {
+      setSavedMovies(
+        savedMovies.filter((movie) => {
+          return movie._id !== savedMovieId;
+        })
+      )
+    })
+    .catch((err) => {
+      console.error('Ошибка при удалении фильма:', err);
+  })
+  }
+ 
+  
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
