@@ -31,12 +31,10 @@ export function SearchForm({
   useEffect(() => {
     setCurrentValue(inputValue);
     setSearchError('');
-    console.log('Занчение инпута обновилось:', inputValue);
   }, [inputValue]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('Submitting со значением инпута:', currentValue);
     if (currentValue.length !== 0) {
       onSearch(currentValue);
       setSearchError('');
@@ -47,7 +45,6 @@ export function SearchForm({
 
   const handleInputChange = (e) => {
     setCurrentValue(e.target.value);
-    console.log('Input Value Changed:', e.target.value);;
   };
 
   return (
@@ -84,7 +81,8 @@ export function SearchForm({
             Найти
           </button>
           <div className="search__line"></div>
-          {windowWidth >= 768 && <Toggle />}
+          {windowWidth >= 768 && <Toggle isFilterActive={isFilterActive}
+            onFilterChange={onFilterChange}/>}
         </form>
       </div>
       {serverError ? (
@@ -96,7 +94,8 @@ export function SearchForm({
           {searchError}
         </span>
       )}
-      {windowWidth >= 320 && windowWidth <= 767 && <Toggle />}
+      {windowWidth >= 320 && windowWidth <= 767 && <Toggle isFilterActive={isFilterActive}
+            onFilterChange={onFilterChange}/>}
     </section>
   );
 }

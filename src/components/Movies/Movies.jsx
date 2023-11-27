@@ -20,33 +20,24 @@ export function Movies({ loggedIn, onChangeSave, onDelete, savedMovies }) {
 
   const updateAndSaveMoviesData = useCallback(
     (moviesData, searchQuery, isFilterActive) => {
+      console.log('Movies before search:', moviesData);
       const searchResult = searchMovies(moviesData, searchQuery);
       setSearchedMovies(searchResult);
 
-      console.log('updateAndSaveMoviesData Movies Data from API:', moviesData);
-      console.log('Filtering for Short Films:', isFilterActive);
-
       const filteredMovies = filterShortFilms(searchResult, isFilterActive);
+
       setMoviesForRender(filteredMovies);
+
 
       localStorage.setItem('movies', JSON.stringify(filteredMovies));  //короткометражки
       localStorage.setItem('searchedMovies', JSON.stringify(searchQuery)); //запрос фильмов по поиску
       localStorage.setItem('shorts', JSON.stringify(isFilterActive)); //состояние фильтра
-     
-      console.log('Stored Movies:', localStorage.getItem('movies'));
-      console.log('Stored Searched Movies:', localStorage.getItem('searchedMovies'));
-      console.log('Stored Shorts:', localStorage.getItem('shorts'));
     },
     []
   );
 
-  useEffect(() => {
-    setFirstEntrance(!localStorage.getItem('storedMovies'));
-  }, []);
-
   const handleSearchRequest = useCallback(
     (query) => {
-      console.log('Запрос при получения фильмов:', query);
       setFirstEntrance(false);
   
       const storedMoviesData = localStorage.getItem('allMovies');
@@ -57,21 +48,16 @@ export function Movies({ loggedIn, onChangeSave, onDelete, savedMovies }) {
         moviesApi
           .getMovies()
           .then((moviesData) => {
-            console.log('Movies Data from API:', moviesData);
-
             localStorage.setItem('allMovies', JSON.stringify(moviesData));
             updateAndSaveMoviesData(moviesData, query, isFilterActive);
           })
           .catch((error) => {
             setServerError(true);
             console.error(`Ошибка при получении фильмов: ${error}`);
-            console.error('Error fetching movies:', error);
           })
           .finally(() => setLoading(false));
       } else {
         const savedMoviesData = JSON.parse(storedMoviesData);
-
-        console.log('Stored Movies:', localStorage.getItem('movies'));
         updateAndSaveMoviesData(savedMoviesData, query, isFilterActive);
       }
     },
@@ -92,11 +78,11 @@ export function Movies({ loggedIn, onChangeSave, onDelete, savedMovies }) {
             const filtered = filterShortFilms(searchedMovies, isFilterActive);
             setMoviesForRender(filtered);
 
-            localStorage.setItem("'movies", JSON.stringify(filtered));
+            localStorage.setItem("movies", JSON.stringify(filtered));
             localStorage.setItem("shorts", JSON.stringify(isFilterActive));
           } else {
             setMoviesForRender(search);
-            localStorage.setItem("'movies", JSON.stringify(search));
+            localStorage.setItem("movies", JSON.stringify(search));
             localStorage.setItem("shorts", JSON.stringify(isFilterActive));
           }
         }
@@ -106,6 +92,11 @@ export function Movies({ loggedIn, onChangeSave, onDelete, savedMovies }) {
     },
     [searchMovies, firstEntrance],
   );
+
+  useEffect(() => {
+    setFirstEntrance(!localStorage.getItem('storedMovies'));
+  }, []);
+
 
   useEffect(() => {
     const storedMovies = localStorage.getItem("movies");

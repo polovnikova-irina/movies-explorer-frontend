@@ -4,13 +4,13 @@ import { SHORT_FILM_DURATION, } from './constants'
 export function searchMovies(movies, searchQuery) {
   const term = searchQuery.toLowerCase().trim();
   const matchingMovies = movies.filter((movie) => {
-    const isMatchRU = movie.titleRU && movie.titleRU.toLowerCase().trim().includes(term);
-    const isMatchEN = movie.titleEN && movie.titleEN.toLowerCase().trim().includes(term);
+    const isMatchRU = movie.nameRU.toLowerCase().trim().includes(term);
+    const isMatchEN = movie.nameEN.toLowerCase().trim().includes(term);
+
     return isMatchRU || isMatchEN;
   });
   return matchingMovies;
 }
-
 
 export function filterShortFilms(movieList, isFilterActive) {
   if (isFilterActive) {
@@ -20,3 +20,4 @@ export function filterShortFilms(movieList, isFilterActive) {
     return movieList;
   }
 }
+
