@@ -10,7 +10,6 @@ export function SavedMovies({ loggedIn, onDelete, savedMovies }) {
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [moviesForRender, setMoviesForRender] = useState([]);
-  const [isfirstSavedEntrance, setIsFirstSavedEntrance] = useState(true);
   const [currentInputValue, setCurrentInputValue] = useState('');
 
   //поиск с фильтрацией фильмов
@@ -55,9 +54,6 @@ export function SavedMovies({ loggedIn, onDelete, savedMovies }) {
     setMoviesForRender(savedMovies);
   }, [savedMovies]);
 
-  useEffect(() => {
-    setIsFirstSavedEntrance(savedMovies.length === 0);
-  }, [savedMovies]);
 
   useEffect(() => {
     if (searchedMovies.length) {
@@ -79,14 +75,13 @@ export function SavedMovies({ loggedIn, onDelete, savedMovies }) {
           <SearchForm
             onSearch={handleSubmitSearchRequest}
             inputValue={currentInputValue}
-            isFilterOn={isFilterActive}
-            onFilterTogle={handleOnFilterClick}
+            isFilterActive={isFilterActive}
+            onFilterChange={handleOnFilterClick}
             savedMovies={savedMovies}
           />
           <MoviesCardList
             movies={moviesForRender}
             onDelete={onDelete}
-            firstSavedEntrance={isfirstSavedEntrance}
           />
         </section>
       </main>

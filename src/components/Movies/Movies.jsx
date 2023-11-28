@@ -8,7 +8,7 @@ import { useCallback } from 'react';
 import { moviesApi } from '../../utils/MoviesApi';
 import { searchMovies, filterShortFilms } from '../../utils/utils';
 
-export function Movies({ loggedIn, onChangeSave, onDelete, savedMovies }) {
+export function Movies({ loggedIn, onToggleSave, onDelete, savedMovies }) {
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [moviesForRender, setMoviesForRender] = useState([]);
@@ -132,7 +132,7 @@ export function Movies({ loggedIn, onChangeSave, onDelete, savedMovies }) {
           <MoviesCardList
             movies={moviesForRender}
             isLoading={isLoading}
-            onChangeSave={onChangeSave}
+            onToggleSave={onToggleSave}
             onDelete={onDelete}
             savedMovies={savedMovies}
           />
