@@ -132,9 +132,9 @@ export function Movies({ loggedIn, onChangeSave, onDelete, savedMovies }) {
           <MoviesCardList
             movies={moviesForRender}
             isLoading={isLoading}
-            // onChangeSave={onChangeSave}
-            // onDelete={onDelete}
-            // savedMovies={savedMovies}
+            onChangeSave={onChangeSave}
+            onDelete={onDelete}
+            savedMovies={savedMovies}
           />
           <button className="movies__button" type="button" aria-label="еще">
             Ещё

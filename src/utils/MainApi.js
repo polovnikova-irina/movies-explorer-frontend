@@ -71,7 +71,7 @@ class Api {
     });
   }
 
-  addMovie(movie, token) {
+  saveMovie(movie, token) {
     return this._request('/movies', {
       method: 'POST',
       headers: {

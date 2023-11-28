@@ -1,7 +1,7 @@
 import './MoviesCardList.css';
 import { MoviesCard } from '../MoviesCard/MoviesCard';
 
-export function MoviesCardList({ movies }) {
+export function MoviesCardList({ movies, onDelete, firstSavedEntrance, isLoading, onChangeSave, savedMovies }) {
   console.log('Movies in MoviesCardList:', movies);
 
   return (
