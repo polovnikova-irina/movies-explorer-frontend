@@ -10,7 +10,10 @@ export function Toggle({ isFilterActive, onFilterChange }) {
           className="search__toggle-checkbox"
           type="checkbox"
           checked={isFilterActive}
-          onChange={(evt) => onFilterChange(evt.target.checked)}
+          onChange={(evt) => {
+            console.log('Checkbox Checked:', evt.target.checked); // Добавьте этот console.log
+            onFilterChange(evt.target.checked);
+          }}
         />
         <span className={`search__toggle-icon ${isFilterActive ? 'search__toggle-icon_on' : 'search__toggle-icon_off'}`} />
       </label>

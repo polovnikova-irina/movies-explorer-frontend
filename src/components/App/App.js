@@ -110,32 +110,28 @@ function App() {
         );
       })
       .catch((err) => {
-        console.error('Ошибка при удалении фильма:', err);
+        console.log('Ошибка при удалении фильма:', err);
       });
   }
 
   function handleToggleMovieSave(movie) {
+    console.log('onToggleSave called with movie:', movie);
     const isSaved = savedMovies.some((item) => movie.id === item.movieId);
 
     if (!isSaved) {
       mainApi
         .saveMovie(movie, localStorage.jwt)
         .then((res) => {
-          setSavedMovies([res, ...savedMovies]);
+          setSavedMovies((prevSavedMovies) => [res, ...prevSavedMovies]);
         })
         .catch((err) => {
-          console.error('Ошибка при сохранении фильма:', err);
+          console.log('Ошибка при сохранении фильма:', err);
         });
     } else {
       const matchingMovies = savedMovies.filter((element) => {
         return element.movieId === movie.id;
       });
-
-      if (matchingMovies.length > 0) {
         handleDeleteMovie(matchingMovies[0]._id);
-      } else {
-        console.error('Не удалось найти сохраненный фильм для удаления.');
-      }
     }
   }
 

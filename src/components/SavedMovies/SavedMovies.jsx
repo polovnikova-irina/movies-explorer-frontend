@@ -7,9 +7,11 @@ import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 import { searchMovies, filterShortFilms } from '../../utils/utils';
 
 export function SavedMovies({ loggedIn, onDelete, savedMovies }) {
+  console.log(savedMovies)
+
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [isFilterActive, setIsFilterActive] = useState(false);
-  const [moviesForRender, setMoviesForRender] = useState([]);
+  const [moviesForRender, setMoviesForRender] = useState(savedMovies);
   const [currentInputValue, setCurrentInputValue] = useState('');
 
   //поиск с фильтрацией фильмов
@@ -34,7 +36,7 @@ export function SavedMovies({ loggedIn, onDelete, savedMovies }) {
   );
 
   //фильтрация фильмов
-  const handleOnFilterClick = useCallback(
+  const handleFilterClick = useCallback(
     (isFilterActive) => {
       let filteredMovies;
 
@@ -45,6 +47,7 @@ export function SavedMovies({ loggedIn, onDelete, savedMovies }) {
       } else {
         filteredMovies = searchedMovies;
       }
+      console.log('Filtered Movies:', filteredMovies);
       setMoviesForRender(filteredMovies);
     },
     [searchedMovies, savedMovies, currentInputValue]
@@ -76,7 +79,7 @@ export function SavedMovies({ loggedIn, onDelete, savedMovies }) {
             onSearch={handleSubmitSearchRequest}
             inputValue={currentInputValue}
             isFilterActive={isFilterActive}
-            onFilterChange={handleOnFilterClick}
+            onFilterChange={handleFilterClick}
             savedMovies={savedMovies}
           />
           <MoviesCardList

@@ -9,14 +9,16 @@ export function MoviesCardList({
   onToggleSave,
   savedMovies,
 }) {
-  console.log('Movies in MoviesCardList:', movies);
+  const { pathname } = useLocation();
+  const moviesPage = pathname === "/movies";
+  const savedMoviesPage = pathname === "/saved-movies";
 
   return (
     <section className="card-list">
       {movies.length !== 0 && (
         <ul className="card-list__container">
           {movies.map((movie) => (
-            <li key={movie.id}>
+            <li key={(moviesPage && movie.id) || (savedMoviesPage && movie._id)}>
               <MoviesCard
                 movie={movie}
                 onToggleSave={onToggleSave}

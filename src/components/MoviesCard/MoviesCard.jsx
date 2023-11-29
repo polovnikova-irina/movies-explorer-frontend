@@ -1,18 +1,20 @@
 import './MoviesCard.css';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MOVIES_API_URL } from "../../utils/constants"
+import { MOVIES_API_URL } from '../../utils/constants';
 import deleteIcon from '../../images/moviesCard__image-delete.svg';
 import saveIcon from '../../images/moviesCard__image-save.svg';
+import saveIconDisactive from '../../images/moviesCard__image-save-disactive.svg';
 
 export function MoviesCard({ movie, onToggleSave, onDelete, savedMovies }) {
 
   const [isSavedMovie, setIsSavedMovie] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   const location = useLocation();
   const savedMoviesPage = location.pathname === '/saved-movies';
   const moviesPage = location.pathname === '/movies';
-  const [hovered, setHovered] = useState(false);
+
 
   const handleHover = () => {
     setHovered(true);
@@ -30,14 +32,17 @@ export function MoviesCard({ movie, onToggleSave, onDelete, savedMovies }) {
     } else {
       return `${hours}ч ${minutes}м`;
     }
-  }
+  };
 
-  const handleDelete = () => {
-    onDelete(movie._id)
-  }
+  useEffect(() => {
+    if (moviesPage)
+      setIsSavedMovie(savedMovies.some((item) => movie.id === item.movieId));
+  }, [savedMovies, movie.id, setIsSavedMovie, moviesPage]);
 
   const handleSave = () => {
-    if (savedMovies.some(item => movie.id === item.movieId)) {
+    console.log('Save button clicked');
+    console.log('Current isSavedMovie:', isSavedMovie);
+    if (savedMovies.some((item) => movie.id === item.movieId)) {
       setIsSavedMovie(false);
       onToggleSave(movie);
     } else {
@@ -46,22 +51,30 @@ export function MoviesCard({ movie, onToggleSave, onDelete, savedMovies }) {
     }
   };
 
-  useEffect(() => {
-    if (moviesPage)
-    setIsSavedMovie(savedMovies.some(item => movie.id === item.movieId))
-  }, [savedMovies, movie.id, setIsSavedMovie, moviesPage])
+
+
+  const handleDelete = () => {
+    onDelete(movie._id);
+  };
 
 
   return (
-    <div className="card" onMouseEnter={handleHover}
-    onMouseLeave={handleLeave}>
+    <div className="card" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
       <a
         href={movie.trailerLink}
         target="_blank"
         className="card__image-link"
         rel="noreferrer"
       >
-        <img className="card__image" src={`${MOVIES_API_URL}${movie.image.url}`} alt={movie.nameRU} />
+        <img
+          className="card__image"
+          src={
+            moviesPage
+              ? `${MOVIES_API_URL}${movie.image.url}`
+              : `${movie.image}`
+          }
+          alt={movie.nameRU}
+        />
       </a>
       <div className="card__container">
         <div className="card__wrapper">
@@ -69,9 +82,6 @@ export function MoviesCard({ movie, onToggleSave, onDelete, savedMovies }) {
           {moviesPage && (
             <button
               className="card__button card__button_type_save"
-              // ${!isSavedMovie
-              //   ? "movies-card__btn_type_save" 
-              //   : "movies-card__btn_type_saved"}`}
               type="button"
               aria-label="Сохранить"
               onClick={handleSave}
@@ -79,15 +89,15 @@ export function MoviesCard({ movie, onToggleSave, onDelete, savedMovies }) {
               <img
                 className="card__icon card__icon_type_save"
                 alt="сохранить"
-                src={saveIcon}
+                src={isSavedMovie ? saveIcon : saveIconDisactive}
               />
             </button>
           )}
           {savedMoviesPage && (
             <button
-            className={`card__button card__button_type_delete ${
-              hovered ? '' : 'card__button_visible'
-            }`}
+              className={`card__button card__button_type_delete ${
+                hovered ? '' : 'card__button_visible'
+              }`}
               type="button"
               aria-label="Удалить фильм"
               onClick={handleDelete}
