@@ -5,7 +5,6 @@
   height: 72px;
   border-radius: 9px;
   background-color: #2f2f2f;
-  margin-bottom: 45px;
   margin-top: 75px;
 }
 
@@ -93,6 +92,19 @@
   display: none;
 }
 
+.search__error_active {
+  color: #ee3465;
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  display: block;
+  font-size: 11px;
+  margin: 0 auto 0;
+  font-weight: 400;
+  margin: 10px auto 30px;
+  min-height: 15px;
+}
+
 @media screen and (min-width: 768px) {
   .search__container {
     display: flex;
@@ -145,7 +157,12 @@
   }
 
   .search::after {
-    margin: 110px 0 78px;
+    margin: 85px 0 78px;
+  }
+
+  .search__error_active {
+    margin: 15px auto 0;
+    min-height: 15px;
   }
 }
 

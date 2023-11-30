@@ -115,7 +115,7 @@ function App() {
   }
 
   function handleToggleMovieSave(movie) {
-    console.log('onToggleSave called with movie:', movie);
+    console.log('movie.id:', movie.id)
     const isSaved = savedMovies.some((item) => movie.id === item.movieId);
 
     if (!isSaved) {

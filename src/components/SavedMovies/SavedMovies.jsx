@@ -38,6 +38,8 @@ export function SavedMovies({ loggedIn, onDelete, savedMovies }) {
   //фильтрация фильмов
   const handleFilterClick = useCallback(
     (isFilterActive) => {
+      setIsFilterActive(isFilterActive)
+      console.log('HandleFilterClick - isFilterActive:', isFilterActive);
       let filteredMovies;
 
       if (!searchedMovies.length && !currentInputValue) {
@@ -47,7 +49,7 @@ export function SavedMovies({ loggedIn, onDelete, savedMovies }) {
       } else {
         filteredMovies = searchedMovies;
       }
-      console.log('Filtered Movies:', filteredMovies);
+      console.log('HandleFilterClick - filteredMovies:', filteredMovies);
       setMoviesForRender(filteredMovies);
     },
     [searchedMovies, savedMovies, currentInputValue]

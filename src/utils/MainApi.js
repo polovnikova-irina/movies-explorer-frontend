@@ -72,6 +72,7 @@ class Api {
   }
 
   saveMovie(movie, token) {
+    console.log('Saving movie with id:', movie.id);
     return this._request('/movies', {
       method: 'POST',
       headers: {

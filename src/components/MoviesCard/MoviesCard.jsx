@@ -40,8 +40,6 @@ export function MoviesCard({ movie, onToggleSave, onDelete, savedMovies }) {
   }, [savedMovies, movie.id, setIsSavedMovie, moviesPage]);
 
   const handleSave = () => {
-    console.log('Save button clicked');
-    console.log('Current isSavedMovie:', isSavedMovie);
     if (savedMovies.some((item) => movie.id === item.movieId)) {
       setIsSavedMovie(false);
       onToggleSave(movie);
@@ -50,8 +48,6 @@ export function MoviesCard({ movie, onToggleSave, onDelete, savedMovies }) {
       onToggleSave(movie);
     }
   };
-
-
 
   const handleDelete = () => {
     onDelete(movie._id);
