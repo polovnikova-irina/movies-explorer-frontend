@@ -7,6 +7,7 @@ import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 import { useCallback } from 'react';
 import { moviesApi } from '../../utils/MoviesApi';
 import { searchMovies, filterShortFilms } from '../../utils/utils';
+import { SCREEN_SIZES, INITIAL_COUNT, INCREMENT_VALUES } from '../../utils/constants.js';
 
 export function Movies({ loggedIn, onToggleSave, onDelete, savedMovies }) {
   const [searchedMovies, setSearchedMovies] = useState([]);
@@ -16,7 +17,10 @@ export function Movies({ loggedIn, onToggleSave, onDelete, savedMovies }) {
   const [serverError, setServerError] = useState(false);
   const [firstEntrance, setFirstEntrance] = useState(true);
   const [currentValue, setCurrentValue] = useState('');
-  // const [count, setCount] = useState(renderMoreMovies().initial);
+  const [count, setCount] = useState(INITIAL_COUNT.L_SCREEN);
+  const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
+
+  const moviesToShow = moviesForRender.slice(0, count);
 
   const updateAndSaveMoviesData = useCallback(
     (moviesData, searchQuery, isFilterActive) => {
@@ -112,6 +116,38 @@ export function Movies({ loggedIn, onToggleSave, onDelete, savedMovies }) {
     }
   }, []);
 
+    const handleLoadMore = () => {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth >= SCREEN_SIZES.L) {
+      setCount(prevCount => prevCount + INCREMENT_VALUES.L_SCREEN);
+    } else if (screenWidth >= SCREEN_SIZES.M) {
+      setCount(prevCount => prevCount + INCREMENT_VALUES.M_SCREEN);
+    } else {
+      setCount(prevCount => prevCount + INCREMENT_VALUES.S_SCREEN);
+    }
+  };
+
+  useEffect(() => {
+    let timeout;
+
+    const handleResize = () => {
+      clearTimeout(timeout);
+    timeout = setTimeout(() => handleLoadMore(), 200)
+    }
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  },[]);
+
+  useEffect(() => {
+    const screenWidth = window.innerWidth;
+    const areMoreCardsToShow = count < moviesForRender.length; 
+  
+    setShowLoadMoreButton(screenWidth >= SCREEN_SIZES.L && areMoreCardsToShow);
+  }, [count, moviesForRender]);
+
   return (
     <>
       <Header loggedIn={loggedIn} />
@@ -126,15 +162,17 @@ export function Movies({ loggedIn, onToggleSave, onDelete, savedMovies }) {
             serverError={serverError}
           />
           <MoviesCardList
-            movies={moviesForRender}
+            movies={moviesToShow}
             isLoading={isLoading}
             onToggleSave={onToggleSave}
             onDelete={onDelete}
             savedMovies={savedMovies}
           />
-          <button className="movies__button" type="button" aria-label="еще">
+          {showLoadMoreButton && (
+          <button className="movies__button" type="button" aria-label="еще" onClick={handleLoadMore}>
             Ещё
           </button>
+          )}
         </section>
       </main>
       <Footer />

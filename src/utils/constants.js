@@ -13,13 +13,13 @@ export const SCREEN_SIZES = {
   };
   
   export const INITIAL_COUNT = {
-    L_SCREEN: 12,
+    L_SCREEN: 16,
     M_SCREEN: 8,
     S_SCREEN: 5,
   };
   
   export const INCREMENT_VALUES = {
-    L_SCREEN: 3,
+    L_SCREEN: 4,
     M_SCREEN: 2,
     S_SCREEN: 2,
   };

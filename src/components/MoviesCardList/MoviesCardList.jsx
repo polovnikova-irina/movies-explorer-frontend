@@ -1,6 +1,7 @@
 import './MoviesCardList.css';
 import { MoviesCard } from '../MoviesCard/MoviesCard';
 import { useLocation } from 'react-router-dom';
+import { MOVIES_MESSAGES } from '../../utils/constants';
 
 export function MoviesCardList({
   movies,
@@ -15,6 +16,14 @@ export function MoviesCardList({
 
   return (
     <section className="card-list">
+          {moviesPage &&
+        movies.length === 0 &&
+        !isLoading &&
+        localStorage.getItem("searchedMovies") && (
+          <p className="card-list__not-found">
+            {MOVIES_MESSAGES.NOT_FOUND_ERROR}
+          </p>
+        )}
       {movies.length !== 0 && (
         <ul className="card-list__container">
           {movies.map((movie) => (
