@@ -16,12 +16,16 @@ import { PageNotFound } from '../PageNotFound/PageNotFound.jsx';
 
 function App() {
   const navigate = useNavigate();
-  const [currentUser, setСurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); //загрузка баттонпрелоадер
+  const [isLoading, setIsLoading] = useState(false); //загрузка баттонпрелоадер
   const [isTokenValid, setTokenValidity] = useState(true); //при обновлении оставалась нужная страница
-  const [isSuccess, setIsSuccess] = useState(true); //уведомление об ошибках или успехе
+  const [isSuccess, setIsSuccess] = useState(false); //уведомление об успехе
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isEditingProfile, setIsEditingProfile] = useState(false);  //редактируется ли профиль
+  const [isError, setIsError] = useState(false); //уведомление об ошибках 
+  const [isPageEntranceNew, setIsPageEntranceNew] = useState(false); 
+
 
   useEffect(() => {
     if (localStorage.jwt) {
@@ -30,7 +34,7 @@ function App() {
         mainApi.getSavedMovies(localStorage.jwt),
       ])
         .then(([dataUser, dataMovies]) => {
-          setСurrentUser(dataUser);
+          setCurrentUser(dataUser);
           setSavedMovies(dataMovies);
           setLoggedIn(true);
           setTokenValidity(false);
@@ -45,25 +49,35 @@ function App() {
 
   const handleUpdateUser = (name, email) => {
     setIsLoading(true);
+    console.log('Начало обновления пользователя:', name, email);
+    console.log('Перед отправкой запроса:', { name, email, jwt: localStorage.jwt });
     mainApi
       .setUsersData(name, email, localStorage.jwt)
       .then((data) => {
-        setСurrentUser(data);
+        setIsEditingProfile(false);
+        setIsError(false);
+        setCurrentUser(data);
         setIsSuccess(true);
       })
       .catch((err) => {
         console.log('Ошибка при изменении данных о пользователе:', err);
         setIsSuccess(false);
+        setIsError(true)
       })
       .finally(() => setIsLoading(false));
   };
+
+  function handleClickEditProfile() {
+    setIsPageEntranceNew(false);
+    setIsEditingProfile(true);
+    setIsSuccess(false);
+  }
 
   function handleRegisterSubmit(name, email, password) {
     setIsLoading(true);
     mainApi
       .register(name, email, password)
       .then((res) => {
-        console.log('Регистрация успешна:', res);
         handleLoginSubmit(email, password);
         setIsSuccess(false);
       })
@@ -193,8 +207,12 @@ function App() {
                   element={Profile}
                   loggedIn={setLoggedIn}
                   onUpdateUser={handleUpdateUser}
+                  onEditProfile={handleClickEditProfile}
                   isSuccess={isSuccess}
                   isLoading={isLoading}
+                  isEditingProfile={isEditingProfile}
+                  isError={isError}
+                  isPageEntranceNew={isPageEntranceNew}
                 />
               }
             />

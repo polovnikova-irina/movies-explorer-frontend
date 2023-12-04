@@ -4,65 +4,60 @@ import './Profile.css';
 import { Header } from '../Header/Header';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../hooks/validation';
+import {
+  SUCCESS_MESSAGE,
+  AUTH_ERRORS,
+  EMAIL_REGEX,
+  NAME_REGEX,
+} from '../../utils/constants';
 
-export function Profile({ loggedIn, onUpdateUser }) {
+export function Profile({
+  loggedIn,
+  onUpdateUser,
+  onEditProfile,
+  isSuccess,
+  isLoading,
+  isEditingProfile,
+  isError,
+  isPageEntranceNew,
+}) {
   const navigate = useNavigate();
-  const [isEditing, setIsEditing] = useState(false);
-  const [prevValues, setPrevValues] = useState({});
-  const [notification, setNotification] = useState("");
 
-  const { values, handleChange, errors, isValid, setIsValid, resetForm } =
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [showUpdateMessage, setShowUpdateMessage] = useState(true);
+
+  const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
 
-   const currentUser = useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
 
-   const handleEditClick = () => {
-    setPrevValues(values);
-    setIsEditing(true);
-  };
-
-  const handleSaveClick = () => {
-    setIsEditing(false);
-  };
+  useEffect(() => {
+    setButtonDisabled(currentUser.name === values.name && currentUser.email === values.email);
+  }, [currentUser, values]);
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdateUser({
-      name: currentUser.name,
-      email: currentUser.email,
-    });
+    console.log('Значения формы перед отправкой:', values);
+    onUpdateUser(values.name, values.email);;
   };
 
   useEffect(() => {
     resetForm({
-      name: currentUser.name || '',
-      email: currentUser.email || '',
+      name: currentUser.name,
+      email: currentUser.email,
     });
-  }, [currentUser, resetForm]);
+  }, [currentUser, resetForm, isEditingProfile]);
 
   useEffect(() => {
-    if (isEditing) {
-      handleDisableBtn();
+    if (isSuccess !== null) {
+      setShowUpdateMessage(true);
+      const hideMessageTimeout = setTimeout(() => {
+        setShowUpdateMessage(false);
+      }, 5000); 
+      return () => clearTimeout(hideMessageTimeout);
     }
-  }, [isEditing, values, currentUser]);
-
-  function handleDisableBtn() {
-    if (
-      values.name === currentUser.name &&
-      values.email === currentUser.email
-    ) {
-      setIsValid(false);
-    } else {
-      setIsValid(true);
-    }
-  }
-
-  const handleCancelClick = () => {
-    resetForm(prevValues);
-    setIsEditing(false);
-  };
-
+  }, [isSuccess]);
 
   function signOut() {
     localStorage.clear();
@@ -73,85 +68,78 @@ export function Profile({ loggedIn, onUpdateUser }) {
   return (
     <>
       <Header loggedIn={loggedIn} />
-      <main className='content'>
-        <section className='profile'>
-          <h2 className='profile__title'>{`Привет, ${values.name}!`}</h2>
-          <form className='profile__form' onSubmit={handleSubmit}>
-            <label className='profile__label'>
+      <main className="content">
+        <section className="profile">
+          <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
+          <form className="profile__form" onSubmit={handleSubmit}  disabled={!isValid}>
+            <label className="profile__label">
               Имя
               <input
-                className='profile__input'
-                type='text'
-                name='name'
+                className="profile__input"
+                type="text"
+                name="name"
                 value={values.name || ''}
                 onChange={handleChange}
                 required
-                placeholder='Имя'
-                minLength='2'
-                maxLength='30'
-                disabled={!isEditing}
+                pattern={NAME_REGEX}
+                placeholder="Введите имя"
+                minLength="2"
+                maxLength="30"
+                disabled={!isEditingProfile}
               />
             </label>
-            {/* <span className='profile__input-error input-error'>
-            {errors.name}
-            </span> */}
-            <label className='profile__label'>
+            <span className="profile__input-error">{errors.name}</span>
+            <label className="profile__label">
               E-mail
               <input
-                className='profile__input'
-                placeholder='E-mail'
-                type='email'
-                name='email'
-                value={values.email}
+                className="profile__input"
+                placeholder="Введите e-mail"
+                type="email"
+                name="email"
+                pattern={EMAIL_REGEX}
+                value={values.email || ""}
                 onChange={handleChange}
                 required
-                disabled={!isEditing}
+                disabled={!isEditingProfile}
               />
             </label>
-            {/* <span className='profile__input-error input-error'>
-            {errors.email || 'Некорректный email'}
-            </span> */}
-            {isEditing && (
-              <>
-                <button
-                  className={`profile__save-button auth-form__button ${
-                    !isValid ? 'profile__save-button_disabled' : ''
-                  }`}
-                  type='submit'
-                  onClick={handleSaveClick}
-                  disabled={!isValid}
-                >
-                  Сохранить
-                </button>
-                <button
-                  className='profile__button-cancel'
-                  type='button'
-                  onClick={handleCancelClick}
-                >
-                  Отменить
-                </button>
-              </>
-            )}
+            <span className="profile__input-error">{errors.email}</span>
+            <>
+            <span className="profile__success">
+                {showUpdateMessage && isSuccess ? `${SUCCESS_MESSAGE}` : ''}
+              </span>
+              <span className="profile__error">{showUpdateMessage && isError ? `${AUTH_ERRORS.BAD_REQUEST.CHANGE_USER}` : ''}</span>
+            {isEditingProfile && !isPageEntranceNew && (
+              <button
+                className={`profile__save-button auth-form__button ${
+                  (!isValid || isLoading || buttonDisabled)  ? 'profile__save-button_disabled' : ''
+                }`}
+                type="submit"
+                disabled={!isValid || isLoading || buttonDisabled}
+              >
+                {isLoading ? 'Сохранение...' : 'Сохранить'}
+              </button>
+             )}
+            </>
           </form>
-          {!isEditing && (
-                       
-            <div className='profile__edit-container'>
-              <button
-                className='profile__button-edit'
-                type='button'
-                onClick={handleEditClick}
-              >
-                Редактировать
-              </button>
-              <button
-                className='profile__signout'
-                type='button'
-                onClick={signOut}
-              >
-                Выйти из аккаунта
-              </button>
-            </div>
-          )}
+          {(!isEditingProfile || isPageEntranceNew) && (  
+          <div className="profile__edit-container">
+            <button
+              className="profile__button-edit"
+              type="button"
+              onClick={onEditProfile}
+            >
+              Редактировать
+            </button>
+            <button
+              className="profile__signout"
+              type="button"
+              onClick={signOut}
+            >
+              Выйти из аккаунта
+            </button>
+          </div>
+         )}
         </section>
       </main>
     </>

@@ -46,6 +46,7 @@ class Api {
     return this._request('/users/me', {
       method: 'GET',
       headers: {
+        "Content-Type": "application/json",
         'Authorization': `Bearer ${token}`,
       },
     });

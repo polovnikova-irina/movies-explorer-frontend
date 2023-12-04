@@ -2,6 +2,12 @@
 import './AuthForm.css';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
+import {
+  SUCCESS_MESSAGE,
+  AUTH_ERRORS,
+  EMAIL_REGEX,
+  NAME_REGEX,
+} from '../../utils/constants';
 
 export function AuthForm({
   title,
@@ -22,7 +28,6 @@ export function AuthForm({
   isValid,
 }) {
 
-
   return (
     <div className="auth-form">
       <div className="auth-form__header">
@@ -41,6 +46,7 @@ export function AuthForm({
                 className="auth-form__input"
                 type="text"
                 name="name"
+                pattern={NAME_REGEX}
                 minLength="2"
                 maxLength="30"
                 required
@@ -59,7 +65,7 @@ export function AuthForm({
               className="auth-form__input"
               type="email"
               name="email"
-              pattern="^\S+@\S+\.\S+$"
+              pattern={EMAIL_REGEX}
               required
               onChange={onChange}
               value={valueEmail}

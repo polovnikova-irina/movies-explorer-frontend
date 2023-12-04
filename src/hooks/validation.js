@@ -10,7 +10,6 @@ export function useForm() {
     const name = target.name;
     setValues({...values, [name]: value});
   };
-
   return {values, handleChange, setValues};
 }
 
@@ -38,5 +37,5 @@ export function useFormWithValidation() {
     [setValues, setErrors, setIsValid]
   );
 
-  return { values, handleChange, errors, isValid, setIsValid, resetForm };
+  return { values, handleChange, errors, isValid, resetForm };
 }
