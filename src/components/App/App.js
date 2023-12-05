@@ -13,18 +13,22 @@ import { Login } from '../Login/Login.jsx';
 import { Profile } from '../Profile/Profile.jsx';
 import { Preloader } from '../Preloader/Preloader.jsx';
 import { PageNotFound } from '../PageNotFound/PageNotFound.jsx';
+import { AUTH_ERRORS } from '../../utils/constants.js';
+
 
 function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false); //загрузка баттонпрелоадер
+  const [isLoading, setIsLoading] = useState(false); 
   const [isTokenValid, setTokenValidity] = useState(true); //при обновлении оставалась нужная страница
   const [isSuccess, setIsSuccess] = useState(false); //уведомление об успехе
   const [loggedIn, setLoggedIn] = useState(false);
   const [isEditingProfile, setIsEditingProfile] = useState(false);  //редактируется ли профиль
-  const [isError, setIsError] = useState(false); //уведомление об ошибках 
+  const [updateErrorMessage, setUpdateErrorMessage] = useState(''); //сообщение об ошибке
+  const [showUpdateError, setShowUpdateError] = useState(false); //отображение ошибки
   const [isPageEntranceNew, setIsPageEntranceNew] = useState(false); 
+
 
 
   useEffect(() => {
@@ -47,24 +51,62 @@ function App() {
     }
   }, [loggedIn]);
 
+//для обработки ошибок на странице регистрации
+function getRegisterErrorMessage(err) {
+  if (err.status === 409) {
+    return AUTH_ERRORS.CONFLICT.REGISTER;
+  } else if (err.status === 400) {
+    return AUTH_ERRORS.BAD_REQUEST.REGISTER;
+  } else {
+    return AUTH_ERRORS.BAD_REQUEST.COMMON;
+  }
+}
+
+//для обработки ошибок на странице входа
+function getSignInErrorMessage(err) {
+  if (err.status === 401) {
+    return AUTH_ERRORS.UNAUTHORIZED.AUTH;
+  } else {
+    return AUTH_ERRORS.BAD_REQUEST.COMMON;
+  }
+}
+
+//для обработки ошибок на странице профиля
+function getProfileErrorMessage(err) {
+  if (err.statusCode === 409) {
+    return AUTH_ERRORS.CONFLICT.CHANGE_USER;
+  } else if (err.statusCode === 400) {
+    return AUTH_ERRORS.BAD_REQUEST.CHANGE_USER;
+  } else if (err.statusCode === 401) {
+    return AUTH_ERRORS.UNAUTHORIZED.IDENTIFICATION;
+  } else {
+    return AUTH_ERRORS.BAD_REQUEST.COMMON;
+  }
+}
+
   const handleUpdateUser = (name, email) => {
     setIsLoading(true);
-    console.log('Начало обновления пользователя:', name, email);
-    console.log('Перед отправкой запроса:', { name, email, jwt: localStorage.jwt });
     mainApi
       .setUsersData(name, email, localStorage.jwt)
       .then((data) => {
         setIsEditingProfile(false);
-        setIsError(false);
         setCurrentUser(data);
         setIsSuccess(true);
       })
       .catch((err) => {
         console.log('Ошибка при изменении данных о пользователе:', err);
         setIsSuccess(false);
-        setIsError(true)
+        setUpdateErrorMessage(getProfileErrorMessage(err));
+        setShowUpdateError(true);
+
+        const timeoutDuration = 3000;
+        setTimeout(() => {
+          setShowUpdateError(false);
+        }, timeoutDuration);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   function handleClickEditProfile() {
@@ -211,7 +253,8 @@ function App() {
                   isSuccess={isSuccess}
                   isLoading={isLoading}
                   isEditingProfile={isEditingProfile}
-                  isError={isError}
+                  updateErrorMessage={updateErrorMessage}
+                  showUpdateError={showUpdateError}
                   isPageEntranceNew={isPageEntranceNew}
                 />
               }

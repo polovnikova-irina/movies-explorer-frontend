@@ -6,7 +6,6 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../hooks/validation';
 import {
   SUCCESS_MESSAGE,
-  AUTH_ERRORS,
   EMAIL_REGEX,
   NAME_REGEX,
 } from '../../utils/constants';
@@ -18,13 +17,13 @@ export function Profile({
   isSuccess,
   isLoading,
   isEditingProfile,
-  isError,
   isPageEntranceNew,
+  updateErrorMessage,
+  showUpdateError,
 }) {
   const navigate = useNavigate();
 
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [showUpdateMessage, setShowUpdateMessage] = useState(true);
 
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
@@ -32,14 +31,15 @@ export function Profile({
   const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
-    setButtonDisabled(currentUser.name === values.name && currentUser.email === values.email);
+    setButtonDisabled(
+      currentUser.name === values.name && currentUser.email === values.email
+    );
   }, [currentUser, values]);
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Значения формы перед отправкой:', values);
-    onUpdateUser(values.name, values.email);;
+    onUpdateUser(values.name, values.email);
   };
 
   useEffect(() => {
@@ -48,16 +48,6 @@ export function Profile({
       email: currentUser.email,
     });
   }, [currentUser, resetForm, isEditingProfile]);
-
-  useEffect(() => {
-    if (isSuccess !== null) {
-      setShowUpdateMessage(true);
-      const hideMessageTimeout = setTimeout(() => {
-        setShowUpdateMessage(false);
-      }, 5000); 
-      return () => clearTimeout(hideMessageTimeout);
-    }
-  }, [isSuccess]);
 
   function signOut() {
     localStorage.clear();
@@ -71,7 +61,11 @@ export function Profile({
       <main className="content">
         <section className="profile">
           <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
-          <form className="profile__form" onSubmit={handleSubmit}  disabled={!isValid}>
+          <form
+            className="profile__form"
+            onSubmit={handleSubmit}
+            disabled={!isValid}
+          >
             <label className="profile__label">
               Имя
               <input
@@ -97,7 +91,7 @@ export function Profile({
                 type="email"
                 name="email"
                 pattern={EMAIL_REGEX}
-                value={values.email || ""}
+                value={values.email || ''}
                 onChange={handleChange}
                 required
                 disabled={!isEditingProfile}
@@ -105,41 +99,45 @@ export function Profile({
             </label>
             <span className="profile__input-error">{errors.email}</span>
             <>
-            <span className="profile__success">
-                {showUpdateMessage && isSuccess ? `${SUCCESS_MESSAGE}` : ''}
+              <span className="profile__success">
+                {isSuccess ? `${SUCCESS_MESSAGE}` : ''}
               </span>
-              <span className="profile__error">{showUpdateMessage && isError ? `${AUTH_ERRORS.BAD_REQUEST.CHANGE_USER}` : ''}</span>
-            {isEditingProfile && !isPageEntranceNew && (
-              <button
-                className={`profile__save-button auth-form__button ${
-                  (!isValid || isLoading || buttonDisabled)  ? 'profile__save-button_disabled' : ''
-                }`}
-                type="submit"
-                disabled={!isValid || isLoading || buttonDisabled}
-              >
-                {isLoading ? 'Сохранение...' : 'Сохранить'}
-              </button>
-             )}
+              <span className="profile__error">
+                {showUpdateError ? updateErrorMessage : ''}
+              </span>
+              {isEditingProfile && !isPageEntranceNew && (
+                <button
+                  className={`profile__save-button auth-form__button ${
+                    !isValid || isLoading || buttonDisabled
+                      ? 'profile__save-button_disabled'
+                      : ''
+                  }`}
+                  type="submit"
+                  disabled={!isValid || isLoading || buttonDisabled}
+                >
+                  {isLoading ? 'Сохранение...' : 'Сохранить'}
+                </button>
+              )}
             </>
           </form>
-          {(!isEditingProfile || isPageEntranceNew) && (  
-          <div className="profile__edit-container">
-            <button
-              className="profile__button-edit"
-              type="button"
-              onClick={onEditProfile}
-            >
-              Редактировать
-            </button>
-            <button
-              className="profile__signout"
-              type="button"
-              onClick={signOut}
-            >
-              Выйти из аккаунта
-            </button>
-          </div>
-         )}
+          {(!isEditingProfile || isPageEntranceNew) && (
+            <div className="profile__edit-container">
+              <button
+                className="profile__button-edit"
+                type="button"
+                onClick={onEditProfile}
+              >
+                Редактировать
+              </button>
+              <button
+                className="profile__signout"
+                type="button"
+                onClick={signOut}
+              >
+                Выйти из аккаунта
+              </button>
+            </div>
+          )}
         </section>
       </main>
     </>
