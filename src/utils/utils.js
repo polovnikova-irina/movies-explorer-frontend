@@ -1,5 +1,4 @@
 import { SHORT_FILM_DURATION, } from './constants'
-// SCREEN_SIZES, INITIAL_COUNT, INCREMENT_VALUES 
 
 export function searchMovies(movies, searchQuery) {
   const term = searchQuery.toLowerCase().trim();

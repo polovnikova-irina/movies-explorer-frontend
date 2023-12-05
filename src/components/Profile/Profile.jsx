@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation  } from 'react-router-dom';
 import './Profile.css';
 import { Header } from '../Header/Header';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -22,6 +22,12 @@ export function Profile({
   showUpdateError,
 }) {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    setButtonDisabled(false);
+    localStorage.removeItem('buttonDisabled');
+  }, [location.pathname]);
 
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
@@ -38,7 +44,6 @@ export function Profile({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Значения формы перед отправкой:', values);
     onUpdateUser(values.name, values.email);
   };
 
@@ -108,7 +113,7 @@ export function Profile({
               {isEditingProfile && !isPageEntranceNew && (
                 <button
                   className={`profile__save-button auth-form__button ${
-                    !isValid || isLoading || buttonDisabled
+                    !isValid || isLoading || buttonDisabled 
                       ? 'profile__save-button_disabled'
                       : ''
                   }`}

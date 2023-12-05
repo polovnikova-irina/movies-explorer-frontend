@@ -13,23 +13,24 @@ import { Login } from '../Login/Login.jsx';
 import { Profile } from '../Profile/Profile.jsx';
 import { Preloader } from '../Preloader/Preloader.jsx';
 import { PageNotFound } from '../PageNotFound/PageNotFound.jsx';
-import { AUTH_ERRORS } from '../../utils/constants.js';
-
+import {
+  getProfileErrorMessage,
+  getRegisterErrorMessage,
+  getSignInErrorMessage,
+} from '../../utils/errorHandlers.js';
 
 function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
   const [isTokenValid, setTokenValidity] = useState(true); //при обновлении оставалась нужная страница
   const [isSuccess, setIsSuccess] = useState(false); //уведомление об успехе
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isEditingProfile, setIsEditingProfile] = useState(false);  //редактируется ли профиль
+  const [isEditingProfile, setIsEditingProfile] = useState(false); //редактируется ли профиль
   const [updateErrorMessage, setUpdateErrorMessage] = useState(''); //сообщение об ошибке
   const [showUpdateError, setShowUpdateError] = useState(false); //отображение ошибки
-  const [isPageEntranceNew, setIsPageEntranceNew] = useState(false); 
-
-
+  const [isPageEntranceNew, setIsPageEntranceNew] = useState(false);
 
   useEffect(() => {
     if (localStorage.jwt) {
@@ -50,70 +51,6 @@ function App() {
         });
     }
   }, [loggedIn]);
-
-//для обработки ошибок на странице регистрации
-function getRegisterErrorMessage(err) {
-  if (err.status === 409) {
-    return AUTH_ERRORS.CONFLICT.REGISTER;
-  } else if (err.status === 400) {
-    return AUTH_ERRORS.BAD_REQUEST.REGISTER;
-  } else {
-    return AUTH_ERRORS.BAD_REQUEST.COMMON;
-  }
-}
-
-//для обработки ошибок на странице входа
-function getSignInErrorMessage(err) {
-  if (err.status === 401) {
-    return AUTH_ERRORS.UNAUTHORIZED.AUTH;
-  } else {
-    return AUTH_ERRORS.BAD_REQUEST.COMMON;
-  }
-}
-
-//для обработки ошибок на странице профиля
-function getProfileErrorMessage(err) {
-  if (err.statusCode === 409) {
-    return AUTH_ERRORS.CONFLICT.CHANGE_USER;
-  } else if (err.statusCode === 400) {
-    return AUTH_ERRORS.BAD_REQUEST.CHANGE_USER;
-  } else if (err.statusCode === 401) {
-    return AUTH_ERRORS.UNAUTHORIZED.IDENTIFICATION;
-  } else {
-    return AUTH_ERRORS.BAD_REQUEST.COMMON;
-  }
-}
-
-  const handleUpdateUser = (name, email) => {
-    setIsLoading(true);
-    mainApi
-      .setUsersData(name, email, localStorage.jwt)
-      .then((data) => {
-        setIsEditingProfile(false);
-        setCurrentUser(data);
-        setIsSuccess(true);
-      })
-      .catch((err) => {
-        console.log('Ошибка при изменении данных о пользователе:', err);
-        setIsSuccess(false);
-        setUpdateErrorMessage(getProfileErrorMessage(err));
-        setShowUpdateError(true);
-
-        const timeoutDuration = 3000;
-        setTimeout(() => {
-          setShowUpdateError(false);
-        }, timeoutDuration);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
-  function handleClickEditProfile() {
-    setIsPageEntranceNew(false);
-    setIsEditingProfile(true);
-    setIsSuccess(false);
-  }
 
   function handleRegisterSubmit(name, email, password) {
     setIsLoading(true);
@@ -144,16 +81,61 @@ function getProfileErrorMessage(err) {
         setIsSuccess(false);
       })
       .catch((err) => {
-        if (err.status === 400) {
-          console.log('400 - не передано одно из полей');
-        } else if (err.status === 401) {
-          console.log('401 - пользователь с email не найден');
-        }
         console.log(err);
+        setUpdateErrorMessage(getSignInErrorMessage(err));
+        setShowUpdateError(true);
         setIsSuccess(true);
       })
       .finally(() => setIsLoading(false));
   }
+
+  const handleUpdateUser = (name, email) => {
+    setIsLoading(true);
+    mainApi
+      .setUsersData(name, email, localStorage.jwt)
+      .then((data) => {
+        setIsEditingProfile(false);
+        setCurrentUser(data);
+        setIsSuccess(true);
+      })
+      .catch((err) => {
+        console.log('Ошибка при изменении данных о пользователе:', err);
+        setIsSuccess(false);
+        setUpdateErrorMessage(getProfileErrorMessage(err));
+        setShowUpdateError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  function handleClickEditProfile() {
+    setIsPageEntranceNew(false);
+    setIsEditingProfile(true);
+    setIsSuccess(false);
+  }
+
+ // Запуск таймера для setIsSuccess
+  useEffect(() => {
+    if (isSuccess) {
+      const successTimeout = setTimeout(() => {
+        setIsSuccess(false);
+      }, 3000);
+
+      return () => clearTimeout(successTimeout);
+    }
+  }, [isSuccess]);
+
+  // Запуск таймера для showUpdateError
+  useEffect(() => {
+    if (showUpdateError) {
+      const errorTimeout = setTimeout(() => {
+        setShowUpdateError(false);
+      }, 3000);
+
+      return () => clearTimeout(errorTimeout);
+    }
+  }, [showUpdateError]);
 
   function handleDeleteMovie(savedMovieId) {
     mainApi
@@ -171,7 +153,7 @@ function getProfileErrorMessage(err) {
   }
 
   function handleToggleMovieSave(movie) {
-    console.log('movie.id:', movie.id)
+    console.log('movie.id:', movie.id);
     const isSaved = savedMovies.some((item) => movie.id === item.movieId);
 
     if (!isSaved) {
@@ -187,20 +169,20 @@ function getProfileErrorMessage(err) {
       const matchingMovies = savedMovies.filter((element) => {
         return element.movieId === movie.id;
       });
-        handleDeleteMovie(matchingMovies[0]._id);
+      handleDeleteMovie(matchingMovies[0]._id);
     }
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
+      <div className='page'>
         {isTokenValid ? (
           <Preloader />
         ) : (
           <Routes>
-            <Route path="/" element={<Main loggedIn={loggedIn} />} />
+            <Route path='/' element={<Main loggedIn={loggedIn} />} />
             <Route
-              path="/signup"
+              path='/signup'
               element={
                 <Register
                   onRegister={handleRegisterSubmit}
@@ -210,7 +192,7 @@ function getProfileErrorMessage(err) {
               }
             />
             <Route
-              path="/signin"
+              path='/signin'
               element={
                 <Login
                   onLogin={handleLoginSubmit}
@@ -220,7 +202,7 @@ function getProfileErrorMessage(err) {
               }
             />
             <Route
-              path="/movies"
+              path='/movies'
               element={
                 <ProtectedRouteElement
                   element={Movies}
@@ -232,7 +214,7 @@ function getProfileErrorMessage(err) {
               }
             />
             <Route
-              path="/saved-movies"
+              path='/saved-movies'
               element={
                 <ProtectedRouteElement
                   element={SavedMovies}
@@ -243,7 +225,7 @@ function getProfileErrorMessage(err) {
               }
             />
             <Route
-              path="/profile"
+              path='/profile'
               element={
                 <ProtectedRouteElement
                   element={Profile}
@@ -259,7 +241,7 @@ function getProfileErrorMessage(err) {
                 />
               }
             />
-            <Route path="*" element={<PageNotFound />} />
+            <Route path='*' element={<PageNotFound />} />
           </Routes>
         )}
       </div>
