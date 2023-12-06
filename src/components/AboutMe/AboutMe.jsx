@@ -18,7 +18,7 @@ export function AboutMe() {
         как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и
         ушёл с постоянной работы.
       </p>
-      <a className="about-me__link" href="https://github.com/polovnikova-irina" target="_blank">Github</a>
+      <a className="about-me__link" href="https://github.com/polovnikova-irina" target="_blank" rel="noreferrer">Github</a>
       </div>
       </div>      
     </section>
