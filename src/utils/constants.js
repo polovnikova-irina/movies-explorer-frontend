@@ -36,7 +36,7 @@ export const registerErrorMessage = {
 };
 
 export const signInErrorMessage = {
-  401: 'При регистрации пользователя произошла ошибка',
+  401: 'При авторизации произошла ошибка',
 };
 
 export const MOVIES_MESSAGES = {

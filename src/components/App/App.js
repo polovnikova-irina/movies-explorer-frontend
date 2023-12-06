@@ -1,7 +1,7 @@
 import '../../vendor/fonts/fonts.css';
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 import { ProtectedRouteElement } from '../ProtectedRoute/ProtectedRoute.jsx';
 import { mainApi } from '../../utils/MainApi.js';
@@ -21,16 +21,20 @@ import {
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [currentUser, setCurrentUser] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isTokenValid, setTokenValidity] = useState(true); //при обновлении оставалась нужная страница
-  const [isSuccess, setIsSuccess] = useState(false); //уведомление об успехе
+  const [isTokenValid, setTokenValidity] = useState(true); 
+  const [isSuccess, setIsSuccess] = useState(false); 
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isEditingProfile, setIsEditingProfile] = useState(false); //редактируется ли профиль
-  const [updateErrorMessage, setUpdateErrorMessage] = useState(''); //сообщение об ошибке
-  const [showUpdateError, setShowUpdateError] = useState(false); //отображение ошибки
+  const [isEditingProfile, setIsEditingProfile] = useState(false); 
+  const [updateErrorMessage, setUpdateErrorMessage] = useState(''); 
+  const [showUpdateError, setShowUpdateError] = useState(false); 
   const [isPageEntranceNew, setIsPageEntranceNew] = useState(false);
+
+  const profilePage = location.pathname === '/profile';
 
   useEffect(() => {
     if (localStorage.jwt) {
@@ -48,7 +52,11 @@ function App() {
           console.log('Ошибка при загрузке данных о пользователе:', err);
           setTokenValidity(false);
           localStorage.clear();
-        });
+        })
+    } else {
+      setLoggedIn(false);
+      setTokenValidity(false);
+      localStorage.clear();
     }
   }, [loggedIn]);
 
@@ -62,9 +70,8 @@ function App() {
       })
       .catch((err) => {
         console.error('Ошибка при регистрации:', err);
-        if (err.status === 400) {
-          console.log('400 - некорректно заполнено одно из полей');
-        }
+        setUpdateErrorMessage(getRegisterErrorMessage(err));
+        setShowUpdateError(true);
         setIsSuccess(true);
       })
       .finally(() => setIsLoading(false));
@@ -114,6 +121,11 @@ function App() {
     setIsEditingProfile(true);
     setIsSuccess(false);
   }
+
+  useEffect(() => {
+    setIsPageEntranceNew(false);
+    setIsEditingProfile(false);
+  }, [profilePage]);
 
  // Запуск таймера для setIsSuccess
   useEffect(() => {
@@ -188,6 +200,8 @@ function App() {
                   onRegister={handleRegisterSubmit}
                   isSuccess={isSuccess}
                   isLoading={isLoading}
+                  updateErrorMessage={updateErrorMessage}
+                  showUpdateError={showUpdateError}
                 />
               }
             />
@@ -198,6 +212,8 @@ function App() {
                   onLogin={handleLoginSubmit}
                   isSuccess={isSuccess}
                   isLoading={isLoading}
+                  updateErrorMessage={updateErrorMessage}
+                  showUpdateError={showUpdateError}
                 />
               }
             />

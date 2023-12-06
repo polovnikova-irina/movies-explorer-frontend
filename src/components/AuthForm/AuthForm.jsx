@@ -1,13 +1,7 @@
-// import React, { useState } from 'react';
 import './AuthForm.css';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
-import {
-  SUCCESS_MESSAGE,
-  AUTH_ERRORS,
-  EMAIL_REGEX,
-  NAME_REGEX,
-} from '../../utils/constants';
+import { EMAIL_REGEX, NAME_REGEX } from '../../utils/constants';
 
 export function AuthForm({
   title,
@@ -19,6 +13,7 @@ export function AuthForm({
   valuePassword,
   passwordInput,
   submitButton,
+  submitButtonLoading,
   onSubmit,
   text,
   to,
@@ -26,8 +21,10 @@ export function AuthForm({
   isRegistration,
   errors,
   isValid,
+  updateErrorMessage,
+  showUpdateError,
+  isLoading,
 }) {
-
   return (
     <div className="auth-form">
       <div className="auth-form__header">
@@ -40,23 +37,25 @@ export function AuthForm({
         <form className="auth-form__form" onSubmit={onSubmit}>
           {isRegistration && (
             <>
-            <label className="auth-form__label">
-              {nameInput}
-              <input
-                className="auth-form__input"
-                type="text"
-                name="name"
-                pattern={NAME_REGEX}
-                minLength="2"
-                maxLength="30"
-                required
-                onChange={onChange}
-                value={valueName}
-                placeholder="Введите имя"
-              />
-              <span className='auth-form__input-error input-error'>{errors.name}</span>
-            </label>
-             </>
+              <label className="auth-form__label">
+                {nameInput}
+                <input
+                  className="auth-form__input"
+                  type="text"
+                  name="name"
+                  pattern={NAME_REGEX}
+                  minLength="2"
+                  maxLength="30"
+                  required
+                  onChange={onChange}
+                  value={valueName}
+                  placeholder="Введите имя"
+                />
+                <span className="auth-form__input-error input-error">
+                  {errors.name}
+                </span>
+              </label>
+            </>
           )}
 
           <label className="auth-form__label">
@@ -71,7 +70,9 @@ export function AuthForm({
               value={valueEmail}
               placeholder="Введите e-mail"
             />
-             <span className='auth-form__input-error input-error'>{errors.email}</span>
+            <span className="auth-form__input-error input-error">
+              {errors.email}
+            </span>
           </label>
           <label className="auth-form__label">
             {passwordInput}
@@ -86,19 +87,30 @@ export function AuthForm({
               onChange={onChange}
               placeholder="Введите пароль"
             />
-            <span className='auth-form__input-error input-error'>{errors.password}</span>
+            <span className="auth-form__input-error input-error">
+              {errors.password}
+            </span>
           </label>
-          <button
-            className={`auth-form__button ${
+          <div
+            className={`auth-form__wrapper ${
               isRegistration
-                ? 'auth-form__button_type_registration-form'
-                : 'auth-form__button_type_login-form'
-            } ${!isValid ? 'auth-form__button_disabled' : ''}`}
-            type="submit"
-            disabled={!isValid} 
+                ? 'auth-form__wrapper_type_registration-form'
+                : 'auth-form__wrapper_type_login-form'
+            }`}
           >
-            {submitButton}
-          </button>
+            <span className="auth-form__error profile__error">
+              {showUpdateError ? updateErrorMessage : ''}
+            </span>
+            <button
+              className={`auth-form__button ${
+                !isValid || isLoading ? 'auth-form__button_disabled' : ''
+              }`}
+              type="submit"
+              disabled={!isValid || isLoading}
+            >
+              {!isLoading ? `${submitButton}` : `${submitButtonLoading}`}
+            </button>
+          </div>
         </form>
       </div>
       <div

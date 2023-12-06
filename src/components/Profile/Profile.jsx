@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { useNavigate, useLocation  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Profile.css';
 import { Header } from '../Header/Header';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -22,12 +22,6 @@ export function Profile({
   showUpdateError,
 }) {
   const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    setButtonDisabled(false);
-    localStorage.removeItem('buttonDisabled');
-  }, [location.pathname]);
 
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
@@ -103,27 +97,27 @@ export function Profile({
               />
             </label>
             <span className="profile__input-error">{errors.email}</span>
-            <>
               <span className="profile__success">
                 {isSuccess ? `${SUCCESS_MESSAGE}` : ''}
               </span>
-              <span className="profile__error">
-                {showUpdateError ? updateErrorMessage : ''}
-              </span>
-              {isEditingProfile && !isPageEntranceNew && (
-                <button
-                  className={`profile__save-button auth-form__button ${
-                    !isValid || isLoading || buttonDisabled 
-                      ? 'profile__save-button_disabled'
-                      : ''
-                  }`}
-                  type="submit"
-                  disabled={!isValid || isLoading || buttonDisabled}
-                >
-                  {isLoading ? 'Сохранение...' : 'Сохранить'}
-                </button>
-              )}
-            </>
+              <div className='profile__wrapper'>
+                <span className="profile__error">
+                  {showUpdateError ? updateErrorMessage : ''}
+                </span>
+                {isEditingProfile && !isPageEntranceNew && (
+                  <button
+                    className={`profile__save-button auth-form__button ${
+                      !isValid || isLoading || buttonDisabled 
+                        ? 'profile__save-button_disabled'
+                        : ''
+                    }`}
+                    type="submit"
+                    disabled={!isValid || isLoading || buttonDisabled}
+                  >
+                    {!isLoading ? 'Сохранить' : 'Сохранение...'}
+                  </button>
+                )}
+              </div>
           </form>
           {(!isEditingProfile || isPageEntranceNew) && (
             <div className="profile__edit-container">
