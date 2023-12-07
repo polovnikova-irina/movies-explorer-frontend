@@ -1,5 +1,5 @@
 import './MoviesCard.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MOVIES_API_URL } from '../../utils/constants';
 import deleteIcon from '../../images/moviesCard__image-delete.svg';
@@ -7,7 +7,6 @@ import saveIcon from '../../images/moviesCard__image-save.svg';
 import saveIconDisactive from '../../images/moviesCard__image-save-disactive.svg';
 
 export function MoviesCard({ movie, onToggleSave, onDelete, savedMovies }) {
-  // const [isSavedMovie, setIsSavedMovie] = useState(false);
   const [hovered, setHovered] = useState(false);
 
   const location = useLocation();
