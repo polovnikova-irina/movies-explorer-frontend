@@ -79,12 +79,14 @@ export function Movies({ loggedIn, onToggleSave, onDelete, savedMovies }) {
         if (localStorage.getItem('searchedMovies')) {
           if (isFilterActive) {
             const filtered = filterShortFilms(searchedMovies, isFilterActive);
+
             setMoviesForRender(filtered);
 
             localStorage.setItem('movies', JSON.stringify(filtered));
             localStorage.setItem('shorts', JSON.stringify(isFilterActive));
           } else {
             setMoviesForRender(search);
+
             localStorage.setItem('movies', JSON.stringify(search));
             localStorage.setItem('shorts', JSON.stringify(isFilterActive));
           }
@@ -93,12 +95,13 @@ export function Movies({ loggedIn, onToggleSave, onDelete, savedMovies }) {
         setIsFilterActive(isFilterActive);
       }
     },
-    [searchMovies, firstEntrance]
+    [searchedMovies, firstEntrance]
   );
 
   useEffect(() => {
-    setFirstEntrance(!localStorage.getItem('storedMovies'));
+    setFirstEntrance(!localStorage.getItem('allMovies'));
   }, []);
+
 
   useEffect(() => {
     const storedMovies = localStorage.getItem('movies');

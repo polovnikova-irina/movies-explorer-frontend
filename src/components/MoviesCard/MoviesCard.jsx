@@ -7,14 +7,23 @@ import saveIcon from '../../images/moviesCard__image-save.svg';
 import saveIconDisactive from '../../images/moviesCard__image-save-disactive.svg';
 
 export function MoviesCard({ movie, onToggleSave, onDelete, savedMovies }) {
-
-  const [isSavedMovie, setIsSavedMovie] = useState(false);
+  // const [isSavedMovie, setIsSavedMovie] = useState(false);
   const [hovered, setHovered] = useState(false);
 
   const location = useLocation();
   const savedMoviesPage = location.pathname === '/saved-movies';
   const moviesPage = location.pathname === '/movies';
 
+  const isSaved =
+    savedMovies && savedMovies.some((item) => movie.id === item.movieId);
+
+  const handleSave = () => {
+    onToggleSave(movie);
+  };
+
+  const handleDelete = () => {
+    onDelete(movie._id);
+  };
 
   const handleHover = () => {
     setHovered(true);
@@ -33,26 +42,6 @@ export function MoviesCard({ movie, onToggleSave, onDelete, savedMovies }) {
       return `${hours}ч ${minutes}м`;
     }
   };
-
-  useEffect(() => {
-    if (moviesPage)
-      setIsSavedMovie(savedMovies.some((item) => movie.id === item.movieId));
-  }, [savedMovies, movie.id, setIsSavedMovie, moviesPage]);
-
-  const handleSave = () => {
-    if (savedMovies.some((item) => movie.id === item.movieId)) {
-      setIsSavedMovie(false);
-      onToggleSave(movie);
-    } else {
-      setIsSavedMovie(true);
-      onToggleSave(movie);
-    }
-  };
-
-  const handleDelete = () => {
-    onDelete(movie._id);
-  };
-
 
   return (
     <div className="card" onMouseEnter={handleHover} onMouseLeave={handleLeave}>
@@ -84,8 +73,8 @@ export function MoviesCard({ movie, onToggleSave, onDelete, savedMovies }) {
             >
               <img
                 className="card__icon card__icon_type_save"
-                alt="сохранить"
-                src={isSavedMovie ? saveIcon : saveIconDisactive}
+                src={isSaved ? saveIcon : saveIconDisactive}
+                alt={isSaved ? 'Сохранено' : 'Сохранить'}
               />
             </button>
           )}

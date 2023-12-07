@@ -185,6 +185,12 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    if (loggedIn && (location.pathname === '/signin' || location.pathname === '/signup')) {
+      navigate('/movies', { replace: true });
+    }
+  }, [location.pathname, loggedIn, navigate]);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
