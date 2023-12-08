@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Toggle.css';
 
 export function Toggle({ isFilterActive, onFilterChange }) {
@@ -12,7 +12,6 @@ export function Toggle({ isFilterActive, onFilterChange }) {
           checked={isFilterActive}
           onChange={(evt) => { 
             const isChecked = evt.target.checked;
-            console.log('Toggle - Checkbox checked:', isChecked);
             onFilterChange(isChecked);
           }}
         />

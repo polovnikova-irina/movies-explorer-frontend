@@ -70,6 +70,7 @@ export function Movies({ loggedIn, onToggleSave, onDelete, savedMovies }) {
   const handleFilterClick = useCallback(
     (isFilterActive) => {
       if (!firstEntrance) {
+
         setIsFilterActive(isFilterActive);
         const searchQuery = JSON.parse(localStorage.getItem('searchedMovies'));
         const allMovies = JSON.parse(localStorage.getItem('allMovies'));
@@ -78,7 +79,7 @@ export function Movies({ loggedIn, onToggleSave, onDelete, savedMovies }) {
 
         if (localStorage.getItem('searchedMovies')) {
           if (isFilterActive) {
-            const filtered = filterShortFilms(searchedMovies, isFilterActive);
+            const filtered = filterShortFilms(search, isFilterActive);
 
             setMoviesForRender(filtered);
 
@@ -95,7 +96,7 @@ export function Movies({ loggedIn, onToggleSave, onDelete, savedMovies }) {
         setIsFilterActive(isFilterActive);
       }
     },
-    [searchedMovies, firstEntrance]
+    [firstEntrance]
   );
 
   useEffect(() => {
